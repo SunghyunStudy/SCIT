@@ -1,0 +1,18 @@
+0910
+
+1) switch ~ case 문
+    식(변수)의 결과가 특정한 case인 경우 실행
+
+    int data = ??;  // 5, 10, 15만 가능하다고 가정
+    // switch 변수는 반드시 정수형(int, char, byte, short)
+    //                      + 문자열도 가능
+
+    switch(data){
+        case 5 : 실행문들; break;
+        case 10 : 실행문들; break;
+        case 15 : 실행문들; break;
+       }
+
+2) switch ~ case 식
+
+
