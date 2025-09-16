@@ -1,3 +1,4 @@
+import java.sql.SQLOutput;
 import java.util.Scanner;
 
 public class Exam_29 {
@@ -10,7 +11,7 @@ public class Exam_29 {
 
 
         while(true){
-            System.out.println("=== 좌석 예약 상태");
+            System.out.println("\n=== 좌석 예약 상태");
             for(int i = 0; i < 10; i++){
                 System.out.printf("[%s]", seat[i]);
             }
@@ -22,6 +23,10 @@ public class Exam_29 {
 
             System.out.print("좌석 입력(1~10)");
             seatIndex = sc.nextInt();
+            if(seatIndex < 1 || seatIndex > 10){
+                System.out.println("## 예약을 다시 진행해 주세요");
+                continue;
+            }
             if(seatCount[seatIndex-1] == 1){
                 System.out.println("(warning) 이미 예약된 좌석입니다.");
                 System.out.println();
@@ -39,5 +44,30 @@ public class Exam_29 {
                 break;
             }
         }
+
+
+
     }
 }
+
+
+/*
+        String[] allSeat = new String[10];
+        while(true){
+            System.out.println("=== 좌석 예약 상태");
+            for(int i - 0; i< allSeat.length; ++i){
+                if(allSeat[i] == null){
+                    System.out.println("[    ]");
+
+                }else{
+                    System.out.print("[ " + allSeat[i] + " ");
+                }
+            }
+            System.out.println("\n");
+            System.out.print("예약자 이름 입력:");
+            name = sc.next()
+
+            System.outprint("좌석 입력 (1~10)");
+
+        }
+ */
