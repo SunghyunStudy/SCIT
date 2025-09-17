@@ -9,7 +9,8 @@ public class SCBankTest {
         // String도 참조(레퍼런스)변수임
         // call by value는 스택영역에 생성된 변수에 값이 다이렉트로 저장됨
 
-
+        // man1 은 참조변수인거임
+        // static으로 생성했으 ㄹ경우 에는 참조변수 없이 메서드명으로 바로 불러올 수 있음 (SCBank.customerName 이렇게)
         SCBank man1 = new SCBank();   // man1 안에는 주소가 들어있는거임.
         man1.customerName = "홍길동";
         man1.accountNo = "m1234";
