@@ -18,9 +18,7 @@ public class FriendTest {
 
         System.out.print("이름 : ");        name = sc.next();
         System.out.print("sns : ");    sns = sc.next();
-        System.out.print("생년 : ");   year = sc.nextInt();
-        System.out.print("생월 : ");   month = sc.nextInt();
-        System.out.print("생일 : ");  day = sc.nextInt();
+        System.out.print("생일(연도 월 일) : ");   year = sc.nextInt(); month = sc.nextInt(); day = sc.nextInt();
         birthday = LocalDate.of(year, month, day); // year, month, day
         System.out.print("나이 : ");        age = sc.nextInt();
         System.out.print("성격(외향:true, 내향:false) : ");        type = sc.nextBoolean();
