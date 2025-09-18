@@ -1,0 +1,30 @@
+
+문자열을 boolean으로 바꾸는 방법
+
+1) parsing 하거나 2) if를 사용함
+
+if
+    if 방법 1
+    if(type.equals("t")) mytype = true;        ****** 객체는 == 으로 비교할 수 없음 ******** / 값이 아니라 주소가 같은지 비교하는 연산자임.
+    else mytype = false;
+
+    if 방법 2
+    mytype = (type.equals("t")) ? true : false;
+
+
+
+비즈니스 로직 : Service
+FriendService : 비즈니스 로직을 처리   // service를 따로 만들면 static으로 선언할 필요가 없음.       // 동사 CRUD
+FriendTest : main
+Friend : 데이터                    // 명사
+
+
+제임스 짐
+
+- 부모 -
+운동
+
+- 자식 -
+골프      : 가격, 칼로리,
+헬스      : 가격, 칼로리,
+필라테스  : 가격, 칼로리,
