@@ -1,4 +1,4 @@
-package inheritance;
+package first;
 
 public class Parent {
     private int money;      // private은 상속하지 않음.
@@ -15,7 +15,6 @@ public class Parent {
     public void setMoney(int money) {
         this.money = money;
     }
-
 
     public void output(){
         System.out.println("부모의 데이터 : " + money);

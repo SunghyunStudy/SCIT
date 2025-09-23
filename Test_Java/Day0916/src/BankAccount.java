@@ -47,4 +47,8 @@ public class BankAccount {
          return this.createDate;
     }
 
+    public void output(){
+        System.out.printf("고객명 : %s, 계좌번호 : %s, 잔액 : %d, 날짜 : %s", this.customerName, this.accountNo,  this.balance, this.createDate);
+    }
+
 }

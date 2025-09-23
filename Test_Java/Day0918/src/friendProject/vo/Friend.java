@@ -1,4 +1,4 @@
-package friendProject;
+package friendProject.vo;
 
 public class Friend {
     private String name;

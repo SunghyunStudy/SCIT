@@ -1,0 +1,62 @@
+09.19
+
+1) 상속
+
+    메소드 오버라이딩 :
+    final을 class       앞에 붙으면 "상속" 불가.
+            지역변수    앞에 붙으면 값 "수정" 불가.
+            멤버변수    앞에 붙으면 값 "수정" 불가.
+            맴버메소드  앞에 붙으면 "오버라이딩" 불가
+
+    static : 프로그램이 구동될 때 가장 먼저 메모리에 로딩 변수는 메모리에 한 개만 만들어져서 공유해서 사용.
+                new로 생성할 필요없음.
+           : nested class 앞, 클래스 변수 앞, 메소드 앞에
+
+
+public final class String(){
+}
+
+public class MyString{
+    final int data;       X     // 값이 0으로 고정됨. 값을 초기화하고 시작해야됨
+    final int data = 10;  O
+
+    public static void main(){
+        final int DATA = 50;
+    }
+}
+
+
+
+<Test.java>
+package 패키지 명
+
+import 다른 패키지명.클래스명;
+import 다른 패키지명.클래스명;
+import 다른 패키지명.클래스명;
+
+public class MyClass {
+    멤버변수
+    클래스변수
+    상수;         // public static final double PI = 3.14; (공유할거)
+
+    static { }      // singleton 패턴의 클래스 생성시 사용 / private한 클래스 변수를 초기화할 때 사용..
+
+    생성자          // 우리 멤버변수를 메모리에 생성하고 초기화
+
+    멤버메소드
+    내부 클래스 (static 없는)
+    static 내부 클래스     // 책에서 개별적으로 보시오 !!
+}
+
+
+Person p = new Person();
+    // 부모부터 생성한 후에 자식객체를 생성.
+    // 부모의 생성자가 없으면 안됨.  --> JVM가 만들어준다.
+                                     --> 기본생성자를
+
+
+https://blog.naver.com/hehe5959/220577085979 이 코드의 문제가 뭔지 알아야됨
+
+
+
+

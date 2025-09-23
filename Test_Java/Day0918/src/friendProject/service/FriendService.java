@@ -1,9 +1,11 @@
-package friendProject;
+package friendProject.service;
+
+import friendProject.vo.Friend;
 
 import java.util.Scanner;
 
 public class FriendService {
-    private  Friend friend;
+    private Friend friend;
     Scanner sc = new Scanner(System.in);
 
     // test에서 호출한 FriendService가 바로 실행되는 곳.
