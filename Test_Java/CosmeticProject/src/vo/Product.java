@@ -1,9 +1,9 @@
 package vo;
 
 public class Product {
-    String productNo;
-    String name;
-    int price;
+    private String productNo;
+    private String name;
+    private int price;
 
     public Product(){
 
@@ -39,7 +39,9 @@ public class Product {
         this.price = price;
     }
 
-    public String output(){
-        System.out.printf("상품 번호 = %s, 상품명 = %s, 가격 = %d%n", productNo, name, price);
+    @Override
+    public String toString() {
+        // format의 사용방법은 printf와 동일함.
+        return String.format("상품 번호 : %s, 상품명 : %s, 가격 : %,d, ", productNo, name, price);
     }
 }

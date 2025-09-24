@@ -17,76 +17,30 @@ public class CosmeticServiceImpl implements CosmeticService {
     @Override
     public boolean insert(Product product) {
 
-        // 배열이 꽉 찼는가?
-        if(count >= list.length){
-            return false;
-        }
 
-        // 이미 등록된 상품번호 거르기
-        for(int i = 0; i < count; i++){
-            if(list[i].getProductNo().equals(product.getProductNo())){
-                return false;
-            }
-        }
-
-        list[count++] = product;
-        return true;
 
     }
 
     @Override
     public boolean update(Product product) {
-        int index = -1;
 
-        for(int i = 0; i < count; i++){
-            if (list[i].getProductNo().equals(product.getProductNo())){
-                index = i;
-                break;
-            }
-        }
-
-        if(index == -1){
-            return false;
-        }
-
-        list[index] = product;
-        return true;
     }
 
     @Override
     public boolean delete(String productNo) {
-        int index;
 
-        for(int i = 0; i < list.length; i++){
-            if(list[i].getProductNo().equals(productNo)){
-                index = i;
-                break;
-            }
-        }
-
-        if(index == -1) {
-            return false;
-        }
-
-        for(int j = index; j < count - 1; j++){
-            list[j] = list[j+1];
-        }
-
-        list[--count] = null;
-        return true;
     }
 
     @Override
     public Product selectOne(String productNo) {
-        int index;
-
         for(int i = 0; i < list.length; i++){
             if(list[i].getProductNo().equals(productNo)){
-                
+                return list[i];
             }
         }
 
         return null;
+
     }
 
     @Override

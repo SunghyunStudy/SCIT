@@ -13,6 +13,13 @@ public class Lipstick extends Product {
     }
 
 
+
+    public Lipstick(String productNo, String name, int price, String type, String color) {
+        super(productNo, name, price);
+        this.type = type;
+        this.color = color;
+    }
+
     public String getType() {
         return type;
     }

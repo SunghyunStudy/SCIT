@@ -1,0 +1,21 @@
+startsWith()
+endsWith()
+indexOf
+lastIndexOf
+split()
+isBlank()
+isEmpty()
+length()
+matches()
+trim()
+
+ppt String 주요 메소드 꼭 외우자~!!!!!!!!!!!!!!!!!
+
+• StringBuffer 객체의 생성
+186
+StringBuffer buf1 = new StringBuffer();
+StringBuffer buf2 = new StringBuffer(CharSequence seq);
+StringBuffer buf2 = new StringBuffer(int capacity);
+
+추후 바뀌는 데이터의 용량이 다를 수도 있기 때문에 그거에 대비하여 버퍼의 여유를 두어 객체를 수정할 수 있도록 함.
+thread safe
