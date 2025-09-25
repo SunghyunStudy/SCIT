@@ -18,4 +18,13 @@ StringBuffer buf2 = new StringBuffer(CharSequence seq);
 StringBuffer buf2 = new StringBuffer(int capacity);
 
 추후 바뀌는 데이터의 용량이 다를 수도 있기 때문에 그거에 대비하여 버퍼의 여유를 두어 객체를 수정할 수 있도록 함.
-thread safe
+thread safety
+
+
+
+Math 클래스
+    - 모든 메소드가 static - Math.PI, Math.random()
+    - PI, E
+    - 생성자가 필요없음
+        - static이 아닌애가 있다면 생성자가 필요함.
+

@@ -39,7 +39,8 @@ public class Product {
         this.price = price;
     }
 
-    public String output(){
-        System.out.printf("상품 번호 = %s, 상품명 = %s, 가격 = %d%n", productNo, name, price);
+    @Override
+    public String toString() {
+        return String.format("상품 번호 : %s,  상품명 : %s,  가격 : %d", productNo, name, price);
     }
 }

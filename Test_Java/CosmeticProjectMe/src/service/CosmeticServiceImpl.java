@@ -16,40 +16,48 @@ public class CosmeticServiceImpl implements CosmeticService {
 
     @Override
     public boolean insert(Product product) {
+        //
+        if (count >= list.length) return false;
 
-
+        list[count++] = product;
+        return true;
 
     }
 
     @Override
     public boolean update(Product product) {
+        String tmp = product.getProductNo();
 
+        for(int i = 0; i < list.length; i++){
+            if(list[i].getProductNo().equals(tmp)){
+                list[i] = product;
+            }
+        }
+        return true;
     }
 
     @Override
     public boolean delete(String productNo) {
-
+        return true;
     }
 
     @Override
     public Product selectOne(String productNo) {
-        for(int i = 0; i < list.length; i++){
+        for(int i = 0; i < count; i++){
             if(list[i].getProductNo().equals(productNo)){
                 return list[i];
             }
         }
-
         return null;
-
     }
 
     @Override
     public Product[] selectAll() {
-        return new Product[0];
+        return list;
     }
 
     @Override
     public int getCount() {
-        return 0;
+        return count;
     }
 }
