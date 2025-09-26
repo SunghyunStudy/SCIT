@@ -28,17 +28,30 @@ public class CosmeticServiceImpl implements CosmeticService {
     public boolean update(Product product) {
         String tmp = product.getProductNo();
 
-        for(int i = 0; i < list.length; i++){
+        for(int i = 0; i < count; i++){
             if(list[i].getProductNo().equals(tmp)){
                 list[i] = product;
+                return true;
             }
         }
-        return true;
+        return false;
     }
 
     @Override
     public boolean delete(String productNo) {
-        return true;
+        for(int i = 0; i < count; ++i){
+            if(list[i].getProductNo().equals(productNo)){
+                for(int j = i; j <= count; ++j){
+                    if(j == count){
+                        list[j] = null;
+                        count--;
+                        return true;
+                    }
+                    list[j] = list[j+1];
+                }
+            }
+        }
+        return false;
     }
 
     @Override

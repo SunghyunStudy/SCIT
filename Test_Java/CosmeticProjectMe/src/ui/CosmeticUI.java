@@ -101,8 +101,8 @@ public class CosmeticUI {
         String name;
         int price;
 
-        System.out.println("상품명 : "); name = sc.next();
-        System.out.println("상품가격 : "); price = sc.nextInt();
+        System.out.print("상품명 : "); name = sc.next();
+        System.out.print("상품가격 : "); price = sc.nextInt();
 
         Product product = new Product(null, name, price);
         return product;
@@ -152,6 +152,7 @@ public class CosmeticUI {
         int price;
         String type;
         String color;
+        boolean result = false;
 
         System.out.println("<< 상품 정보 수정 >>");
         System.out.println("> 수정할 상품의 번호 : "); productNo = sc.next();
@@ -162,25 +163,39 @@ public class CosmeticUI {
             return;
         }
 
-        System.out.println("상품명 : "); name = sc.next();
-        System.out.println("상품가격 : "); price = sc.nextInt();
+        p = makeProduct();
+        p.setProductNo(productNo);
 
         if(productNo.equals("1")){
-            System.out.print("> 립스틱 타입: (1. 립밤 / 2. 립글로스 / 3. 틴트) : "); type = sc.next();
-            System.out.print("> 립스틱 색상: (1. 빨강 / 2. 분홍 / 3. 오렌지) : "); color = sc.next();
-            Lipstick l = new Lipstick(productNo, name, price, type, color);
-            service.update(l);
+            Product p2 = makeLipstick(p);
+            result = service.update(p2);
         }
         else if(productNo.equals("2")){
-            String texture;
-            System.out.print("> 파운데이션 제형: (1. 크림 / 2. 스틱) : "); texture = sc.next();
-            Foundation f = new Foundation(productNo, name, price, texture);
-            service.update(f);
+            Product p2 = makeFoundation(p);
+            result = service.update(p2);
         }
+        System.out.println((result) ? "수정 완료" : "수정 실패");
+
     }
 
 
-    public void deleteProduct(){}
+    public void deleteProduct(){
+        String productNo;
+        Product p;
+        boolean result;
+
+        System.out.print("삭제할 상품번호를 입력하시오 : "); productNo = sc.next();
+
+        p = service.selectOne(productNo);
+        if(p == null){
+            System.out.println("존재하지 않는 상품번호입니다.");
+            return;
+        }
+
+        result = service.delete(productNo);
+        System.out.println((result) ? "## 삭제가 완료되었습다" : "## 삭제 실패했습니다.");
+
+    }
 
 
     public void productPrint(){
@@ -192,7 +207,7 @@ public class CosmeticUI {
             return;
         }
 
-        for(int i = 0; i < listAll.length; i++){
+        for(int i = 0; i < count; i++){
             Product p = listAll[i];
             System.out.println(p);
         }
