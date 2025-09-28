@@ -12,7 +12,6 @@ public class Exam_42 {
         id = sc.next();
 
         if (isValid(id) && isNumeric(id) && codeCheck(id) && leapYearCheck(id)) {
-            // 2. 모든 검증을 통과했다면, 정보를 조합해서 출력합니다.
             String[] sary = id.split("");
             String month = sary[2] + sary[3];
             String day = sary[4] + sary[5];
@@ -20,7 +19,6 @@ public class Exam_42 {
             System.out.printf("당신은 %s년 %s월 %s일생 %s 입니다.\n",
                     birthyear(id), month, day, genderCheck(id));
         } else {
-            // 3. 검증에 하나라도 실패하면 오류 메시지를 출력합니다.
             System.out.println("잘못된 주민번호입니다.");
         }
         sc.close();
