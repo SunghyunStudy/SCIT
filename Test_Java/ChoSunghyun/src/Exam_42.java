@@ -24,46 +24,48 @@ public class Exam_42 {
         sc.close();
     }
 
-    private static boolean codeCheck(String id){
-        int count=2, sum=0, verif;
+    private static boolean codeCheck(String id) {
+        int count = 2, sum = 0, verif;
         String[] sary = new String[13];
         int[] iary = new int[13];
 
         String idClean = id.replace("-", "");
 
         // 길거나 짧으면 컷.
-        if(idClean.length() != 13) return false;
+        if (idClean.length() != 13)
+            return false;
 
         // 입력받은 id를 한글자씩 배열에 저장
         sary = idClean.split("");
 
         // 숫자만 int로 변환하여 iary에 저장
-        for(int i = 0; i < sary.length; i++){
+        for (int i = 0; i < sary.length; i++) {
             iary[i] = Integer.parseInt(sary[i]);
         }
 
         // 알고리즘 연산 후 sum에 합계 저장.
-        for(int j = 0; j < iary.length-1; j++){
-            if(count == 10) count = 2;
+        for (int j = 0; j < iary.length - 1; j++) {
+            if (count == 10)
+                count = 2;
             sum += iary[j] * count;
             count++;
         }
 
         verif = 11 - (sum % 11);
-        if(verif >= 10){
+        if (verif >= 10) {
             verif = verif % 10;
         }
 
-      return iary[12] == verif;
+        return iary[12] == verif;
     }
 
-    private static String birthyear(String id){
+    private static String birthyear(String id) {
         String[] sary = new String[14];
         String birthYear;
         sary = id.split("");
         birthYear = sary[0] + sary[1];
 
-        if(sary[7].equals("1") || sary[7].equals("2")){
+        if (sary[7].equals("1") || sary[7].equals("2")) {
             return "19" + birthYear;
         } else if (sary[7].equals("3") || sary[7].equals("4")) {
             return "20" + birthYear;
@@ -71,12 +73,12 @@ public class Exam_42 {
         return "";
     }
 
-    private static String genderCheck(String id){
+    private static String genderCheck(String id) {
         String[] sary = new String[14];
         String birthYear;
         sary = id.split("");
 
-        if(sary[7].equals("1") || sary[7].equals("3")){
+        if (sary[7].equals("1") || sary[7].equals("3")) {
             return "남자";
         } else if (sary[7].equals("2") || sary[7].equals("4")) {
             return "여자";
@@ -84,12 +86,14 @@ public class Exam_42 {
         return "";
     }
 
-    private static boolean isValid(String id){
-        if (id.length() != 14) return false;
+    private static boolean isValid(String id) {
+        if (id.length() != 14)
+            return false;
 
         String[] sary = new String[14];
         sary = id.split("");
-        if(!(sary[6].equals("-"))) return false;
+        if (!(sary[6].equals("-")))
+            return false;
 
         String genderCode = sary[7];
         if (!(genderCode.equals("1") || genderCode.equals("2") || genderCode.equals("3") || genderCode.equals("4"))) {
@@ -99,7 +103,7 @@ public class Exam_42 {
         return true;
     }
 
-    public static boolean isNumeric(String id){
+    public static boolean isNumeric(String id) {
         String[] idClean = id.split("-");
         String front, back;
         char c; // 숫자 검증을 위한 변수
@@ -115,9 +119,9 @@ public class Exam_42 {
             return false;
         }
 
-        for (int i = 0; i < front.length(); i++){
+        for (int i = 0; i < front.length(); i++) {
             c = front.charAt(i);
-            if(c < '0' || c > '9'){
+            if (c < '0' || c > '9') {
                 return false;
             }
         }
@@ -131,13 +135,12 @@ public class Exam_42 {
         return true;
     }
 
-
-    public static boolean leapYearCheck(String id){
+    public static boolean leapYearCheck(String id) {
         String[] sary = id.split("");
         String month = sary[2] + sary[3];
         String day = sary[4] + sary[5];
 
-        if(!(month.equals("02") && day.equals("29"))) {
+        if (!(month.equals("02") && day.equals("29"))) {
             return true;
         }
 
