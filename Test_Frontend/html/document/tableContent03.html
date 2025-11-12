@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>표요소</title>
+    <style>
+        table {
+            border: 2px solid #ff6565;
+            border-collapse: collapse;
+            width: 500px;
+        }
+
+        table caption {
+            /* 테이블 제목인듯 */
+            font-size: 1.5em;
+            font-weight: bold;
+            color: rgb(3, 105, 47)
+        }
+
+        table thead {
+            background-color: aqua;
+            /* 색상명으로 */
+        }
+
+        table th,
+        table td {
+            border: 1px solid #000;
+            padding: 10px;
+            /* 표 사이에 여백을 만듬 */
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <h1><a href="../index.html"><img src="./images/home.png" alt="홈으로"></a></h1>
+    <h2>테이블에 디자인 처리</h2>
+
+
+    <h2>첫번째 표</h2>
+    <table border="1">
+        <caption>시간표</caption>
+        <thead>
+            <tr>
+                <th></th>
+                <th>월요일</th>
+                <th>화요일</th>
+                <th>수요일</th>
+                <th>목요일</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <th>1교시</th>
+                <td colspan="2">국어</td>
+                <td rowspan="4">컴퓨터 실습</td>
+                <td>자율학습</td>
+            </tr>
+            <tr>
+                <th>2교시</th>
+                <td rowspan="2">수학</td>
+                <td rowspan="3">영어 Speaking</td>
+                <td rowspan="3">기초과학</td>
+            </tr>
+            <tr>
+                <th>3교시</th>
+            </tr>
+            <tr>
+                <th>4교시</th>
+                <td>사회</td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+
+</html>

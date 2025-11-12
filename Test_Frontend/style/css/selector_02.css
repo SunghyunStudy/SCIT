@@ -1,0 +1,45 @@
+@charset "utf-8";
+
+/*
+    방문한 적이 있는 링크: 브라우저의 히스토리에 남게된다.
+    파란색: 히스토리에 없을 경우 (link)
+    보라색: 히스토리에 있을 경우 (visited)
+    빨간색: 마우스로 이동하기 위해 Press 상태(active 상태)
+    호버: 마우스를 움직여 타깃위에 올렸을 때 (hover)
+    포커스: 타깃이 포커스를 받았을 때 (예를 들어 탭으로 이동 focus)
+*/
+a {
+    text-decoration: none;
+}
+
+a:link {
+    color: red;
+}
+
+a:visited {
+    color: blue;
+}
+
+a:active {
+    color: rgb(68, 255, 0);
+    font-weight: bolder;
+}
+
+a:hover {
+    background-color: aqua;
+}
+
+a:focus {
+    background-color: rgb(147, 147, 147);
+    color: white;
+}
+
+p {
+    color: yellowgreen;
+}
+
+p:hover {
+    background-color: violet;
+    color: black;
+    cursor: pointer;
+}

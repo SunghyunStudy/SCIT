@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="b90ed2fb-c738-4bba-b3fc-7afa64752bc0" name="변경" comment="">
+      <change afterPath="$PROJECT_DIR$/../Day0930/Day0930.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Day1013/Day1013.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Exam/src/Exam_25.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Exam/src/Exam_26.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Exam/src/Exam_27.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Exam/src/Exam_28.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Exam/src/Exam_29.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../FitnessNew/FitnessNew.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../backjun/backjun.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../cosmetic_new/cosmetic_new.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../CosmeticProject/src/ui/CosmeticUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/../CosmeticProject/src/ui/CosmeticUI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../CosmeticProjectMe/src/service/CosmeticServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/../CosmeticProjectMe/src/service/CosmeticServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../CosmeticProjectMe/src/ui/CosmeticUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/../CosmeticProjectMe/src/ui/CosmeticUI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../CosmeticProjectMe/src/vo/Lipstick.java" beforeDir="false" afterPath="$PROJECT_DIR$/../CosmeticProjectMe/src/vo/Lipstick.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Day0915/src/DoubleLoop_01.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Day0915/src/DoubleLoop_01.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Day0915/src/MethodTest_01.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Day0915/src/MethodTest_01.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Day0916/src/memo.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../Day0916/src/memo.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Day0917/src/VarMethodTest_01.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Day0917/src/VarMethodTest_01.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Day0919/src/abstractPack/PolygonTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Day0919/src/abstractPack/PolygonTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Day0919/src/abstractPack/Temp.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Day0919/src/abstractPack/Temp.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Day0924/src/ObjectAPITest_01.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Day0924/src/ObjectAPITest_01.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Day0924/src/StringAPITest_02.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Day0924/src/StringAPITest_02.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Day0924/src/StringAPI_03.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Day0924/src/StringAPI_03.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Day0924/src/StringBufferAPITest_01.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Day0924/src/StringBufferAPITest_01.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Day0925/src/DateAPITest_01.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Day0925/src/DateAPITest_01.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Day0925/src/ObjectAPITest_01.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Day0925/src/ObjectAPITest_01.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Day0926/src/ArrayTest_01.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Day0926/src/ArrayTest_01.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Day0926/src/ArrayTest_02.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Day0926/src/ArrayTest_02.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Day0929/src/0929.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../Day0929/src/0929.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Day0929/src/maptest/MapAPITest_01.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Day0929/src/maptest/MapAPITest_01.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Exam/src/Exam_21.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Exam/src/Exam_21.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Exam/src/Exam_30/Service.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Exam/src/Exam_30/Service.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/fitness/ui/FitnessUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/fitness/ui/FitnessUI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/fitness/vo/Fitness.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/fitness/vo/Fitness.java" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 2
+}</component>
+  <component name="ProjectId" id="33Mn9ItaUTaPoyZklznLPPT2nPN" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;모듈&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
+    &quot;애플리케이션.FitnessMain.executor&quot;: &quot;Run&quot;
+  }
+}</component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="디폴트 작업">
+      <changelist id="b90ed2fb-c738-4bba-b3fc-7afa64752bc0" name="변경" comment="" />
+      <created>1759135657566</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1759135657566</updated>
+    </task>
+    <servers />
+  </component>
+</project>

@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        div#time {
+            color: red;
+            font-weight: bold;
+            font-size: large;
+        }
+
+        div#quiz {
+            border: 2px solid black;
+        }
+
+        div#result {
+            border: 2px dashed black;
+        }
+    </style>
+
+
+
+
+    <script>
+        window.addEventListener('load', init);
+
+        function init() {
+            let m = 0;
+            let s = 0;
+            setInterval(() => {
+                let curTime = document.getElementById("time");
+                curTime.innerText = `경과 시간: ${m}분 ${s}초`;
+                s += 1;
+                if (s === 60) {
+                    s = 0;
+                    m += 1;
+                }
+            }, 1000);
+
+            const submitBtn = document.querySelector("#submitBtn"); // 이거 시험  
+            submitBtn.addEventListener('click', process);
+        }
+
+        function process() {
+            let resultQ1 = '';
+            let resultQ2 = '';
+            let q1 = document.querySelector("input[type=radio]:checked").value;
+
+            let q2 = document.getElementById("q2").value;
+            let score = 0;
+            let scoreText = ``;
+
+            if (q1 == null) {
+                alert("정답을 입력하시오");
+                return;
+            }
+
+            if (q2.length <= 0) {
+                alert("정답을 입력하시오");
+                return;
+            }
+
+
+            console.log(q1);
+            if (q1 === "class") {
+                resultQ1 = '1번: O';
+                score += 50;
+            } else {
+                resultQ1 = '1번: X(정답은 2)';
+            }
+            document.getElementById("result1").innerText = resultQ1;
+
+            if (q2 === "int") {
+                resultQ2 = '2번: O';
+                score += 50;
+            } else {
+                resultQ2 = '2번: X(정답은 int)';
+            }
+
+            document.getElementById("result2").innerText = resultQ2;
+
+            scoreText += '총점: ' + score + '점';
+            document.getElementById("total").innerText = scoreText;
+
+
+            if (score >= 50) {
+                document.getElementById("pass").innerText = '합격입니다.';
+                document.getElementById("nonPass").innerText = "";
+            } else {
+                document.getElementById("nonPass").innerText = "불합격입니다.";
+                document.getElementById("pass").innerText = '';
+            }
+
+        }
+
+    </script>
+
+
+
+
+
+</head>
+
+<body>
+    <div id="time">경과 시간: 0분 0초</div>
+    <h2>[Java 퀴즈]</h2>
+    <div id="quiz">
+        <form action="quiz" method="post" enctype="multipart/form-data">
+            <label>1. Java에서 클래스를 정의할 때 사용하는 키워드는? <br>
+                <input type="radio" name="q1" value="function" checked> 1. function <br>
+                <input type="radio" name="q1" value="class"> 2. class<br>
+                <input type="radio" name="q1" value="define"> 3. define<br>
+                <input type="radio" name="q1" value="object"> 4. object<br>
+            </label>
+            <br>
+
+            <label for="q2">2. 4바이트 크기의 정수형 변수를 선언할 때 사용하는 키워드는</label>
+            <input type="text" id="q2" name="q2" maxlength="16"><br>
+            <br>
+            <input type="button" value="완료" id="submitBtn">
+
+
+        </form>
+    </div>
+
+    <h2>[결과]</h2>
+    <div id="result">
+        <p id="result1"></p>
+        <p id="result2"></p>
+
+        <p id="total"></p>
+
+        <p id="pass" style="color:red;"></p>
+        <p id="nonPass" style="color:green;"></p>
+
+    </div>
+
+</body>
+
+</html>

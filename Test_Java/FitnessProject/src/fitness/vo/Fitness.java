@@ -114,7 +114,6 @@ public class Fitness implements Comparable<Fitness> {
     @Override
     public int compareTo(Fitness o) {
         int result = (id.compareTo(o.getId()) > 0 ) ? 1:  (id.compareTo(o.getId()) < 1) ? -1 :  0;
-
         return result;
     }
 }

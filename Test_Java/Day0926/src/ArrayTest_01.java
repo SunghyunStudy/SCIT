@@ -10,8 +10,11 @@ public class ArrayTest_01 {
         a.add(15);              // --> Integer로 자동변환(auto boxing)되어 저장됨.
         a.add(LocalDate.now());
 
-        a.get(0).getClass();   // .get : 0번 인덱스의 값을 꺼냄 .getClass() : 형태?
 
+
+
+        System.out.println(a.get(0).getClass());   // .get : 0번 인덱스의 값을 꺼냄 .getClass() : 형태?
+        System.out.println(a);
         // 위에꺼로 선언하지 마삼. 아래꺼를 써야함.
         // 제네릭을 지정한 어레이리스트
         ArrayList<String> b = new ArrayList<>();
@@ -19,7 +22,7 @@ public class ArrayTest_01 {
         b.add("123");
 //        b.add(15);                    잘못된 데이터가 들어가지 않도록 자동으로 막음
 //        b.add(LocalDate.now());
-
+        System.out.println(b);
 
         // list는 인터페이스, arraylist는 클래스임.
         String[] ary = new String[10];
@@ -33,7 +36,7 @@ public class ArrayTest_01 {
         // 데이터 꺼내기
         String s1 = ary[0];
         String s2 = list.get(0);
-
+        System.out.println(s2);
         // 데이터 개수 확인
         // 배열은 방의 크기만 확인할 수 있다. 삽입된 데이터의 개수는 개발자가 확인
         System.out.println(ary.length); //방 개수

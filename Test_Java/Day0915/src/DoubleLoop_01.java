@@ -9,10 +9,8 @@ public class DoubleLoop_01 {
                 System.out.print(j + "  ");
                 ++j;
             }
-
             ++i;
             System.out.println();
         }
     }
-
 }

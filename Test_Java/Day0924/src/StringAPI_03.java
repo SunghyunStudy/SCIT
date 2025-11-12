@@ -17,14 +17,15 @@ public class StringAPI_03 {
         String song = "I was wondering if after all these years you'd like to meet";
         String song2 = "나린 나리 개나리 입에 따다 물고요!";
 
-        System.out.println(song.contains("like"));
-//        System.out.println(song.contains(new StringBuffer("meet")));        // 쓰레드 세이프 있음
-        System.out.println(song.contains(new StringBuilder("these")));       // 쓰레드 세이프 없음
+        System.out.println(song.contains("like"));  // true
+        System.out.println(song.contains(new StringBuffer("meet")));        // 쓰레드 세이프 있음  // true
+        System.out.println(song.contains(new StringBuilder("these")));       // 쓰레드 세이프 없음  // true
 
         System.out.println("startswith: " + song.startsWith("I"));
-        System.out.println(song.endsWith("meet3"));
+        System.out.println("endswith: " + song.endsWith("et"));
         System.out.println("나리의 위치 : " + song2.indexOf("나리"));   // 나리의 위치 없으면 -1 반환
         System.out.println("나리의 위치 : " + song.lastIndexOf("나리"));
+        System.out.println("문장의 마지막 위치 : " + song.lastIndexOf("meet"));
 
         String[] ary = song.split(" ");
 

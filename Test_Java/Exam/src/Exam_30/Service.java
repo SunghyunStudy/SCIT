@@ -29,8 +29,6 @@ public class Service {
         }
     }
 
-
-
     public String menu(){
         System.out.print("===================\n" +
                            "1.예약\n" +

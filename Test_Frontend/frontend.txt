@@ -1,0 +1,98 @@
+25.10.30
+웹개발
+  - 웹 프론트엔드
+    - html (구조문서) ==> 정적
+    - css  (표현문서) ==> 스타일 적용
+    - js   (기능)     ==> 동적기능
+
+  - 웹 백엔드(DB)
+
+HTML(Hyper Text Markup Language)
+  markup을 이용해서 해당 컨텐츠의 용도를 알려줌(브라우저)
+  렌더링 엔진이 마크업기능을 해석해서 출력
+
+  대소문자를 가리지 않음 --> 소문자를 사용
+
+     <태그명 속성명="속성값">... </태그명> :
+     <태그명>
+
+  다른 태그를 포함하여 사용되거나 포함되어 사용된다.
+  모든 태그들은 자기만의 고유스타일이 있어서 CSS를 이용해서
+  바꿀 수 있다.
+
+  블록 요소(block tag) ==> 포함하여 사용, 패딩, 마진을 가질 수 있음
+     hr, p, div, blockquote, div, pre ...
+    hr: 가로선
+    태그의 폭이 컨테이너의 100%
+       (다른 요소와 영역을 나누지 않음)
+
+
+  인라인 요소(inline tag)==> 포함되어 사용,  패딩, 마진을 가질 수 없음
+    태그의 폭이 컨텐츠의 폭이다.
+    a : 다른 블록요소에 포함되어 사용된다.
+    폼태그:
+    text : 인라인 요소의 한종류이다.
+
+    br:줄바꿈, 오픈태그
+
+※ 브라우저: Major 브라우저 5개 =>
+    Chrome, Edge, FireFox, Opera, Sapari
+
+        i : css로 더 눕힐 수 있음
+        oblique : 눕히는건 글꼴 디자인 설계당시부터 눕힘글꼴을 넣은 거임..
+
+
+
+https://www.irasutoya.com/
+https://www.iconfinder.com/
+https://pixabay.com/ko/
+
+
+
+
+
+25.11.05
+
+JS 문법 유의 사항
+1) 대소문자를 구별한다.
+2) 엔터가 세미콜론의 역할을 한다. 세미콜론을 사용하면 문장이 종료된다.
+
+자바스크립트의 코드 삽입 위치
+- head : 에러날 확률이 높아짐.
+      1) 인라인
+      2) html 코드 삽입
+- body : 가독성이 떨어진다.
+
+자바스크립트는 
+1) html에 접근해서 동작을 시킨다. == 
+
+자바스크립트 데이터 타입 외워야 함.
+
+mdn 홈페이지
+https://developer.mozilla.org/ko/
+
+
+
+25.11.07
+(1) JS를 이용하여 태그에 접근하기 
+  document.getElementById("아이디");
+  document.getElementsByClassNmae("클래스명");  => 배열반환
+  document.getElementsByTagName("태그명")       => 배열반환
+
+  document.querySelector("CSS 선택자");    ==> 1개 반환
+  document.querySelectorAll("CSS 선택자"); ==> 배열반환
+
+2) close tag : 태그내에 데이터 삽입(close tag)
+  innerHTML;
+  innerText;
+
+3) open tag : 속성에 접근함.
+  getAttribute() : 읽어
+  setAttribute() : 씀
+
+
+
+
+
+시험 : sort문제 잘 보자
+display : flex 공부하자

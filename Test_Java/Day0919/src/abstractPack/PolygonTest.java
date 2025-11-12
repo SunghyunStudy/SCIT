@@ -11,6 +11,7 @@ abstract class Polygon{
 class MyCircle extends Polygon{
     double radius;
 
+    // 이거 구현 안하면 빨간 밑줄 겁내 뜸.
     @Override
     double area() { // abstract 메서드는 반드시 구현을 해야됨. 대신 output은 구현 안해도 됨(abstract이 아니니까)
         return radius * radius * Math.PI;

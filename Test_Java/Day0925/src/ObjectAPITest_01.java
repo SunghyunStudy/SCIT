@@ -13,11 +13,11 @@ public class ObjectAPITest_01 {
         System.out.println("바뀐이름-1의 이름 " + p.name);
 
 
-        Person p2 = new Person("홍길동", 26);
+        Person p2 = new Person("꺽정", 26);
         System.out.println("p2 주소" + p2.toString());          // p랑 주소가 다름.
         // hashcode 메소드를 쓰면 값이 같다면 주소를 맞춰줌
         System.out.println("길동이-2의 주소 :" + p2.hashCode());
-        System.out.println("바뀐이름-1의 이름 " + p2.name);
+        System.out.println("바뀐이름-2의 이름 " + p2.name);
 
         // 지금 hashcode를 썼는데 바로 아래 p == p2는 주소가 false로 뜸 주소가 똑같다면 지금 p2, p의 이름이 똑같아야됨
         //
@@ -61,6 +61,7 @@ class Person /* extends Object */{
     }
 
 
+    @Override
     public boolean equals(Object obj){
         if(obj == null) return false; // p.equals(null)을 방지
         if(!(obj instanceof Person)) return false;  // 객체가 아닌 문자열 같은 형태를 방지

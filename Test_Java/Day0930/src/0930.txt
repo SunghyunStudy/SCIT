@@ -1,0 +1,25 @@
+예외 (Exception)
+
+          <<interface>>
+            Throwable
+                |
+            Exception
+       _________|________                    Error
+       |                |
+RuntimeException    IOException
+
+
+
+- checked Exception     - 반드시 체크해야됨.
+- unchecked Exception   - 사용자가 조심하면 됨.
+
+
+throw와 throws의 차이점
+· throw : 에러를 고의로 발생시킬 때 사용합니다.
+· throws : 자신을 호출한 상위 메소드로 에러를 던지는 역할을 합니다.
+
+구분 	        throw	                            throws
+목적	        예외를 발생시키는 역할	            예외를 선언하여 호출자에게 책임을 위임하는 역할
+사용 위치	    메서드 내부 코드	                메서드 선언부 (메서드 시그니처)
+대상	        예외 객체 (예: new Exception())	    예외 클래스명
+예외 개수	    한 번에 하나만 가능	                여러 개 선언 가능

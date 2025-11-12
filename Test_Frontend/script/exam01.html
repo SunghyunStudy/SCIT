@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>문제</title>
+
+    <script>
+        const receivedData = [
+            { "1과목": "자바", "2과목": "자바스크립트", "3과목": "JLPT" },
+            { "보충과목": ['연산자', '자료형', '반복문'] },
+            ['말하기', '듣기', '비즈니스 일본어']
+        ]
+        // 위의 데이터에서 자바스크립트와 반복문, 비즈니스 일본어를 꺼내어 콘솔창에 출력
+        console.log(receivedData[0]["2과목"]);
+        console.log(receivedData[1].보충과목[2]);
+        console.log(receivedData[2][2]);
+
+        console.log(`2과목 : ${receivedData[0]["2과목"]}
+보충과목 : ${receivedData[1].보충과목[2]}
+언어 : ${receivedData[2][2]}`);
+    </script>
+</head>
+
+<body>
+    <h1><a href="../html/index.html"><img src="./images/home.png" alt="홈으로"></a></h1>
+    <p style="color: red;">😊결과는 개발자 모드의 콘솔창에서 확인하시오</p>
+    <hr>
+
+
+
+</body>
+
+</html>

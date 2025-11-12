@@ -6,6 +6,8 @@ public class ArrayTest_02 {
     public static void main(String[] args) {
         List<String> market = new ArrayList<>();
 
+
+
         // 데이터 추가하기
         market.add("바나나");
         market.add("소고기");

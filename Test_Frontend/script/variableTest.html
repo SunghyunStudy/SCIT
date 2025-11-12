@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>변수 선언 방법과 Scope</title>
+
+</head>
+
+<body>
+    <h1>
+        <a href="../index.html">
+            <img src="./images/home.png" alt="홈으로">
+        </a>
+    </h1>
+    <h2>자바스크립트 변수 선언 및 Scope</h2>
+    <p style="color:red;">👍 결과는 개발자 모드의 콘솔창에서 확인하시오</p>
+    <hr>
+    <p id="result"></p>
+
+    <script>
+        // 변수 선언 방법
+        // 1) 아무런 선언없이 사용 (추가: 태그 내부에 출력)
+        a = 25;     // 전역 변수 (사용하지 마시오! xxxxx)
+        var a = 45; // 전역 변수 (사용하지 마시오! xxx)
+        var a = "45";
+
+        let b = "대한민국!";   // 두 번 선언 불가능
+        b = "Korea";           // 사용가능
+
+        const c = "잔치가 벌어짐";  // 선언하자마자 초기화, 값을 변경할 수 없다.
+        // c = "Party!!";
+
+        const ary = [1, 2, 3, 4, 5];
+        ary[2] = 200;
+        // ary = [5, 10, 15, 20];
+
+        let result = document.getElementById("result");   // 요소를 검색해서 불러옴
+
+        // 출력 .데이터 만들고
+        let resultStr = '';
+
+        resultStr += `<h2>${a}</h2>`;
+        resultStr += `<h2>${c}</h2>`;
+        resultStr += `<h2>${ary}</h2>`;
+        resultStr += `<h2>${ary[1]}</h2>`;
+
+        // 위치에 꽂는다1
+        result.innerHTML = resultStr;    // 태그 표현
+        // result.innerText = resultStr;       // 태그 못표현
+
+        /*
+        document.write(`<h2>${a}</h2>`);
+        document.write(`<h2>${c}</h2>`);
+        document.write(`<h2>${ary}</h2>`);
+        document.write(`<h2>${ary[1]}</h2>`);
+        */
+
+        // ================ 변수의 유효범위 
+        // 1) 키워드 없이 선언하면 window 공간(global, 전역공간)에 선언됨
+        a = 123;
+        console.log(a);
+        console.log(this);
+        // window.alert("경고");
+
+        // 2) var로 선언할 경우 함수레벨 Scope
+        function varScope(a, b) {
+            var result = a + b;
+            console.log(`함수 내부에서 합계: ${result}`)
+        }
+        varScope(10, 20);
+        console.log(`함수 외부에서 합계: ${result}`);
+
+        function varScope2(a, b) {
+            var result = a + b;
+
+            if (result > 10) {
+                var temp = 25;
+                console.log(`if블록에서 내부 선언, 출력 temp : ${temp}`);
+            }
+            // 사용가능
+            console.log(`if블록에서 내부 선언, 외부출력 temp : ${temp}`);
+        }
+        varScope2(5, 6);
+
+        // 
+        function letScope(a, b) {
+            let result = a + b;
+
+            if (result > 10) {
+                let temp = 25;
+                console.log(`if블록에서 내부 선언, 출력 temp : ${temp}`);
+            }
+            // 사용불가
+            console.log(`if블록에서 내부 선언, 외부출력 temp : ${temp}`);
+        }
+        letScope(11, 21);
+        // 클로저를 하시오!! ==> Scope을 정확히 알아야함! (x)
+    </script>
+</body>
+
+</html>

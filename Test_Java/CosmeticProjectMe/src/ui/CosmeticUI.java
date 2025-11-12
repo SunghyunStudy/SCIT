@@ -109,14 +109,14 @@ public class CosmeticUI {
 
     }
 
-    public Lipstick makeLipstick(Product product){
+    public Lipstick makeLipstick(Product p){
         String type;
         String color;
 
         System.out.print("> 립스틱 타입: (1. 립밤 / 2. 립글로스 / 3. 틴트) : "); type = sc.next();
         System.out.print("> 립스틱 색상: (1. 빨강 / 2. 분홍 / 3. 오렌지) : "); color = sc.next();
 
-        Lipstick lipstick = new Lipstick(product.getProductNo(), product.getName(), product.getPrice(), type, color);
+        Lipstick lipstick = new Lipstick(p.getProductNo(), p.getName(), p.getPrice(), type, color);
         return lipstick;
     }
 

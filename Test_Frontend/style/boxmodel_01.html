@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>박스모델</title>
+    <style>
+        div.box1 {
+            width: 400px;
+            height: 100px;
+            background-color: #ff6a00;
+        }
+
+        div.box2 {
+            width: 50%;
+            height: 100px;
+            background-color: #0094ff;
+        }
+
+        nav ul li {
+            display: inline-block;
+            width: 200px;
+            height: 50px;
+        }
+
+        nav ul li:hover {
+            color: white;
+            background-color: black;
+        }
+
+        nav ul li a {
+            display: inline-block;
+            width: 200px;
+            height: 50px;
+        }
+
+        /* .box의 요소 조정  */
+        div.box {
+            width: 100px;
+            height: 100px;
+            border: 2px solid black;
+        }
+
+        div.two {
+            /* visibility: hidden; */
+            display: none;
+        }
+
+        /* 둥근 원안에 태극기 배경으로 넣기 */
+        div#flag {
+            width: 190px;
+            height: 190px;
+            border: 2px solid blue;
+            border-radius: 95px;
+            background-image: url(./images/flag.png);
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>
+        <a href="../index.html">
+            <img src="./images/home.png" alt="홈으로">
+        </a>
+    </h1>
+    <h2>박스모델</h2>
+    <div class="box1"></div>
+    <div class="box2"></div>
+    <hr>
+    <nav>
+        <ul>
+            <li><a href="#">애완견 종류</a></li>
+            <li><a href="#">입양하기</a></li>
+            <li><a href="#">건강돌보기</a></li>
+            <li><a href="#">더불어살기</a></li>
+        </ul>
+    </nav>
+    <hr>
+    <div class="box one">1</div>
+    <div class="box two">2</div>
+    <div class="box three">3</div>
+
+    <hr>
+    <div id="flag"></div>
+</body>
+
+</html>

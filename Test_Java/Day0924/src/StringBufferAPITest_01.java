@@ -11,6 +11,9 @@ public class StringBufferAPITest_01 {
 
         // 새로운 객체를 계속 만드는 작업이므로 성능이 나빠진다.
         song.concat(" 병아리떼 뿅뿅뿅").concat(" 봄나들이").concat(" 갑니다 ");
+        System.out.println(song);
+
+        song = song.concat(" 병아리떼 뿅뿅뿅").concat(" 봄나들이").concat(" 갑니다 ");
         // concat도 반환하는 변수를 안만들어도 되는데
         // String은 원본이 바뀌지 않음 (Immutable)
         // concat을 할 때 마다 원본이 바뀌는게 아니라 객체가 새로 생겼다가 없어지는거임

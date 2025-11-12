@@ -29,6 +29,6 @@ Map
     C : put()
     R : get(키)
 
-
+SetAPITest_02 는 0925의 ObjectAPITest_01 hashcode, equals 개념한번 보자
 
 

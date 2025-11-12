@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>자바스크립트 함수(2)</title>
+    <style>
+        div#target {
+            border: 1px dashed darkblue;
+            width: 128px;
+            height: 128px;
+        }
+
+        pre {
+            font-family: "맑은 고딕";
+            font-size: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>
+        <a href="../index.html">
+            <img src="./images/home.png" alt="홈으로">
+        </a>
+    </h1>
+    <h2>자바스크립트 함수(2)</h2>
+    <div>
+        <a href="#" data-img="face1.png">첫 번째 그림</a>&nbsp;
+        <a href="#" data-img="face2.png">두 번째 그림</a>&nbsp;
+        <a href="#" data-img="face3.png">세 번째 그림</a>&nbsp;
+    </div>
+    <hr>
+    <div id="target">
+        <img src="./images/face1.png" alt="첫 번째 그림"><br>
+        <p>첫 번째 그림</p>
+    </div><br><br><br>
+
+    <pre>
+    1) JS를 이용하여 태그읽어오기
+        document.getElementById("아이디");
+        document.getElementsByClassName("클래스명"); ==> 배열반환
+        document.getElementsByTagName("태그명"); ==> 배열반환
+        
+        document.querySelector("CSS 선택자"); ==> 1개반환
+        document.querySelectorAll("CSS 선택자"); ==> 배열반환
+        
+    2) close tag : 태그 내에 데이터 쓰기/읽기
+        innerHTML;
+        innerText;
+        
+    3) open tag : 속성에 접근함
+        getAttribute() : 읽어
+        setAttribute() : 씀
+    </pre>
+
+    <script>
+        // 이벤트 소스
+        let tag = document.querySelectorAll("div>a"); // 3개의 요소를 반환
+
+        // 3개의 a 태그에 이벤트 등록
+        tag.forEach((item) => { item.addEventListener('mouseenter', draw) });
+
+        // 이벤트 핸들러
+        function draw() {
+            let clickImg = './images/' + this.getAttribute("data-img");
+            let clickTxt = this.innerHTML;
+
+            let targetImg = document.querySelector("div#target>img");
+            let targetP = document.querySelector("div#target>p");
+
+            targetImg.setAttribute("src", clickImg);
+            targetP.innerHTML = clickTxt;
+        }
+    </script>
+</body>
+
+</html>

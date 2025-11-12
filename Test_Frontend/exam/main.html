@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>iframe</title>
+    <style>
+        iframe#i1 {
+            border: 2px solid black;
+            margin: 0px auto 0px auto;
+            /* block요소일때 가운데보내는 방법 */
+            float: left;
+        }
+
+        iframe#i2 {
+            border: 2px solid black;
+            margin: 0px auto 0px auto;
+            /* block요소일때 가운데보내는 방법 */
+            float: right;
+        }
+
+        div#1 {
+            text-align: center;
+            height: "1000px";
+        }
+    </style>
+</head>
+
+<body>
+    <div id="1">
+        <iframe id="i1" src="./quiz.html" name="myWin" frameborder="0" height="1000px" width="49%"></iframe>
+    </div>
+
+    <div id="2">
+        <iframe id="i2" src="./music.html" name="myWin" frameborder="0" height="1000px" width="49%"></iframe>
+    </div>
+</body>
+
+</html>

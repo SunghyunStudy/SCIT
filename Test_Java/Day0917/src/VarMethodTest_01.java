@@ -6,8 +6,8 @@ public class VarMethodTest_01 {
         countCheck("apple", "banana", "pear", "melon");
 
         // 가변인자 메소드 printf()
-        System.out.printf("안녕?");
-        System.out.printf("안녕? %d %s", 10, "korea");
+        System.out.printf("안녕?%n");
+        System.out.printf("안녕? %d %s%n", 10, "korea");
         System.out.printf("너의 이름은? %s, %d살, %d학년, %d 반", "임꺽정", 25, 2, 5);
     }
 

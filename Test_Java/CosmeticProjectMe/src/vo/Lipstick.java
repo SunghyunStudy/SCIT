@@ -40,6 +40,7 @@ public class Lipstick extends Product {
     public String toString() {
         String textType = (type.equals("1")) ? "립밤" : (type.equals("2")) ? "립글로스" : "틴트";
         String textColor = (color.equals("1")) ? "빨강" : (color.equals("2")) ? "분홍" : "오렌지";
+
         return super.toString() + String.format(", 립스틱 타입 : %s, 색상 : %s", textType, textColor);
     }
 }

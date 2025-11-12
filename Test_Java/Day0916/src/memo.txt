@@ -1,7 +1,7 @@
 non static 메소드로 가득찬 클래스를 만들어봅시다.
 클래스명 SimpleCalc
 
-static 클래스 안에서 만든 nostatic은 호출 불가 = static으로 만들어야함 SCBankTest 참고
+static 클래스 안에서 만든 no static은 호출 불가 = static으로 만들어야함 SCBankTest 참고
 
 <클래스의 설계>
 - 값을 담기 위한 클래스 (VO: Value Object: 변수 위주)
@@ -10,7 +10,6 @@ static 클래스 안에서 만든 nostatic은 호출 불가 = static으로 만�
 public class 클래스명 {
 
 }
-
 
 [문제]
 SCBank의 고객의 계좌를 관리하는 클래스를 설계하시오.

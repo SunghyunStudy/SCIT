@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <!DOCTYPE html>
+    <html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>표 요소</title>
+        <style>
+            table {
+                border: 2px solid #333;
+                border-collapse: collapse;
+                width: 100px;
+            }
+
+            table th,
+            table td {
+                border: 1px solid #000;
+                padding: 10px;
+                text-align: center;
+            }
+
+            img {
+                width: 100px;
+                height: 100px;
+            }
+
+            div#result {
+                width: 300px;
+                height: 500px;
+                border: 1px dashed black;
+            }
+
+            div#block {
+                display: inline;
+            }
+
+
+            div#result>img {
+                float: right;
+                width: 300px;
+                height: 300px;
+            }
+        </style>
+
+    </head>
+
+    <body>
+        <h1>
+            Music Store
+        </h1>
+        <div id="block">
+            <div id="all">
+                <a href="#" data-img="cd1.jpg" data-title="노래1" data-artist="가수1" data-price="20000원"><img
+                        src="./images/cd1.jpg" alt="사진1"></a>
+
+                <a href="#" data-img="cd2.jpg" data-title="노래2" data-artist="가수2" data-price="10000원"><img
+                        src="./images/cd2.jpg" alt="사진2"></a>
+
+                <a href="#" data-img="cd3.jpg" data-title="노래3" data-artist="가수3" data-price="40000원"><img
+                        src="./images/cd3.jpg" alt="사진3"></a>
+            </div>
+            <div id="all">
+                <a href="#" data-img="cd4.jpg" data-title="노래4" data-artist="가수4" data-price="23000원"><img
+                        src="./images/cd4.jpg" alt="사진4"></a>
+
+                <a href="#" data-img="cd5.jpg" data-title="노래5" data-artist="가수5" data-price="32000원"><img
+                        src="./images/cd5.jpg" alt="사진5"></a>
+
+                <a href="#" data-img="cd6.jpg" data-title="노래6" data-artist="가수6" data-price="28000원"><img
+                        src="./images/cd6.jpg" alt="사진6"></a>
+            </div>
+            <div id="all">
+                <a href="#" data-img="cd7.jpg" data-title="노래7" data-artist="가수7" data-price="18000원"><img
+                        src="./images/cd7.jpg" alt="사진7"></a>
+
+                <a href="#" data-img="cd8.jpg" data-title="노래8" data-artist="가수8" data-price="8000원"><img
+                        src="./images/cd8.jpg" alt="사진8"></a>
+
+                <a href="#" data-img="cd9.jpg" data-title="노래9" data-artist="가수9" data-price="21000원"><img
+                        src="./images/cd9.jpg" alt="사진9"></a>
+            </div>
+
+            <div id="result">
+                <img src="./images/white.png" alt="">
+                <h3 id="title"></h3>
+                <p id="artist"></p>
+                <p id="price"></p>
+                <form action="list" method="post" enctype="multipart/form-data">
+                    <!-- <input type="button" value="장바구니 담기" id="submitBtn"> -->
+                </form>
+            </div>
+        </div>
+
+
+        <script>
+
+
+            let tag = document.querySelectorAll("div>a"); // 3개의 요소를 반환
+            tag.forEach((item) => { item.addEventListener('click', draw) });
+            // tag에 [a, a, a] 이렇게 들어가있음
+
+            function draw() {
+                let myTag = this; // 클릭을 한 이벤트 소스
+                let clickImg = './images/' + myTag.getAttribute("data-img");
+
+
+                let result = document.querySelector('div#result>img');
+
+                let pTitle = document.querySelector('h3#title');
+                let dataTitle = myTag.getAttribute("data-title");
+                pTitle.innerText = dataTitle;
+
+                let pArtist = document.querySelector('p#artist');
+                let dataAtist = myTag.getAttribute("data-artist");
+                pArtist.innerText = "Artist : " + dataAtist;
+
+
+                let pPrice = document.querySelector('p#price');
+                let dataPrice = myTag.getAttribute("data-price");
+                pPrice.innerText = "Price : " + dataPrice;
+
+                let btn = document.querySelector('form');
+                btn.innerHTML = '<input type="button" value="장바구니 담기" id="submitBtn">';
+                console.log(btn.innerHTML);
+
+                result.setAttribute("src", clickImg);
+            }
+        </script>
+    </body>
+
+    </html>
+</body>
+
+</html>

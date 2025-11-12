@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        table,
+        tr,
+        td {
+            border: 1px solid black;
+            border-collapse: collapse;
+        }
+    </style>
+</head>
+
+<body>
+    <strong style="font-size : 30px">기본정보</strong>
+    <label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;표시 항목은 필수 입력 항목입니다.</label>
+    <!-- 수정사항 1 : 기본정보 와 표 테이블 사이 공간을 띄우고 싶은데 띄울 수가 없음 -->
+    <!-- 수정사항 2 : 이메일에 select 된 이메일 주소를 이메일 뒷 주소 textbox에 넣을 수 없음-->
+    <table>
+        <colgroup>
+            <col span="1" style="background-color: yellowgreen;">
+        </colgroup>
+        <!-- 1. 이름 (텍스트 박스) -->
+        <tr>
+            <form>
+                <td>이름</td>
+                <td>
+                    <input type="text" id="name">
+                </td>
+            </form>
+        </tr>
+
+        <!-- 2. 아이디 (텍스트 박스, 버튼)-->
+        <tr>
+            <form action="/join/idcheck.html">
+                <td>아이디</td>
+                <td>
+                    <input type="text" id="id">
+                    <input type="submit" id="idcheck" value="아이디중복확인"><br>
+                    <label>6~16자까지 영문자(소문자), 숫자 사용 가능합니다.</label>
+                </td>
+            </form>
+        </tr>
+
+        <!-- 3. 비밀번호 (텍스트 박스)-->
+        <tr>
+            <form>
+                <td>비밀번호</td>
+                <td>
+                    <input type="password" id="pw"><br>
+                    <label>6~16자까지 영문자(대소문자), 숫자 및 특수문자 사용 가능합니다.</label><br>
+                    <label>3자리 연속 또는 같은 문자, 아이디는 사용하실 수 없습니다.</label>
+                </td>
+            </form>
+        </tr>
+
+        <!-- 4. 비밀번호 확인 -->
+        <tr>
+            <form>
+                <td>비밀번호 확인</td>
+                <td><input type="password" id="pw">
+                    비밀번호가 일치합니다. <!-- 같은지 체크 후 label 문구 변경 -->
+                </td>
+            </form>
+        </tr>
+
+        <!-- 5. 생년월일/성별 (date, 라디오 버튼<남/여>)-->
+        <tr>
+            <form>
+                <td>생년월일/성별</td>
+                <td>
+                    <input type="date" id="birthdate">
+
+                    <!-- 남자 라디오 버튼 -->
+                    <input type="radio" id="male" name="check_sex" value="Male">
+                    <label for="male">남</label>
+
+                    <!-- 여자 라디오 버튼 -->
+                    <input type="radio" id="female" name="check_sex" value="Female">
+                    <label for="female">여</label>
+                </td>
+
+
+            </form>
+        </tr>
+
+        <!-- 6. 이메일 (텍스트박스, 리스트, 버튼, 텍스트 박스, 버튼)-->
+
+        <tr>
+            <form>
+
+                <td>이메일</td>
+                <td><input type="text" id="E_ID">@
+                    <input type="text" id="email_list">
+                    <select id="email_list">
+                        <option value="none" selected="selected">메일주소입력</option>
+                        <option value="naver">naver.com</option>
+                        <option value="daum">daum.net</option>
+                        <option value="nate">nate.com</option>
+                        <option value="kakao">kakao.com</option>
+                        <option value="yahoo">yahoo.com</option>
+                    </select>
+                </td>
+            </form>
+        </tr>
+
+        <!-- 7. 연락처 (label, 리스트)-->
+        <tr>
+            <form>
+                <td>연락처</td>
+                <td>
+                    <label>휴대전화</label>
+                    <select id="phone_number1">
+                        <option value="none" selected="selected">선택</option>
+                        <option value="010">010</option>
+                        <option value="011">011</option>
+                        <option value="017">017</option>
+                    </select>
+                    <label>-</label>
+                    <input type="text" id="phone_number2">
+                    <label>-</label>
+                    <input type="text" id="phone_number3">
+                    <br>
+                    <label>일반전화</label>
+                    <select id="phone_number1">
+                        <option value="none" selected="selected">선택</option>
+                        <option value="010">010</option>
+                        <option value="011">011</option>
+                        <option value="017">017</option>
+                    </select>
+                    <label>-</label>
+                    <input type="text" id="phone_number2">
+                    <label>-</label>
+                    <input type="text" id="phone_number3">
+                    <br>
+                    <label>연락처는 둘 중 하나만 입력해도 됩니다.</label>
+                </td>
+            </form>
+        </tr>
+        <!-- 8. 우편번호 (텍스트박스, 버튼) -->
+        <tr>
+            <form action="/join/searchCode.html">
+                <td>우편번호</td>
+                <td>
+                    <input type="text" id="zipcode">
+                    <input type="submit" value="주소검색">
+                </td>
+            </form>
+        </tr>
+        <!-- 9. 주소 (텍스트 박스)-->
+        <tr>
+            <form>
+                <td>주소</td>
+                <td>
+                    <input type="text" id="address_1"><br>
+                    <input type="text" id="address_2">
+                </td>
+            </form>
+        </tr>
+        <!-- 10. 정보수신 여부 (체크박스)-->
+        <tr>
+            <td>정보수신 여부</td>
+            <td>서비스 및 이벤트 소식을
+                <input type="checkbox" id="event1" name="event1" value="email">
+                <label for="event1"> Email로 수신하겠습니다.</label>
+                <input type="checkbox" id="event2" name="event2" value="sms">
+                <label for="event2"> SMS로 수신하겠습니다.</label>
+            </td>
+        </tr>
+    </table>
+</body>
+
+</html>

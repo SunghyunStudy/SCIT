@@ -37,7 +37,6 @@ public class Temp {
 
 //        MyAbstract b = new MyAbstract();  // 객체 생성을 못하는 클래스 (= abstract class)
         ChildAbstract c = new ChildAbstract();  // 객체 생성 가능 (상속전용클래스)
-
     }
 }
 

@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <!-- <script>
+        window.addEventListener('load', init);
+
+        function init() {
+            const submitBtn = document.querySelector("#submitBtn");     // 이거 시험
+            submitBtn.addEventListener('click', process);               
+        }
+
+        function process() {
+            alert("눌렸음");
+        }
+    </script> -->
+
+    <script defer src="./js/functionTest_03.js"></script>
+</head>
+
+<body>
+    <h1>
+        <a href="../index.html">
+            <img src="./images/home.png" alt="홈으로">
+        </a>
+    </h1>
+    <h2>JS로 Form 태그에 접근하기</h2>
+    <form action="" method="get">
+        <!-- 한 줄 글상자-->
+        <label for="userid">아이디: </label>
+        <input type="text" id="userid" name="userid" maxlength="16" placeholder="아이디를 입력하시오" required><br>
+
+        <!-- 비밀번호 -->
+        <label for="userpwd">비밀번호:</label>
+        <input type="password" id="userpwd" name="userpwd"><br>
+
+        <!-- 라디오 상자 : name속성을 같은값으로-->
+        <label>성별:
+            <input type="radio" name="gender" value="남자" checked>남자
+            <input type="radio" name="gender" value="여자">여자
+        </label><br>
+
+        <!-- 체크박스: 같은 그룹에서 여러개 선택 가능 -->
+        <label>취미:
+            <input type="checkbox" name="hobby" value="등산">등산
+            <input type="checkbox" name="hobby" value="음악감상" checked>음악감상
+            <input type="checkbox" name="hobby" value="독서">독서
+            <input type="checkbox" name="hobby" value="음주">음주
+            <input type="checkbox" name="hobby" value="자바코딩">자바코딩
+        </label><br>
+
+        <label for="personalcolor"></label>퍼스널 컬러:
+        <input type="color" name="personalcolor" id="personalcolor"> <br>
+
+        <label for="now">현재: </label>
+        <input type="datetime-local" name="now" id="now"><br>
+
+        <label for="email">이메일: </label>
+        <input type="email" name="email" id="email"><br>
+
+        <label for="range">진척도: </label>
+        <input type="range" name="range" id="range" min="0" max="50" step="10"><br>
+        <br><br>
+
+        <input type="hidden" name="reqPage" id="reqPage" value="1"> <!-- 사용자의 입력이 없이 서버로 전송될 값-->
+        <label for="address">지역: </label>
+        <select name="address" id="address">
+            <option value="강남구">강남구</option>
+            <option value="강서구">강서구</option>
+            <option value="강동구">강동구</option>
+            <option value="강북구">강북구</option>
+            <option value="서초구">서초구</option>
+        </select><br>
+        <label for="data">평가: </label>
+        <textarea name="data" id="data" cols="100" rows="10"></textarea><br><br>
+
+        <input type="button" value="전송" id="submitBtn">
+    </form>
+    <hr>
+
+    <div id="target"></div>
+</body>
+
+</body>
+
+</html>

@@ -103,6 +103,7 @@ public class CosmeticUI {
         String type;
 
         type = subMenu();
+        if(type == null) return;
 
         // 공통 데이터 입력
         System.out.print("> 상품 번호 : "); productNo = keyin.next();  // primary key임 (nn, uq)
@@ -133,6 +134,7 @@ public class CosmeticUI {
         if(result) System.out.println("## 상품이 등록되었습니다.");
         else System.out.println("## 등록에 실패했습니다.");
     }
+
 
 
     /**

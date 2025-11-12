@@ -21,6 +21,7 @@ public class StringAPITest_02 {
         // s6는 객체가 지워졌다가 만들어지는걸 3번 반복함.
 
 
+        System.out.println(s6);
 //        StringBuffer StringBuilder // 얜 변경가능한 문자열임 ******* mutable *******
     }
 }

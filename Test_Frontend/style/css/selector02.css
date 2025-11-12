@@ -1,0 +1,48 @@
+@charset "utf-8";
+
+/*
+    방문한 적이 있는 링크 : 브라우저의 히스토리에 남게된다.
+    
+    파란색  : 히스토리에 없을 경우    
+    보라색  : 히스토리에 있을 경우
+    빨간색  : 마우스로 이동하기 위해 누르고 있는 상태 (active상태)
+    호버    : 마우스를 올리고만 있는 상태
+    포커스  : tab 누르면 타깃이 변하면서 실선의 상자가 보임. 그거임.
+*/
+
+
+a {
+    /*밑줄을 없앰*/
+    text-decoration: none;
+}
+
+a:link {
+    color: red;
+}
+
+a:visited {
+    color: blue;
+}
+
+a:active {
+    color: yellow;
+    font-weight: bolder;
+}
+
+a:hover {
+    background-color: aqua;
+}
+
+a:focus {
+    background-color: rosybrown;
+    color: white;
+}
+
+p {
+    color: cornflowerblue;
+}
+
+p:hover {
+    background-color: deeppink;
+    cursor: pointer;
+}

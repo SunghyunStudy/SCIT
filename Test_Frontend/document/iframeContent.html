@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>iframe</title>
+    <style>
+        iframe {
+            border: 2px dashed blue;
+            margin: 0px auto 0px auto;
+            /* block요소일때 가운데보내는 방법 */
+        }
+
+        div#win {
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>
+        <a href="../index.html">
+            <img src="./images/home.png" alt="홈으로">
+        </a>
+    </h1>
+    <h2>iframe 태그의 사용</h2>
+    <marquee direction="right">어서오세요~</marquee>
+    <ul>
+        <li><a href="./imagesContent.html" target="myWin">이미지 관련태그</a></li>
+        <li><a href="./tableContent.html" target="myWin">테이블 관련태그</a></li>
+        <li><a href="./formContent.html" target="myWin">폼 관련태그</a></li>
+        <li><a href="./paragraph.html" target="myWin">텍스트 관련태그</a></li>
+        <li><a href="./tableContent3.html" target="myWin">시간표</a></li>
+    </ul>
+    <div id="win">
+        <iframe src="./imagesContent.html" name="myWin" frameborder="0" height="400px" width="90%"></iframe>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>iframe</title>
+    <style>
+        iframe {
+            border: 2px dashed rgb(0, 255, 153);
+            margin: 0px auto 0px auto
+                /* block요소일때 가운데 보내는 방법임 inline 요소일땐 부모쪽(여기선 div)에서 불러와야됨 */
+        }
+
+        div#win {
+            text-align: center;
+            /* 자식을 가운데로 보내라 */
+        }
+    </style>
+</head>
+
+<body>
+    <h1><a href="../index.html"><img src="./images/home.png" alt="홈으로"></a></h1>
+    <h2>iframe 태그의 사용</h2>
+
+    <marquee behavior="" direction="right">어서오세요</marquee>
+
+    <ul>
+        <li><a href="./imagesContent.html" target="myWin">이미지 관련 태그</a></li>
+        <li><a href="./tableContent.html" target="myWin">테이블 관련 태그</a></li>
+        <li><a href="./formContent.html" target="myWin">폼 관련 태그</a></li>
+        <li><a href="./paragraph.html" target="myWin">텍스트 관련 태그</a></li>
+        <li><a href="./tableContent03.html" target="myWin">시간표</a></li>
+        <li><a href="https://www.naver.com" target="myWin">네이버</a></li>
+    </ul>
+
+    <div id="win">
+        <iframe src="./imagesContent.html" frameborder="0" name="myWin" width="90%" height="400px"></iframe>
+    </div>
+</body>
+
+</html>

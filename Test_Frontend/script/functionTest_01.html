@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>자바스크립트 함수</title>
+</head>
+
+<body>
+    <h1>
+        <a href="../index.html">
+            <img src="./images/home.png" alt="홈으로">
+        </a>
+    </h1>
+    <script>
+        /* 문제-1 전달인자 1개를 받아서 그 전달인자를 3제곱해서 반환하는
+        함수를 작성하시오 */
+        let hana1 = function (a) {
+            return a ** 3;
+        }
+
+        let hana2 = (a) => a ** 3;
+        console.log(`화살표 함수 실행 결과: ${hana2(5)}`);
+    </script>
+
+    <h2>자바스크립트 함수</h2>
+
+    <pre>
+        ※ 함수의 특징
+        - 함수는 데이터이며, 함수의 이름이 함수 자체이다.
+
+        ※ 함수의 종류
+        1) 선언 함수 ==> Hoisting 이 된다
+            function 함수명(매개변수) {
+                기능 나열;
+                return 처리된 데이터;
+            }
+
+        2) 표현 함수 ==> 식으로 동작하는 함수이므로 Hoisting되지 않음
+            const func = function(매개변수) {
+                기능 나열
+                return 처리된 데이터;
+            };
+
+        3) 화살표 함수(arrow function)
+            - 다른 언어에서 람다함수라고도 한다.
+            - 특정 함수를 람다함수로 변경하려면
+
+                function 함수명(매개변수) {
+                    기능 나열;
+                    return 처리된 데이터;
+                }
+
+                (1) function키워드를 지운다. 
+                (2) 함수명을 지운다.
+                (3) 매개변수는 그대로 표현
+                    (매개변수)
+                (4)  )와 { 사이에 화살표 => 를 넣는다.
+                    (매개변수) => 
+                (5) { } 내부에 한 줄밖에 없으면 {} 도 뺀다.
+                (6) return 도 삭제
+
+        ※ 함수의 용어
+        1) 일급 함수: 값으로 처리되는 함수. 전달인자로 던지거나 함수를 반환할 수 있다.
+            - 스톱워치처럼 동작하는 함수
+            let 변수 = setTimeout(함수, 밀리초);
+                        경과시간이 지나면 1회 함수를 호출
+
+            let 변수 = setInterval(함수, 밀리초); 
+                        경과시간이 지나면 반복적으로 함수를 호출
+            clearInterval(변수)
+
+        2) 콜백함수(callback): 함수에 전달되어 사용되는 함수
+            setInterval(콜백함수, 밀리초);
+
+        3) 고차함수: 함수를 전달인자로 받거나 함수를 반환하는 함수.
+            setInterval() 자체가 고차함수이다.
+
+    </pre>
+    <hr>
+
+    <div>
+        <input type="button" value="시작" id="start">
+        <input type="button" value="끝" id="stop">
+        <input type="button" value="지워" id="clear">
+    </div><br>
+    <h2 id="result"></h2>
+
+    <script>
+        // 버튼 요소
+        let start = document.getElementById("start");
+        let stop = document.getElementById("stop");
+        let clear = document.getElementById("clear");
+
+        // h2 
+        let result = document.getElementById("result");
+        let hello = "";
+        let startBtn = '';
+
+        start.addEventListener('click', () => {
+            startBtn = setInterval(() => {
+                hello += '😜';
+                result.innerHTML = hello;
+            }, 500);
+        });
+        stop.addEventListener('click', () => {
+            clearInterval(startBtn);
+        });
+
+        clear.addEventListener('click', () => {
+            result.innerHTML = '';          // 쓰기
+            let data = result.innerHTML;    // 읽기
+        });
+
+
+
+
+
+    </script>
+</body>
+
+</html>

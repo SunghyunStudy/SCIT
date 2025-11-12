@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        div#target {
+            border: 1px dashed darkblue;
+            width: 128px;
+            height: 128px;
+        }
+
+        pre {
+            font-family: "맑은 고딕";
+            font-size: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1><a href="../html/index.html"><img src="./images/home.png" alt="홈으로"></a></h1>
+    <h2>자바스크립트 함수(2)</h2>
+
+    <div>
+        <a href="#" data-img="samsung.png">재dragon</a>&nbsp;
+        <a href="#" data-img="nvidia.png">황슨황</a>&nbsp;
+        <a href="#" data-img="hyundai.png">대의선</a>&nbsp;
+    </div>
+    <hr>
+
+    <div id="target">
+        <img src="./images/samsung.png" alt="재dragon">
+        <p>재dragon</p>
+        <hr>
+        <hr>
+        <hr>
+    </div>
+
+    <script>
+        let tag = document.querySelectorAll("div>a"); // 3개의 요소를 반환
+
+        tag.forEach((item) => { item.addEventListener('mouseenter', draw) });
+        console.log(tag);
+        // tag에 [a, a, a] 이렇게 들어가있음
+
+        function draw() {
+            let myTag = this; // 클릭을 한 이벤트 소스
+            let clickImg = './images/' + myTag.getAttribute("data-img");
+
+            let target = document.querySelector('div#target>img');
+            let pText = document.querySelector('div#target>p');
+
+            pText.innerText = myTag.innerText;
+            target.setAttribute("src", clickImg);
+        }
+    </script>
+
+</body>
+
+</html>

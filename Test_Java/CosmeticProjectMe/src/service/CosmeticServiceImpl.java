@@ -30,7 +30,7 @@ public class CosmeticServiceImpl implements CosmeticService {
 
         for(int i = 0; i < count; i++){
             if(list[i].getProductNo().equals(tmp)){
-                list[i] = product;
+                list[i] = product;  
                 return true;
             }
         }
