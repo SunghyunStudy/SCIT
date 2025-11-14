@@ -69,7 +69,7 @@ public class ParamController {
 			[요청라인] - url(get방식)이 포함되어 있음 ; 브라우저에 노출될 수 있음.
 						http://localhost:9992/param?id=abc&name=aaa
 			[헤더] -
-			[바디] - post 방식 (url에 노출되지 않음)
+			[바디] - post 방식 (url에 노출되지 않음)dd
 	 */
 	
 	@PostMapping ("input2")
