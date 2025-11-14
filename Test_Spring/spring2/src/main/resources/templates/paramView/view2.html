@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>view2</title>
+</head>
+<body>
+
+<h2>[ Post method로 parameter 전달 ]</h2>
+<!-- action의 이름은 GetMapping("")의 이름과 동일
+    name의 값은 @RequestParam("") 의 이름과 동일해야됨
+-->
+<form action="input2" method="post"> <!-- 컨트롤러에 input1을 받을 메서드가 필요함 -->
+    <p>ID<input type="text" name="id"></p>
+    <p>PW<input type="password" name="password"></p>
+    <p>이름<input type="text" name="name"></p>
+    <p>전화
+        <input type="text" name="phone">
+        <input type="radio" name="com" value="kt" checked>KT
+        <input type="radio" name="com" value="skt" >skt
+        <input type="radio" name="com" value="lg" >lg
+    </p>
+    <p>
+        <input type="submit" value="전송">
+        <input type="reset" value="초기화">
+    </p>
+</form>
+
+</body>
+</html>

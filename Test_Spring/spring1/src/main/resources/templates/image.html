@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>이미지</title>
+</head>
+<body>
+    <h2>image 페이지</h2>
+<!--
+    * web에서의 경로
+    protocol    host                port    path    query string
+    http://     www.domain.com      :8888   /login  ?key=value&key=value(get 방식일 경우에 포함)
+    Origin: protocol + host + port 까지 모두 합친 URL
+
+    Protocol: http, https (브라우저와 서버가 통신하기위한 규칙)
+    Host            : 접속할 서버의 주소
+    Port            : 자원에 접근할 수 있는 포트 번호
+    Path            : 사이트 내부 경로
+    Query String    : URL에 추가 정보를 전달할 때 사용.
+
+    절대 경로(Absolute Path)
+    /       루트경로
+
+    상대 경로 (Relative Path)
+    ./      현재 디렉토리
+    ../     상위 디렉토리
+-->
+
+    <!-- 정적 리소스( 절대 경로) 는 static을 기준으로 감
+    // localhost:9991/image.html 을 입력하면 서버는 컨트롤러를 뒤져서 image.html이라는 이름의 매핑을 찾음
+    // 존재하지 않다면 static으로 감. -->
+    <p><img src="image/samsung.png"></p>  <!-- 상대경로 -->
+    <p><img src="image/hyundai.png"></p>    <!-- 상대경로 -->
+    <p><img src="/image/nvidia.png"></p><!-- 절대경로 -->
+    <p>상대 경로: <img src = "../image/samsung.png"></p> <!-- 브라우저가 보고 있는 현재 URL 경로를 기준으로 상위 경로로 간다는 뜻입니다. -->
+    <p>절대 경로: <img src = "/image/hyundai.png"></p> <!-- 즉, ../는 URL 경로 상위로 간다는 뜻이지, 서버 내 폴더 구조 이동을 직접 의미하지는 않습니다. -->
+
+    <p><a href = "./">홈으로(상대경로)</a></p> <!-- home페이지는 그냥 ./까지만임 매핑주소를 기준으로 이동하는듯 -->
+    <p><a href = "/">홈으로(절대경로)</a></p>
+
+<!-- 1. URL과 브라우저 경로 해석
+사용자가 /home.html에서 /image 페이지로 이동하면 브라우저 주소창 URL이 localhost:9991/image가 됩니다.
+
+이 상태에서 이미지 태그가 <img src="../image/samsung.png">라면,
+브라우저는 현재 URL 경로 /image 기준으로 ../image/samsung.png를 계산합니다.
+
+/image의 상위 경로는 / 이므로 실제 요청 주소는 /image/samsung.png가 됩니다.
+
+2. Spring Boot 정적 리소스 제공 구조
+Spring Boot는 기본적으로 src/main/resources/static 디렉토리 안에 있는 파일들을 정적 리소스로 서비스합니다.
+
+예를 들어 src/main/resources/static/image/samsung.png 파일이 있으면,
+클라이언트에서 /image/samsung.png 경로로 요청할 때 이 파일이 전달됩니다. -->
+</body>
+</html>
