@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>회원목록</title>
+    <link rel="stylesheet" th:href="@{/css/list.css}">
+    <link rel="stylesheet" th:href="@{/css/header.css}">
+</head>
+<body>
+
+    <!-- 상단 메뉴 - fragment -->
+    <div th:replace="~{layout/header :: header}"></div>
+
+    <h1>회원목록</h1>
+
+    <!-- 서버로부터 가져온 회원목록이 비어있는 경우 출력할 태그 -->
+    <p class="no-member" th:if="${memberList == null or memberList.isEmpty()}">회원이 없습니다.</p>
+
+    <!-- 서버로부터 가져온 회원목록이 있는 경우 출력할 태그 -->
+    <table th:if="${memberList != null and !memberList.isEmpty()}">
+        <tr>
+            <th>아이디</th>
+            <th>비밀번호</th>
+            <th>이름</th>
+            <th>전화번호</th>
+        </tr>
+        <!-- 서버로부터 가져온 회원목록으로부터 회원정보를 반복출력 -->
+        <tr th:each="member : ${memberList}">
+            <td th:text="${member.id}">id</td>
+            <td th:text="${member.pw}">pw</td>
+            <td th:text="${member.name}">name</td>
+            <td th:text="${member.phone}">phone</td>
+        </tr>
+    </table>
+
+</body>
+</html>

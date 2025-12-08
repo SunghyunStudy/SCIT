@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns:th="thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <!-- handler 처리를 딱히 한 적이 없는데도 경로를 잘못 입력했을 시 자동으로 error 페이지로 이동함. -->
+    <h1>스미마셍</h1>
+    <p>문제가 지속되면 관리자에게 문의해주세요.</p>
+
+    <p th:text="|에러 코드 : ${status}|"></p>
+    <p th:text="|에러 메시지 : ${error}|"></p>
+
+    <a th:href="@{/}">홈으로 가기</a>
+</body>
+</html>

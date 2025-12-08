@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        body.dark{
+            background-color: #333;
+            color: white;
+        }
+    </style>
+    <script>
+        window.onload = function(){
+            if (localStorage.getItem("mode") === "dark"){
+            // page가 로딩되는 순간 로컬스토리지를 뒤져서 mode라는 놈이 dark면 body태그를 다 가져온 뒤 class목록에 dark를 추가
+            // 로컬스토리지에 저장하면 웹을 껐다가 켜도 그대로 적용이 되어 있을거임.
+                document.body.classList.add("dark");
+            }
+
+            let btn = document.querySelector('#btn')
+            btn.addEventListener('click', function(){
+            // toggle : body태그에 dark 클래스가 있으면 제거, 없으면 추가
+                document.body.classList.toggle("dark");
+                const mode = document.body.classList.contains("dark") ? "dark" : "light";
+                localStorage.setItem("mode", mode);
+            });
+        }
+    </script>
+</head>
+<body>
+    <h2>다크모드 토클</h2>
+    <button id="btn">다크모드</button>
+
+
+</body>
+</html>

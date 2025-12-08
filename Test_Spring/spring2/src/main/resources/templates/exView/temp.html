@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script>
+        window.onload = function(){
+            let name = document.querySelector('#name');
+            let message = document.querySelector('#message');
+            name.value = sessionStorage.getItem("name");
+            message.value = sessionStorage.getItem("message");
+
+            name.addEventListener('input', function(){
+                sessionStorage.setItem("name", name.value);
+            });
+
+            // 이렇게도 가능
+            document.querySelector('#message')
+                    .addEventListener("input", (e) => {
+                 sessionStorage.setItem("message", e.target.value);
+            });
+
+        }
+    </script>
+</head>
+<body>
+    <h2> 임시 저장 </h2>
+    <form>
+        이름 : <input type="text" id="name">
+        메시지 : <input type="text" id="message">
+        <button type="submit">입력</button>
+    </form>
+
+</body>
+</html>

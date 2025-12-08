@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<!--
+    타임리프를 사용하기 위한 네임스페이스
+    - 네임스페이스는 이름 충돌을 방지하고 XML 문서 내에서 요소와 속성을 고유하게 식별할 수 있도록 도와주는 XML 표준 속성.
+    - 이를 통해 문서 내에서 th 접두사가 붙은 요소나 속성이 Thymeleaf의 템플릿 기능과 관련이 있음을 명확히 정의
+-->
+<html xmlns:th="http://www.thymeleaf.org" lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <h2>Thymeleaf 문법</h2>
+    <h3> * 값 출력 </h3>
+    <p>[[${str}]]</p>
+    <p>[[${num}]]</p>
+    <p>[[${person}]]</p>
+    <p>[[${person.id}]]</p>
+    <p>[[${person.name}]]</p>
+    <p>[[${tag}]]</p>
+    <p>[[${url}]]</p>
+
+    <!-- text : HTML을 문자로 화면에 그대로 출력 -->
+    <p th:text="${tag}"></p>
+    <!-- utext : HTML 태그 인식-->
+    <p th:utext="${tag}"></p>
+
+    <h3>* 주석</h3>
+    <p>페이지 소스보기를 보시오</p>
+    <!-- HTML주석 : 브라우저가 주석처리 -->
+    <!--     <p th:text="${str}"></p>    -->
+    <!-- 타임리프주석 : 타임리프(서버)가 제거 -->
+    <!--/* <p th:text="${str}"></p> */-->       <!-- 페이지 소스보기 하면 안뜸 -->
+
+    <h3>* 연산자</h3>
+    <p>[[${num gt 0}]]</p>
+    <p th:text="${num}">1000</p> <!-- thymeleaf가 우선순위가 높아서 p태그에 1000은 출력되지 않음.-->
+    <!--  산술연산자 : + - * / %  -->
+    <p th:text="${num + 1}">1000</p>
+    <!--  비교연산자 : < > <= >= == !=  lt gt le ge eq ne  -->
+    <p th:text="${num > 100}"></p>
+    <p th:text="${num gt 100}"></p>
+    <!-- 논리연산자 : and or not -->
+    <p th:text = "${num ge 1 and num le 300}"></p>
+    <p th:text="${num % 300 == 0}"></p>
+
+
+    <h3>* 경로 생성과 하이퍼링크</h3>
+    <!-- 링크를 th에 입력할때는 작은 따옴표도 넣어줘야함-->
+    <p><a href="https://naver.com" th:href="'https://nate.com'">네이버로 가기</a></p>
+    <p><a href="${url}" th:href="${url}">구글로 가기</a></p>
+    <p> 절대경로 생성 : [[@{/param/view1}]]</p>
+    <p><a th:href="@{/param/view1}">페이지 이동</a></p>
+    <p><img th:src="@{/imagefile/image1.png}"></p>
+    <p><img src="" th:src="@{/imagefile/image1.png}"></p>
+
+    <h3>* 객체출력</h3>
+    <ul th:object="${person}">
+        <!-- person 객체에 있는 변수들은 *로 뽑아낼 수 있음.-->
+        <li th:text="*{id}">아이디</li>
+        <li th:text="*{name}">이름</li>
+        <li th:text="*{password}">비밀번호</li>
+    </ul>
+    <p th:text="${person.phone}">핸드폰</p>
+    <p th:text="${person.com}">통신사</p>
+
+
+    <h3>* 포매팅</h3>
+    <p th:text="${inum}"></p>
+    <p th:text="${dnum}"></p>
+    <p th:text="${dnum2}"></p>
+    <p th:text="${date}"></p>
+
+    <!-- 타임리프상 존재하는 numbers 객체를 갖고 포매팅한거임. -->
+    <p th:text="${#numbers.formatInteger(inum, 10)}"></p>
+    <p th:text="${#numbers.formatInteger(inum, 3, 'COMMA')}"></p> <!-- 3자리마다 콤마 -->
+    <p th:text="${#numbers.formatDecimal(dnum, 3, 'COMMA', 4, 'POINT')}"></p> <!-- 3자리마다 콤마 + 소수점 4자리-->
+    <p th:text="${#numbers.formatPercent(dnum2, 0, 2)}"></p>
+    <p th:text="${#numbers.formatPercent(100000.555, 10, 1)}"></p>
+
+    <!-- dates는 좀 옛날거고, temporals가 요즘거임.-->
+    <p th:text="${#dates.format(date, 'yyyy/MM/dd HH:mm')}"></p>
+    <p th:text="${#temporals.format(localDate, 'yyyy년 M월 d일')}"></p>
+    <p th:text="${#temporals.format(localDateTime,'yyyy-MM-dd HH:mm:SS')}"></p>
+
+    <h3> * 문자열 </h3>
+    <p th:text="${str}">문자열 출력</p>
+    <p th:text="${str + 'abcd'}"></p>
+    <!-- ||는 원하는대로 공백을 넣고 싶을때 사용함. -->
+    <p th:text="|${str} a b  c   d|"></p>
+    <pre th:text="|${str} a b  c   d|"></pre>
+    <p th:text="str + 'abcd'"></p>
+
+    <p th:text="${str.equals('문자열')}"></p>
+    <p th:text="${not str.equals('문자열')}"></p>
+    <p th:text="${str == 문자열}"></p>
+    <p th:text="${str == 'ABCD'}"></p>
+
+    <p th:text="${#strings.isEmpty(str)}"></p>
+    <p th:text="${#strings.substring(str, 0, 2)}"></p>
+    <p th:text="${values}"></p>
+    <p th:text="${#strings.listSplit(values, ',')}"></p>
+    <p th:text="${#strings.listSplit(values, ',')[0]}"></p>
+
+</body>
+</html>

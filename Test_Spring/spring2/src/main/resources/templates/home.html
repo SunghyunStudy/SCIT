@@ -1,26 +1,116 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="thymeleaf.org" lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>타이토루</title>
 </head>
 <body>
+
 <ol>
     <li>Lombok & Logger 사용
         <ul>
-            <li><a href="lom/logger">Logger 사용</a></li>
-            <li><a href="lom/lombok">Lombok 사용</a></li>
+            <li><a href="lom/logger">Logger 사용</a> </li>
+            <li><a href="lom/lombok">Lombok 사용</a> </li>
+        </ul>
+    </li>
+    <li> 서버와 값 주고 받기
+        <ul>
+            <li><a href="param/view1">GET method로 parameter 전달</a></li>
+            <li><a href="param/view2">POST method로 parameter 전달</a></li>
+            <li><a href="param/view3">POST method로 parameter 전달 - 객체</a></li>
+            <li><a href="param/input4?name=abc&age=11">GET method로 parameter 전달 - Form없이</a></li>
+            <li><a href="param/input4">GET method로 parameter전달 - 파라미터가 없는 경우</a></li>
+            <li><a href="param/model">Model 사용하기</a> </li>
+        </ul>
+    </li>
+    <!--
+        Session vs Cookie
+            - 웹에서 사용자 상태를 유지하고 위해 사용하는 대표적인 기술
+        1. Session
+            - 사용자 정보는 서버에 저장됨.
+            - 클라이언트는 세션 ID만 브라우저가 쿠키로 저장
+                * 요청 흐름
+                    a. 서버가 세션을 생성하고 세션ID 발급
+                    b. 그 세션ID를 부라우저 쿠키에 저장해둠
+                    C. 이후 모든 요청에 세션 ID를 자동 포함
+                    D. 서버는 해당 세션ID를 보고 사용자 구분
+                 - 로그인시 유지 정도, 장바구니 등 ...
+
+         2. Cookie
+             - 브라우저는 요청을 보낼 때, URL의 path가 쿠키의 path로 시작하면
+                그 쿠기를 자동으로 전송함
+             - 사용자 정보가 브라우저에 저장됨
+             - 사용자 PC에 데이터를 저장하므로 보안에 취약
+             - 최근 본 상품목록, 아이디 저장, 테마 설정 등...
+    -->
+
+    <li>세션
+        <ul>
+            <li><a href="ss/session1">Session에 저장</a> </li>
+            <li><a href="ss/session2">Session에서 읽기</a> </li>
+            <li><a href="ss/session3">Session에서 삭제</a> </li>
+            <li>session.name: [[${session.name}]]님이 접속중</li>
+
+            <li>session.loginId: [[${session.loginId}]]님이 접속중</li>
+            <li><a href="ss/login">로그인하기</a></li>
+            <li><a href="ss/logout">로그아웃하기</a></li>
+            <li><a href="ss/loginTest">로그인해야 접속 가능한 페이지</a></li>
+
+        </ul>
+    </li>
+    <li>
+        <ul>
+            <li><a href="ck/cookie1">쿠키 저장</a></li>
+            <li><a href="ck/cookie2">쿠키 삭제</a></li>
+            <li><a href="ck/cookie3">쿠키 읽기</a></li>
+        </ul>
+    </li>
+    <!--
+        웹 스토리지(Web Storage)
+        HTML5에서 정의된 Web API이며, 브라우저가 제공하는 기능
+        서버와의 통신 없이 클라이언트 쪽에서 데이터를 저장
+
+        1. 로컬 스토리지(Local Storage)
+         특징:
+            영구 저장: 데이터는 명시적으로 삭제되지 않는 한 영구 저장.
+                        브라우저를 닫아 데이터 유지
+            범위 : 도메인단위로 데이터를 저장
+            용량: 일반적으로 5MB 정도의 용량
+            ex. 사용자 설정, APP 상태 등 영구저장시 유용. (쿠키보다 조금 더 많이 저장 가능)(브라우저마다 다르긴 함.)
+
+        2.  세션 스토리지(Session Storage)
+         특징:
+            일시적 저장: 데이터는 현재 세션동안만 유지.
+                         브라우저 또는 탭을 닫으면 데이터가 삭제
+            범위: 각 브라우저 탭이나 창 별로 독립적 저장.
+            용량: 일반적으로 5MB 정도의 용량
+            ex. 사용자 UI, form 데이터
+    -->
+    <li>localStorage & sessionStorage
+        <ul>
+            <li><a href="local/save">값 저장</a> </li>
+            <li><a href="local/output">저장한 값 확인</a> </li>
+            <li><a href="local/delete">저장한 값 삭제</a> </li>
         </ul>
     </li>
 
-    <li> 서버와 값 주고 받기
+
+    <li> Thymeleaf
         <ul>
-            <li><a href="param/view1">Get method로 parameter 전달</a></li>
-            <li><a href="param/view2">Post method로 parameter 전달</a></li>
-            <li><a href="param/view3">Post method로 parameter 전달 - 객체</a></li>
-            <li><a href="param/input4?name=abc&age=11">Get method로 parameter 전달 - Form없이</a></li>
-            <li><a href="param/input4">Get method로 parameter 전달 - 파라미터가 없는 경우</a></li>
-            <li><a href="param/model">model 사용하기</a></li>
+            <li><a href="th/thymeleaf1">타임리프 문법1</a> </li>
+            <li><a href="th/thymeleaf2">타임리프 문법2</a> </li>
+
+        </ul>
+    </li>
+
+    <li>예제
+        <ul>
+            <li><a href="ex/calc1">계산기</a></li>
+            <li><a href="ex/info">개인정보입력</a></li>
+            <li><a th:href="@{ex/count}">방문횟수 카운트</a></li>
+            <li><a th:href="@{ex/darkmode}">다크모드</a></li>
+            <li><a th:href="@{ex/temp}">임시저장</a></li>
+
         </ul>
     </li>
 </ol>

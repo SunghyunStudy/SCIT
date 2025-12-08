@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th ="thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>home</title>
+</head>
+<body>
+    <h1>spring3</h1>
+
+    <p>
+        <a th:href = "@{/test}">저장 테스트</a>
+        - 사용자 화면 없이 서비스에서 Entity 생성하여 바로 저장 테스트
+    </p>
+
+    <p><a th:href="@{optional}">Optional 객체</a></p> <!-- optional은 homeController에서...-->
+    <p><a th:href="@{insert}">입력하기</a></p>
+    <p><a th:href="@{select}">ID로 1명 조회하기</a></p>
+    <p><a th:href="@{delete}">ID로 1명 삭제하기</a></p>
+    <p><a th:href="@{selectAll}">전체 목록 조회하기</a></p>
+    <p><a th:href="@{selectAll2}">전체 목록 조회하기2</a></p>
+
+</body>
+</html>

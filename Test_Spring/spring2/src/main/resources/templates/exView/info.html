@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html xmlns:th="thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script>
+//       window.onload = function(){
+//           const form = document.querySelector('form');
+//           form.addEventListener("submit", function(event){
+//               let name = document.querySelector('#name');
+//               let ssn = document.querySelector('#ssn');
+//               const ssnReg = /^([0-9]{6})[-]*[0-9]{7}/;
+
+//               if(name.value.length < 2){
+//                   alert("이름은 2글자 이상 입력하시오.");
+//                   name.focus;
+//                   name.select;
+//                   event.preventDefault();
+//               }
+//               if(!ssnReg.test(ssn.value.trim())){
+//                   alert("주민번호 형식을 지키십쇼");
+//                   ssn.focus;
+//                   ssn.select;
+//                   event.preventDefault();
+//               }
+
+//           });
+//       }
+
+
+        if('[[${error}]]' == 'error'){
+            alert('주민등록번호를 정확히 입력해주세요.');
+
+        }
+
+
+        function check(){
+            let name = document.querySelector('#name');
+            let ssn = document.querySelector('#ssn');
+
+            if(name.value.length < 2){
+                alert("이름을 입력하세요.");
+                return false; // onsubmit이 false로 리턴되기 때문에 submit이 되지 않음.
+            }
+
+            if(ssn.value.length != 14){
+                alert("주민번호를 입력하시오");
+                return false; // onsubmit이 false로 리턴되기 때문에 submit이 되지 않음.
+            }
+            return true;
+        }
+    </script>
+</head>
+<body>
+
+<!-- 이름은 2자 이상, 주민등록번호 14자 체크 -->
+<!--내가한 코드 -->
+<!--    <h2>개인정보 입력</h2>-->
+<!--    <form th:action="@{/ex/info}" method="post">-->
+<!--        <p>이름<input type="text" name="name" id="name">-->
+<!--        </p>-->
+
+<!--        <p>-->
+<!--            주민등록번호 <input type="text" name="ssn" id="ssn" placeholder="000000-0000000 형식으로 입력">-->
+<!--        </p>-->
+<!--        <input type="submit" value="입력">-->
+<!--    </form>-->
+
+<h2>개인정보 입력</h2>
+<form th:action="@{/ex/info}" method="post" onsubmit="return check();">
+    <p>이름<input type="text" name="name" id="name" th:value="${name}">
+    </p>
+
+    <p>
+        주민등록번호 <input type="text" name="ssn" id="ssn" placeholder="000000-0000000 형식으로 입력" th:value="${ssn}">
+    </p>
+    <input type="submit" value="입력">
+</form>
+</body>
+</html>

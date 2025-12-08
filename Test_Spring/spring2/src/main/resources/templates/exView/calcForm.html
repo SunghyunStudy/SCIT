@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns:th="thymeleaf.org" lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script>
+        window.onload = function(){
+            const form = document.querySelector('form')  // 쿼리 셀렉터 안에 태그 이름을 입력
+            form.addEventListener("submit", function(event){
+                let num1 = document.querySelector('#num1');
+                let num2 = document.querySelector('#num2');
+
+                if(num1.value == '' || isNaN(num1.value)){
+                    alert('정수를 입력하세요.');
+                    num1.focus();
+                    num1.select();
+                    event.preventDefault(); // 제출 막기
+                }
+                if(num2.value == '' || isNaN(num2.value)){
+                    alert('정수를 입력하세요.');
+                    num2.focus();
+                    num2.select();
+                    event.preventDefault(); // 제출 막기
+                }
+            });
+        }
+
+    </script>
+</head>
+<body>
+<h2>계산하기</h2>
+<!-- @{/ex/calc1} 경로를 굳이 이렇게 쓰는 이유는 properties에서 경로를
+ localhost:9999/spring 으로 설정했을 경우 spring 뒤로 /ex/calc1의 링크가 들어감.-->
+    <form th:action="@{/ex/calc1}" method="post">
+        <label for="num1"><input type="text" name="num1" id="num1"></label>
+
+        <label for="oper">
+            <select name="oper" id="oper">
+                <option value="+" selected>+</option>
+                <option value="-">-</option>
+                <option value="*">*</option>
+                <option value="/">/</option>
+            </select>
+        </label>
+
+        <label for="num2"><input type="text" name="num2" id="num2"></label>
+
+        <p>
+            <input type="submit" value="계산">
+        </p>
+    </form>
+
+</body>
+</html>

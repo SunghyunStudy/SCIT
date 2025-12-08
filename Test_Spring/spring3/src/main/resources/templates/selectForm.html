@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <h1>[조회하기]</h1>
+    <form th:action="${select}" method="post">
+        <table>
+            <tr>
+                <th>찾을 아이디</th>
+                <td><input type="text" name="id" required></td>
+            </tr>
+
+            <tr>
+                <td colspan="2"><input type="submit" value="조회" required></td>
+            </tr>
+        </table>
+    </form>
+</body>
+</html>

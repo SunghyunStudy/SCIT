@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>selectAll.html</title>
+    <style>
+        th{
+            border: 1px solid black;
+            background-color:lightgray;
+            font-weight: bold;
+            width: 100px;
+        }
+
+        td{
+            border: 1px solid black;
+            width: 100px;
+            padding: 5px;
+        }
+    </style>
+</head>
+<body>
+    <h1>전체출력</h1>
+    <table>
+        <tr>
+            <th>번호</th>
+            <th>아이디</th>
+            <th>이름</th>
+            <th>나이</th>
+        </tr>
+        <tr th:if="${personList == null or personList.isEmpty()}">
+            <td colspan="4">조회 결과가 없습니다.</td>
+        </tr>
+        <tr th:each="person, status : ${personList}">
+            <td th:text="${status.count}"></td>
+            <td th:text="${person.id}"></td>
+            <td th:text="${person.name}"></td>
+            <td th:text="${person.age}"></td>
+        </tr>
+    </table>
+</body>
+</html>

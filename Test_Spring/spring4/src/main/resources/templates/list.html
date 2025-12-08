@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" th:href="@{/css/list.css}">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        window.onload = function() {
+            if('[[${msg}]]'){
+                Swal.fire({
+                    toast: true,
+                    position: 'top',
+                    icon: 'info',
+                    title: '[[${msg}]]',
+                    showConfirmButton: false,
+                    timer: 1500,
+                    timerProgressBar: true,
+                });
+            }
+        }
+    </script>
+</head>
+<body>
+    <h1>방명록</h1>
+
+    <!-- 게시글 목록 출력 -->
+    <a th:href="@{/write}">글쓰기</a>
+
+    <table th:each="gb : ${guestbookList}">
+        <tr>
+            <td>
+                <form th:action="@{recommend}" method="post">
+                    <input type="hidden" name="num" th:value="${gb.num}">
+                    <button type="submit">
+                        ❤️ <span th:text="${gb.recommendCnt}">0</span>
+                    </button>
+                </form>
+            </td>
+        </tr>
+        <tr>
+            <th>번호: </th>
+            <td th:text="${gb.num}"></td>
+        </tr>
+        <tr>
+            <th>작성자: </th>
+            <td th:text="${gb.name}"></td>
+        </tr>
+        <tr>
+            <th>작성일: </th>
+            <td th:text="${#temporals.format(gb.inputdate, 'yy.MM.dd HH:mm:ss')}"></td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <textarea rows="4" cols="30" th:text ="${gb.message}" readonly></textarea>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <form th:action="@{/delete}" method="post">
+                    <input type="hidden" name="num" th:value="${gb.num}">
+                    <label>비밀번호</label>
+                    <input type="text" name="password" placeholder="비밀번호를 입력하세요.." required>
+                    <button formaction="delete" formmethod="post">삭제</button>
+                    <button formaction="update" formmethod="get">수정</button> <!-- url에 파라미터가 자동으로 보내짐 -->
+                </form>
+
+            </td>
+        </tr>
+    </table>
+    <!-- 여기까지 센세 -->
+<hr><hr><hr><hr><hr>
+
+    <table>
+        <tr>
+            <th>번호</th>
+            <th>이름</th>
+            <th>내용</th>
+            <th>작성시간</th>
+        </tr>
+        <tr th:if="${guestbookList == null or guestbookList.isEmpty()}">
+            <td colspan="4">조회 결과가 없습니다.</td>
+        </tr>
+        <tr th:each="guestbook: ${guestbookList}">
+            <td th:text="${guestbook.num}"></td>
+            <td th:text="${guestbook.name}"></td>
+            <td th:text="${guestbook.message}"></td>
+            <td th:text="${guestbook.inputdate}"></td>
+        </tr>
+
+    </table>
+</body>
+</html>

@@ -1,0 +1,13 @@
+<!-- Layout 파일에는 가능한 fragment 부분만 작성 -->
+<html xmlns:th="thymeleaf.org">
+<body>
+    <!-- th:fragment="header": 이 부분을 재사용 가능한 조각(fragment) 으로 정의 -->
+    <header th:fragment="header">
+        <a th:href="@{/}">홈</a>
+        <a th:if="${session.loginId == null}" th:href="@{/member/join}">회원가입</a>
+        <a th:if="${session.loginId == null}" th:href="@{/member/login}">로그인</a>
+        <a th:if="${session.loginId != null}" th:href="@{/member/logout}">로그아웃</a>
+        <a th:href="@{/member/list}">회원목록</a>
+    </header>
+</body>
+</html>

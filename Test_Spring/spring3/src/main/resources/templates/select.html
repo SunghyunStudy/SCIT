@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <h1>[조회 결과]</h1>
+
+    <div th:if="${person == null}">
+        <p th:text="|${id} : 없는 아이디입니다.|"></p>
+    </div>
+
+    <div th:if="${person != null}">
+        <p th:text="${person.id}"></p>
+        <p th:text="${person.name}"></p>
+        <p th:text="${person.age}"></p>
+    </div>
+</body>
+</html>
