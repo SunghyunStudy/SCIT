@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security" lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>updateForm.html</title>
+    <link rel="stylesheet" th:href="@{/css/main.css}">
+</head>
+
+<body>
+    <header>
+        <h1>[ 수정 ]</h1>
+    </header>
+
+    <section>
+        <form id="updateForm" enctype="multipart/form-data" th:action="@{/board/update}" method="post">
+            <input type="hidden" name="boardNum" th:value="${board.boardNum}">
+            <table>
+                <tr>
+                    <th><label for="title">제목</label></th>
+                    <td><input type="text" th:value="${board.title}" name="title" id="title" width="400px;"></td>
+                </tr>
+
+                <tr>
+                    <th><label for="content">내용</label></th>
+                    <td><textarea name="contents" id="contents" th:text="${board.contents}"></textarea></td>
+                </tr>
+                <tr>
+                    <th>파일첨부</th>
+                    <td>
+                        <input type="file" name="upload">
+                        <span th:text="${board.originalName}" style="font-size: 13px;"></span>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2" class="white center">
+                        <button type="submit">수정</button>
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </section>
+
+
+
+</body>
+
+</html>

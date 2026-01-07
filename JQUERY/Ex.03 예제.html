@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ex.03 예제.html</title>
+    <script src="./jq_folder/jquery-3.7.1.min.js"></script>
+    <script>
+
+        let count = 1;
+        let str = `
+        <table>
+            <tr>
+                <th>No</th>
+                <th>이름</th>
+                <th>지역</th>
+                <th>삭제</th>
+            </tr>
+        `;
+
+        function addPerson() {
+            let name = $('#inputName').val();
+            let area = $('#inputArea').val();
+
+            str += `<tr> 
+                    <td>${count++}</td>        
+                    <td>${name}</td>        
+                    <td>${area}</td>        
+                    <td><input type="button" class="delBtn" value="삭제"></td>
+                    </tr>`;
+
+
+            $('#result').html(str + `</table>`);
+            $('#inputName').val("");
+            $('#inputArea').val("");
+
+        };
+
+        $(document).on('click', '.delBtn', function () {
+            $(this).closest('tr').remove();
+        });
+    </script>
+</head>
+
+<body>
+    <h1>J-Query 예제3</h1>
+    이름 : <input type="text" id="inputName">
+    지역 : <input type="text" id="inputArea">
+    <button onclick="addPerson()">추가</button>
+    <div id="result">
+
+
+    </div>
+
+
+</body>
+
+</html>

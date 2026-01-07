@@ -13,10 +13,11 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class GuestBookRecommendKey {
-	
+
 	@Column(name = "guestbook_num")
 	private Integer guestbookNum;
-	
+
 	@Column(name = "ip", length = 50)
 	private String ip;
+
 }

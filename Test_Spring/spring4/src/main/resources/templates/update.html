@@ -1,27 +1,31 @@
 <!DOCTYPE html>
 <html xmlns:th="thymeleaf.org" lang="en">
+
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>update.html</title>
     <link rel="stylesheet" th:href="@{/css/list.css}">
 </head>
+
 <body>
     <h1>[ 수정하기 ]</h1>
 
     <form th:action="${update}" method="post">
-            <input type="hidden" name="num" th:value="${gb.num}">
+        <input type="hidden" name="num" th:value="${gb.num}">
 
 
-            <p name="num" th:text="|번호: ${gb.num}|"></p>
-            <p name="name" th:text="|이름: ${gb.name}|"></p>
-            <p name="inputdate" th:text="|작성일 : ${#temporals.format(gb.inputdate, 'yy.MM.dd HH:mm:ss')}|"></p>
+        <p name="num" th:text="|번호: ${gb.num}|"></p>
+        <p name="name" th:text="|이름: ${gb.name}|"></p>
+        <p name="inputdate" th:text="|작성일 : ${#temporals.format(gb.inputdate, 'yy.MM.dd HH:mm:ss')}|"></p>
 
-            <span id="cnt">(0 / 200)</span> <textarea type="text" th:text="${gb.message}" name="message" maxlength="200" id="message"></textarea>
-            <br>
-            <input type="submit" value="저장">
+        <span id="cnt">(0 / 200)</span> <textarea type="text" th:text="${gb.message}" name="message" maxlength="200"
+            id="message"></textarea>
+        <br>
+        <input type="submit" value="저장">
 
     </form>
 
 
 </body>
+
 </html>

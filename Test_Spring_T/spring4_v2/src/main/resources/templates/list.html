@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>web4</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" th:href=@{/css/list.css}>
+    <!-- SweetAlert 사용(CDN) -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        window.onload = function() {
+            if ('[[${msg}]]') {
+                Swal.fire({
+                    toast: true,
+                    position: 'top',
+                    icon: 'info',
+                    title: '[[${msg}]]',  // title에 메시지 넣기
+                    showConfirmButton: false,
+                    timer: 1500,
+                    timerProgressBar: true,
+                });
+            }
+
+            // h2 태그를 클릭시 메인페이지 이동
+            let h2 = document.querySelector('h2');
+            h2.addEventListener('click', function() {
+                location.href = '/';
+            });
+
+            // 모든 item 요소에 랜덤 색상 적용
+            let items = document.querySelectorAll('.item');
+            items.forEach(item => {
+                item.style.backgroundColor = getRandomColor2();
+            });
+        }
+
+        // RGBA 랜덤색상 생성 Function
+        function getRandomColor2() {
+            const r = Math.floor(Math.random() * 256); // red
+            const g = Math.floor(Math.random() * 256); // green
+            const b = Math.floor(Math.random() * 256); // blue
+            const alpha = (Math.random() * 0.2 + 0.1).toFixed(2);
+
+            return `rgba(${r}, ${g}, ${b}, ${alpha})`;
+        }
+    </script>
+</head>
+<body>
+
+    <div class="container">
+        <div class="top">
+            <h2>방명록</h2>
+            <a th:href="@{write}">
+                <img th:src="@{/images/icon_write.png}">
+            </a>
+        </div>
+        <div class="items">
+            <div th:each="guest : ${guestbookList}" class="item">
+                <span th:if="${guest.recommendCnt >= 10}" class="badge-hot">🔥 HOT</span>
+                <div class="like-floating">
+                    <form th:action="@{/recommend}" method="post">
+                        <input type="hidden" name="num" th:value="${guest.num}">
+                        <button type="submit" class="like-icon-btn">
+                            ❤ <span class="like-count" th:text="${guest.recommendCnt}">0</span>
+                        </button>
+                    </form>
+                </div>
+                <p>
+                    <label>글번호</label>
+                    <span th:text="${guest.num}"></span>
+                    &nbsp;&nbsp;&nbsp;&nbsp;
+                    <label>작성자</label>
+                    <span th:text="${guest.name}"></span>
+                </p>
+                <p>
+                    <label>작성일</label>
+                    <span th:text="${#temporals.format(guest.inputdate, 'yyyy-MM-dd HH:mm:ss')}"></span>
+                </p>
+
+                <textarea rows="4" cols="30" th:text="${guest.message}" readonly></textarea>
+                <form>
+                    <input type="hidden" name="num" th:value="${guest.num}">
+                    <input type="password" name="password" placeholder="비밀번호를 입력하세요..">
+                    <div class="btn-row">
+                        <!-- formaction, formmethod : submit을 다르게 각각 적용시켜주는 속성 -->
+                        <button class="action-btn update-btn" formaction="/update" formmethod="get">수정</button>
+                        <button class="action-btn delete-btn" formaction="/delete" formmethod="post">삭제</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

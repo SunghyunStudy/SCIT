@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns:th="thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>loginForm.html</title>
+    <link rel="stylesheet" th:href="@{/css/main.css}">
+    <script>
+        window.onload = function() {
+            document.querySelector("#loginForm")
+                    .addEventListener("submit", function(e) {
+               const loginForm   = document.querySelector("#loginForm");
+               const idInput     = document.querySelector("#id");
+               const pwInput     = document.querySelector("#password");
+
+               if (idInput.value === "" || pwInput.value === "") {
+                    alert("ID와 비밀번호를 입력하세요.");
+                    e.preventDefault();
+                    return;
+               }
+            });
+        }
+    </script>
+</head>
+<body>
+
+    <header>
+        <h1>[ 로그인 ]</h1>
+    </header>
+
+    <section>
+        <form id="loginForm" th:action="@{/member/login}" method="post">
+            <table>
+                <tr>
+                    <td>ID</td>
+                    <td><input type="text" name="id" id="id"
+                               th:value="${memberId}"></td>
+                </tr>
+                <tr>
+                    <td>Password</td>
+                    <td><input type="password" name="password" id="password"></td>
+                </tr>
+                <tr>
+                    <td colspan="2" class="white">
+                        <!-- /member/login?error -->
+                        <div class="center errorMsg" th:if="${param.error}">
+                            <p>ID 또는 Password가 틀리거나 휴면계정입니다.</p>
+                            <a th:href="@{/member/inactive}">🔓 휴면 계정 해제하기</a>
+                        </div>
+                        <div class="center errorMsg" th:if="${msg != null}">
+                            <span th:text="${msg}"></span>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2" class="center white">
+                        <input type="submit" value="Login">
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </section>
+
+</body>
+</html>

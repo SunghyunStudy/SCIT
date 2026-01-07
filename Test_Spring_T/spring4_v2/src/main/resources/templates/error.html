@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>기타 error</title>
+    <link rel="stylesheet" th:href="@{/css/error.css}">
+</head>
+<body>
+
+    <div class="error-box">
+
+        <!--
+            templates/error.html    >   모든 에러의 fallback(기본 에러 페이지)
+
+            templates 패키지에 error.html 이름으로 모든 에러페이지를 자동 매핑.
+            404, 500.html 이 존재한다면 그 곳으로 매핑.
+            Spring이 자동으로 찾아가도록 templates/error 폴더안에 페이지를 만들기만 하면 됨.
+
+            Spring Boot는 다음 순서로 에러 페이지를 찾음:
+                /error 라는 URL을 처리하는 컨트롤러
+                templates/error/{status}.html (예: 404.html)
+                templates/error/error.html (fallback)
+                Spring Boot 기본 에러 페이지
+        -->
+
+        <h1>죄송합니다</h1>
+        <p>문제가 지속되면 관리자에게 문의해주세요.</p>
+
+        <p th:text="'에러 코드: ' + ${status}"></p>
+        <p th:text="'에러 메시지: ' + ${error}"></p>
+
+        <a th:href="@{/}">홈으로 돌아가기</a>
+
+    </div>
+
+</body>
+</html>

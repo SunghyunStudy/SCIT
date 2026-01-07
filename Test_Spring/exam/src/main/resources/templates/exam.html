@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org" lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Java 시험 응시</title>
+    <script>
+        window.onload = function () {
+            let msg = "[[${msg}]]";
+            if (msg && msg.length > 0) {
+                alert(msg);
+            }
+
+            const form = document.querySelector('#form');
+
+            form.addEventListener('submit', function (e) {
+                let name = document.querySelector("#name");
+                let email = document.querySelector("#email");
+                let password = document.querySelector("#password");
+
+                if (name.value.trim() == "") {
+                    alert("이름을 입력하세요.");
+                    name.focus();
+                    e.preventDefault();
+                    return;
+                }
+
+                if (email.value.trim() == "") {
+                    alert("이메일을 입력하세요.");
+                    email.focus();
+                    e.preventDefault();
+                    return;
+                }
+
+                if (password.value.trim() == "") {
+                    alert("비밀번호를 입력하세요.");
+                    password.focus();
+                    e.preventDefault();
+                    return;
+                }
+
+                let ans1 = document.querySelector('input[name="answer1"]:checked');
+                if (!ans1) {
+                    alert("1번 문제를 풀어주세요.");
+                    e.preventDefault();
+                    return;
+                }
+
+                let ans2 = document.querySelector('input[name="answer2"]:checked');
+                if (!ans2) {
+                    alert("2번 문제를 풀어주세요.");
+                    e.preventDefault();
+                    return;
+                }
+
+                let ans3 = document.querySelector('input[name="answer3"]:checked');
+                if (!ans3) {
+                    alert("3번 문제를 풀어주세요.");
+                    e.preventDefault();
+                    return;
+                }
+
+                // 4번 문제 (주관식)
+                let ans4 = document.getElementById("answer4");
+                if (ans4.value.trim() == "") {
+                    alert("4번 답을 입력하세요.");
+                    ans4.focus();
+                    e.preventDefault();
+                    return;
+                }
+
+                // 5번 문제 (주관식)
+                let ans5 = document.getElementById("answer5");
+                if (ans5.value.trim() == "") {
+                    alert("5번 답을 입력하세요.");
+                    ans5.focus();
+                    e.preventDefault();
+                    return;
+                }
+
+            });
+        }
+    </script>
+</head>
+
+<body>
+
+    <div class="container">
+        <h2>[ Java 시험 ]</h2>
+
+        <form id="form" th:action="@{exam}" method="post">
+
+            <div>
+                <h3>응시자 정보</h3>
+                <p>
+                    이름 : <input type="text" name="name" id="name">
+                </p>
+                <p>
+                    이메일 : <input type="email" name="email" id="email">
+                </p>
+                <p>
+                    비밀번호 : <input type="password" name="password" id="password">
+                </p>
+            </div>
+
+            <br>
+
+            <div>
+                <h3>시험 문제</h3>
+
+                <div class="question">
+                    <p>1번. Java에서 문자열(String) 내용 비교로 올바른 것은?</p>
+                    <label><input type="radio" name="answer1" value="1"> ①
+                        ==</label><br>
+                    <label><input type="radio" name="answer1" value="2"> ②
+                        equals()</label><br>
+                    <label><input type="radio" name="answer1" value="3"> ③
+                        compareTo()</label><br>
+                    <label><input type="radio" name="answer1" value="4"> ④
+                        !=</label>
+                </div>
+
+                <div class="question">
+                    <p>2번. 오버로딩에 대한 설명으로 옳은 것은?</p>
+                    <label><input type="radio" name="answer2" value="1"> ① 반환 타입만
+                        다르면 오버로딩이 된다.</label><br>
+                    <label><input type="radio" name="answer2" value="2"> ② 접근 제어자가
+                        같아야만 오버로딩이 된다.</label><br>
+                    <label><input type="radio" name="answer2" value="3"> ③ 메서드 이름이
+                        같고 매개변수 목록(개수/타입/순서)이 다르면 오버로딩이다.</label><br>
+                    <label><input type="radio" name="answer2" value="4"> ④ static
+                        메서드만 오버로딩할 수 있다.</label>
+                </div>
+
+                <div class="question">
+                    <p>3번. 배열 길이를 얻는 올바른 코드는?</p>
+                    <label><input type="radio" name="answer3" value="1"> ①
+                        arr.length</label><br>
+                    <label><input type="radio" name="answer3" value="2"> ②
+                        arr.size()</label><br>
+                    <label><input type="radio" name="answer3" value="3"> ③
+                        arr.length()</label><br>
+                    <label><input type="radio" name="answer3" value="4"> ④
+                        arr.getLength()</label>
+                </div>
+
+                <div class="question">
+                    <p>4번. Java에서 클래스를 상속받을 때 사용하는 키워드는?</p>
+                    <input type="text" name="answer4" id="answer4">
+                </div>
+
+                <div class="question">
+                    <p>5번. 예외가 발생할 가능성이 있는 코드를 감싸서 예외를 처리할 때 사용하는 키워드는?</p>
+                    <input type="text" name="answer5" id="answer5">
+                </div>
+
+            </div>
+            <br>
+            <button type="submit">제출</button>
+        </form>
+    </div>
+
+</body>
+
+</html>

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html xmlns:th="thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security" lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>memerList.html</title>
+    <link rel="stylesheet" th:href="@{/css/main.css}">
+    <script>
+        function updateToggle(id) {
+            let result = confirm('정말 권한을 변경하시겠습니까?');
+            if (result) {
+                location.href = `update?id=${id}`;
+            }
+        }
+        function enabledToggle(id, enabled) {
+            let result = enabled === "true" ? "비활성화" : "활성화";
+            if (confirm(`정말 ${result} 하시겠습니까`)) {
+                location.href = `updateEnabled?id=${id}&enabled=${enabled}`;
+            }
+        }
+    </script>
+</head>
+
+<body>
+    <header>
+        <h1>[ 회원 목록 ]</h1>
+    </header>
+    <section>
+        <table>
+            <!-- 회원 검색 -->
+            <form th:action="@{/admin/list}" method="get">
+                <input type="text" name="keyword" placeholder="ID검색" th:value="${keyword}">
+                <input type="submit" value="검색">
+            </form>
+
+            <caption sec:authorize=" isAuthenticated()" th:text="|${#authentication.name}님 로그인 중|"
+                style="text-align: left;">
+
+            </caption>
+            <tr>
+                <th>ID</th>
+                <th>NAME</th>
+                <th>EAMIL</th>
+                <th style="width:150px;">PHONE</th>
+                <th>ADDRESS</th>
+                <th>ROLENAME</th>
+                <th>ENABLED</th>
+                <th></th>
+            </tr>
+
+            <tr th:each="m : ${memberList}" th:if="${m.memberId} != ${#authentication.name}">
+                <td th:text="${m.memberId}"></td>
+                <td th:text="${m.memberName}"></td>
+                <td th:text="${m.email}"></td>
+                <td th:text="${m.phone}"></td>
+                <td th:text="${m.address}"></td>
+                <td th:text="${m.rolename}"></td>
+                <td th:text="${m.enabled}"></td>
+                <td>
+                    <input type="button" value="권한변경" th:attr="data-id=${m.memberId}"
+                        onclick="updateToggle(this.getAttribute('data-id'));">
+                    <!-- 버튼을 JS로 이벤트를 거는게 아님. 함수가 호출 될때 this.getAttribute('data-id') 이 속성값을 파라미터로 보냄 -->
+                    <input type="button" th:value="${m.enabled} ? '비활성화' : '활성화'" th:data-id="${m.memberId}"
+                        th:data-enabled="${m.enabled}" onclick="enabledToggle(this.dataset.id, this.dataset.enabled)">
+                </td>
+            </tr>
+        </table>
+    </section>
+
+</body>
+
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security" lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>writeForm.html</title>
+    <link rel="stylesheet" th:href="@{/css/main.css}">
+</head>
+
+<body>
+    <header>
+        <h1>[ 글쓰기 ]</h1>
+    </header>
+
+    <section>
+        <form id="writeForm" enctype="multipart/form-data" th:action="@{/board/write}" method="post">
+            <!-- Message Body에 들어가는 데이터 타입을 HTTP Header에 명시해줄 수 있다.
+이 때 명시할 수 있도록 해주는 필드가 바로 Content-type이다. -->
+            <!-- 모든 문자를 인코딩하지 않음을 명시한다.
+이 방식은 <form> 요소가 파일이나 이미지를 서버로 전송할 때 주로 사용한다. -->
+            <table>
+                <tr>
+                    <th><label for="title">제목</label></th>
+                    <td><input type="text" name="title" id="title" width="400px;"></td>
+                </tr>
+
+                <tr>
+                    <th><label for="content">내용</label></th>
+                    <td><textarea name="contents" id="contents"></textarea></td>
+                </tr>
+                <tr>
+                    <th>파일첨부</th>
+                    <td>
+                        <input type="file" name="upload">
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2" class="white center">
+                        <button type="submit">저장</button>
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </section>
+
+
+
+</body>
+
+</html>

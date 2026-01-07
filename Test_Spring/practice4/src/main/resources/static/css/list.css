@@ -1,0 +1,308 @@
+@charset "UTF-8";
+
+/* =========================================
+   1. Apple Style Variables & Reset
+   ========================================= */
+:root {
+    --bg-color: #f5f5f7;        /* 전체 배경 */
+    --card-bg: #ffffff;         /* 카드 배경 */
+    --text-primary: #1d1d1f;    /* 진한 회색 텍스트 */
+    --text-secondary: #86868b;  /* 연한 회색 텍스트 */
+    --accent-blue: #0071e3;     /* Apple Blue */
+    --accent-hover: #0077ed;    /* Blue Hover */
+    --accent-red: #ff3b30;      /* Apple Red */
+    --radius-card: 22px;        /* 카드 둥근 모서리 */
+    --radius-btn: 12px;         /* 버튼 둥근 모서리 */
+    --shadow-soft: 0 4px 24px rgba(0, 0, 0, 0.04);
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-primary);
+    margin: 0;
+    padding: 60px 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    line-height: 1.5;
+    letter-spacing: -0.01em;
+}
+
+h1 {
+    font-size: 44px;
+    font-weight: 700;
+    margin-bottom: 50px;
+    text-align: center;
+    color: var(--text-primary);
+}
+
+h1::before, h1::after { color: #d2d2d7; }
+hr { display: none; }
+
+
+/* =========================================
+   2. Main Home Links (메인 버튼들)
+   ========================================= */
+body > p > a {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 320px;
+    background-color: var(--card-bg);
+    color: var(--accent-blue);
+    text-decoration: none;
+    padding: 22px;
+    margin-bottom: 16px;
+    border-radius: 18px;
+    font-size: 18px;
+    font-weight: 600;
+    box-shadow: var(--shadow-soft);
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+body > p > a:hover {
+    transform: scale(1.03);
+    background-color: var(--accent-blue);
+    color: white;
+    box-shadow: 0 10px 30px rgba(0, 113, 227, 0.25);
+}
+
+
+/* =========================================
+   3. Write/Update Form (글쓰기, 수정 페이지)
+   ========================================= */
+/* 이곳의 form 스타일이 list에 영향을 주지 않도록 선택자 관리 */
+body > form {
+    background: var(--card-bg);
+    width: 100%;
+    max-width: 640px;
+    padding: 40px;
+    border-radius: var(--radius-card);
+    box-shadow: var(--shadow-soft);
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column; /* 기본 폼은 세로 정렬 */
+    margin-bottom: 40px;
+}
+
+body > form p {
+    font-size: 15px;
+    color: var(--text-secondary);
+    border-bottom: 1px solid #ebebed;
+    padding-bottom: 10px;
+    margin: 0 0 15px 0;
+}
+
+body > form textarea,
+body > form input[name="password"] {
+    width: 100%;
+    background-color: #f5f5f7;
+    border: none;
+    border-radius: var(--radius-btn);
+    padding: 16px;
+    font-size: 16px;
+    color: var(--text-primary);
+    resize: none;
+    outline: none;
+    font-family: inherit;
+    box-sizing: border-box;
+    transition: box-shadow 0.2s;
+}
+
+body > form textarea {
+    height: 200px;
+    margin-bottom: 20px;
+    line-height: 1.6;
+}
+
+body > form textarea:focus,
+body > form input[name="password"]:focus {
+    box-shadow: 0 0 0 2px rgba(0, 113, 227, 0.2);
+}
+
+#cnt {
+    text-align: right;
+    font-size: 13px;
+    color: var(--text-secondary);
+    margin-bottom: 5px;
+    font-weight: 500;
+}
+
+input[type="submit"] {
+    width: 100%;
+    background-color: var(--accent-blue);
+    color: white;
+    border: none;
+    padding: 18px;
+    border-radius: var(--radius-btn);
+    font-size: 17px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s;
+    margin-top: 10px;
+}
+input[type="submit"]:hover { background-color: var(--accent-hover); }
+
+
+/* =========================================
+   4. Guestbook List (방명록 목록 페이지)
+   ========================================= */
+body > a[href*="write"] {
+    display: inline-block;
+    background-color: var(--accent-blue);
+    color: white;
+    text-decoration: none;
+    padding: 12px 28px;
+    border-radius: 99px;
+    font-weight: 600;
+    margin-bottom: 40px;
+    transition: transform 0.2s;
+}
+body > a[href*="write"]:hover { transform: scale(1.05); background-color: var(--accent-hover); }
+
+/* 카드 스타일 */
+table:not(:last-of-type) {
+    background: var(--card-bg);
+    width: 100%;
+    max-width: 640px;
+    margin-bottom: 30px;
+    border-radius: var(--radius-card);
+    box-shadow: var(--shadow-soft);
+    border-collapse: separate;
+    border-spacing: 0;
+    padding: 30px;
+    position: relative;
+    border: 1px solid rgba(0,0,0,0.02);
+}
+
+table:not(:last-of-type) th {
+    text-align: left;
+    color: var(--text-secondary);
+    font-weight: 500;
+    width: 70px;
+    font-size: 14px;
+    padding: 4px 0;
+}
+table:not(:last-of-type) td {
+    font-size: 16px;
+    padding: 4px 0;
+}
+
+/* 추천 버튼 */
+table:not(:last-of-type) tr:first-child td {
+    position: absolute;
+    top: 25px;
+    right: 25px;
+    padding: 0;
+}
+button[type="submit"] {
+    background: rgba(255, 59, 48, 0.08);
+    color: var(--accent-red);
+    border: none;
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+button[type="submit"]:hover { background: rgba(255, 59, 48, 0.15); }
+
+/* 메시지 영역 */
+table:not(:last-of-type) textarea {
+    width: 100%;
+    background-color: #f9f9f9;
+    border: none;
+    border-radius: 12px;
+    padding: 15px;
+    font-size: 16px;
+    resize: none;
+    margin: 15px 0;
+    color: var(--text-primary);
+    outline: none;
+    box-sizing: border-box;
+}
+
+/* === [중요 수정] 하단 폼 가로 정렬 강제 적용 === */
+table:not(:last-of-type) tr:last-child td {
+    border-top: 1px solid #f0f0f0;
+    padding-top: 20px;
+    margin-top: 10px;
+}
+
+/* 테이블 내부의 form만 가로(row) 정렬로 덮어쓰기 */
+table:not(:last-of-type) form {
+    display: flex !important;       /* 강제 flex */
+    flex-direction: row !important; /* 가로 정렬 */
+    justify-content: flex-end;      /* 우측 정렬 */
+    align-items: center;            /* 수직 중앙 */
+    gap: 8px;
+    width: 100%;
+    background: transparent;
+    box-shadow: none;
+    padding: 0;
+    margin: 0;
+}
+
+/* 라벨: 줄바꿈 방지 */
+table:not(:last-of-type) label {
+    font-size: 13px;
+    color: var(--text-secondary);
+    white-space: nowrap; /* 줄바꿈 금지 */
+    margin-right: 5px;
+}
+
+/* 리스트 내 비밀번호 입력창: 너비 작게 고정 */
+table:not(:last-of-type) input[name="password"] {
+    width: 140px !important;  /* 너비 강제 고정 */
+    padding: 8px 12px;
+    font-size: 14px;
+    border: 1px solid #d2d2d7;
+    background: white;
+    border-radius: 8px;
+    margin: 0;
+}
+
+/* 삭제/수정 버튼 */
+button[formaction="delete"], button[formaction="update"] {
+    border: none;
+    padding: 8px 16px;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    white-space: nowrap; /* 버튼 텍스트 줄바꿈 방지 */
+}
+button[formaction="delete"] { background: #fff0f0; color: var(--accent-red); }
+button[formaction="update"] { background: #f0f7ff; color: var(--accent-blue); }
+
+
+/* =========================================
+   5. Summary List (하단 요약 테이블)
+   ========================================= */
+table:last-of-type {
+    margin-top: 60px;
+    width: 100%;
+    max-width: 800px;
+    border-collapse: collapse;
+    font-size: 14px;
+    background-color: transparent;
+}
+table:last-of-type th {
+    text-align: left;
+    padding: 12px;
+    border-bottom: 1px solid #d2d2d7;
+    color: var(--text-secondary);
+    font-weight: 600;
+}
+table:last-of-type td {
+    padding: 16px 12px;
+    border-bottom: 1px solid #ebebed;
+    color: var(--text-primary);
+}
+table:last-of-type tr:nth-child(2) td[colspan="4"] {
+    text-align: center;
+    padding: 40px;
+    color: var(--text-secondary);
+}

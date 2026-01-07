@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>1. 기본개념</title>
+    <script src="./jq_folder/jquery-3.7.1.min.js"></script>
+    <script>
+        // window.onload = function() {} 과 동일
+        $(document).ready(function () {
+
+
+            // legacy 방식
+            // document.querySelector('#img')
+            //     .setAttribute("src", "./images/illit.jpg");
+
+            // jQuery1 
+            // jQuery('#img').attr("src", "./images/illit.jpg")
+
+
+            // jQuery() 함수를 $로 표현
+            // $('#img').attr("src", "./images/illit.jpg")
+
+            $('img').attr("src", "./images/illit.jpg");
+        });
+    </script>
+</head>
+
+<body>
+    <img id="img" src="./images/잘지내나요.jpg">
+    <img src="./images/잘지내나요.jpg">
+
+
+</body>
+
+</html>

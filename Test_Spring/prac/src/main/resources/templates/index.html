@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>타자 배틀 - 로비</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+    <div>
+        <h1>⌨️ 타자 배틀 로비</h1>
+
+        <div id="userInfo">
+            <span th:text="${#authentication.name}">사용자</span>님 안녕하세요!
+            <a href="/logout" style="color: red; margin-left: 10px;">로그아웃</a>
+        </div>
+
+        <div id="createRoomArea">
+            <h3>방 만들기</h3>
+            <input type="text" id="roomTitle" placeholder="방 제목을 입력하세요">
+            <input type="password" id="roomPassword" placeholder="비밀번호(선택)">
+            <button onclick="createRoom()">생성</button>
+        </div>
+
+        <hr>
+
+        <h3>개설된 방 목록</h3>
+        <div id="roomList">
+            <p>방을 불러오는 중...</p>
+        </div>
+    </div>
+
+    <script src="/js/main.js"></script>
+</body>
+
+</html>

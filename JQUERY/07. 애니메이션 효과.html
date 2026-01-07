@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>애니메이션 효과</title>
+    <script src="./jq_folder/jquery-3.7.1.min.js"></script>
+    <style>
+        #textDiv {
+            border: 1px solid black;
+            background-color: beige;
+            width: 200px;
+            height: 200px;
+        }
+
+        div {
+            margin: 10px 0px;
+            width: 10%;
+            height: 100px;
+            background-color: #e3f2fd;
+        }
+
+        #a {
+            background-color: #bbdefb;
+        }
+
+        #b {
+            background-color: #ffcdd2;
+        }
+
+        #toast {
+            position: fixed;
+            right: 20px;
+            bottom: 20px;
+            background-color: #fee500;
+            color: #191919;
+            padding: 12px 18px;
+            border-radius: 12px;
+            font-size: 14px;
+            font-weight: 500;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+            display: none;
+            opacity: 0;
+        }
+    </style>
+    <script>
+        $(function () {
+            $('#bt1').click(function () { $('#textDiv').show('slow'); });
+            $('#bt2').click(function () { $('#textDiv').hide('slow'); });
+            $('#bt3').click(function () { $('#textDiv').toggle('slow'); });
+            $('#bt4').click(function () { $('#textDiv').slideDown('slow'); });
+            $('#bt5').click(function () { $('#textDiv').slideUp('slow'); });
+            $('#bt6').click(function () { $('#textDiv').fadeIn('slow'); });
+            $('#bt7').click(function () { $('#textDiv').fadeOut('slow'); });
+
+            $('#btn1').click(function () {
+                /*
+                    animate() : 선택한 요소의 css 속성을 점진적으로 변경하여 애니메이션 효과를 만드는 함수
+                    $(selector).animate(properties, duration, easing, complete);
+                        properties: 애니메이션이 적용될 css 속성을 객체 형태로 지정
+                        duration: 진행될 시간("slow", "fast", ms 단위 정수)
+                        easing: 가속도 곡선을 정의 ("swing", "linear")
+                        complete: 애니메이션이 완료된 후 실행될 콜백함수
+                */
+                $("#a").animate({ width: '100%' }, 2000, 'swing');
+                $("#b").animate({ width: '100%' }, 2000, 'linear', function () {
+                    alert('완료');
+                });
+            });
+
+
+
+            $('#btn2').click(function () {
+                $("#a").animate({ width: '10%' }, 2000, 'swing');
+                $("#b").animate({ width: '10%' }, 2000, 'linear');
+
+            });
+
+
+            let fileName = [
+                "./images/home.png",
+                "./images/list.png",
+                "./images/exit.png"
+            ];
+            let index = 1;
+            $('#img1').click(function () {
+                $(this).css('opacity', '0')
+                    .stop()
+                    .attr('src', fileName[index])
+                    .animate({ opacity: 1 }, 1000);
+                index++;
+                if (index >= fileName.length) index = 0;
+            });
+
+            $('#notifyBtn').on('click', function () {
+                $('#toast').stop(false, true)
+                    .css({ bottom: '0px', opacity: 0 })
+                    .show()
+                    .animate({ bottom: '20px', opacity: 1 }, 400)
+                    .delay(2000)
+                    .animate({ bottom: '0px', opacity: 0 }, 400, function () {
+                        $(this).hide();
+                    });
+            });
+        });
+
+
+
+    </script>
+</head>
+
+<body>
+    <h2>[ 애니메이션 효과 ]</h2>
+    <pre>
+        show(), hide(), toggle(), slideDown(), slideUp(), fadeIn(), fadeOut()
+    </pre>
+
+    <p>
+        <input type="button" value="show()" id="bt1">
+        <input type="button" value="hide()" id="bt2">
+        <input type="button" value="toggle()" id="bt3">
+        <input type="button" value="slideDown()" id="bt4">
+        <input type="button" value="slidUp()" id="bt5">
+        <input type="button" value="fadeIn()" id="bt6">
+        <input type="button" value="fadeOut()" id="bt7">
+    </p>
+
+    <div id="textDiv">
+        <p>DIV 태그 내의 문자열</p>
+        <p>DIV 태그 내의 문자열</p>
+        <p>DIV 태그 내의 문자열</p>
+    </div>
+
+    <h3>[ 애니메이션 효과2 ]</h3>
+    <button id="btn1">증가</button>
+    <button id="btn2">감소</button>
+    <div id="a"></div>
+    <div id="b"></div>
+
+    <h3>[ 애니메이션 효과3 ]</h3>
+    <p><img src="./images/home.png" id="img1"></p>
+
+    <h3>[ 애니메이션 효과4 ]</h3>
+    <button id="notifyBtn">알림</button>
+    <div id="toast">새 메시지가 도착했습니다.</div>
+</body>
+
+</html>

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ex.02 예제.html</title>
+    <script src="./jq_folder/jquery-3.7.1.min.js"></script>
+    <script>
+        $(function () {
+            let list = [
+                "./images/home.png",
+                "./images/exit.png",
+                "./images/list.png"
+            ]
+            let index = 1;
+
+            // 클릭 시 이미지 넘김
+            $('#img1').click(function () {
+                $(this).css('opacity', '0')
+                    .stop()
+                    .attr('src', list[index])
+                    .animate({ opacity: 1 }, 1000);
+                index++;
+                if (index >= list.length) index = 0;
+            });
+
+            // 호버 시 슬라이드
+
+            $('#img2').on(
+                {
+                    'mouseenter': function () {
+
+                        var fun = setInterval(function () {
+                            $('#img2').css('opacity', '0')
+                                .stop()
+                                .attr('src', list[index])
+                                .animate({ opacity: 1 }, 1000);
+                            index++;
+                            if (index >= list.length) index = 0;
+                        }, 400)
+                    },
+                    'mouseleave': function () { clearInterval(fun); }
+                });
+        });
+
+    </script>
+</head>
+
+<body>
+    <h1>J-Query 예제2</h1>
+
+    <h3>클릭시 이미지 넘김</h3>
+    <p><img src="./images/home.png" id="img1"></p>
+
+    <h3>마우스를 올리면 이미지가 자동으로 슬라이드</h3>
+    <p><img src="./images/home.png" id="img2"></p>
+
+</body>
+
+</html>

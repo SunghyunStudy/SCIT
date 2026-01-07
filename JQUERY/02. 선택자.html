@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2. 선택자</title>
+    <script src="./jq_folder/jquery-3.7.1.min.js"></script>
+    <script>
+        // $(documnet).ready(function(){ }) 와 동일
+        $(function () {
+
+            let h2 = document.querySelector('h2');
+            h2.style.color = 'yellow';
+            $('h2').css('color', 'blue');
+
+            $('#text1').css('color', 'red');
+            $('.text2').css('color', 'lightgray');
+            // jQuery 객체를 다시 반환하여, 
+            // 연속적으로 이어서 사용할 수 있도록 함. (체이닝 방식)
+            $('p.text2').css('background-color', 'black')
+                .css('border', '4px solid green');
+            $('p:first').css('color', 'green');
+
+
+            $('input[type="text"]').css('background-color', 'pink');
+            $('#select1').css('background-color', 'rgb(5, 99, 124)');
+            $('#select1 option').css('background-color', 'beige');
+            // 띄어쓰기는 자식 요소나 하위 요소를 가리킴
+
+
+            $('table, td, th').css('border', '1px dashed black');
+            $('th').css({
+                backgroundColor: 'rgb(50, 180, 134)',
+                width: '100px',
+                height: '30px'
+            });
+            $('tr:odd').css('background-color', 'yellow');
+        });
+    </script>
+</head>
+
+<body>
+    <h2>[ JQuery 선택자 ]</h2>
+    <p>p태그</p>
+    <p id="text1">id 있는 p태그</p>
+    <p class="text2">class 있는 p태그</p>
+    <p>p태그</p>
+
+    <input type="text"><br>
+    <input type="checkbox"><br>
+    <select name="select1" id="select1">
+        <option value="">aaa</option>
+        <option value="" selected>bbb</option>
+        <option value="">ccc</option>
+    </select>
+
+    <table>
+        <tr>
+            <th>이름</th>
+            <th>나이</th>
+            <th>주소</th>
+        </tr>
+        <tr>
+            <td>홍길동</td>
+            <td>20</td>
+            <td>부산</td>
+        </tr>
+        <tr>
+            <td>이순신</td>
+            <td>30</td>
+            <td>서울</td>
+        </tr>
+        <tr>
+            <td>강감찬</td>
+            <td>40</td>
+            <td>광주</td>
+        </tr>
+        <tr>
+            <td>곽재우</td>
+            <td>50</td>
+            <td>대구</td>
+        </tr>
+        <tr>
+            <td>홍경래</td>
+            <td>60</td>
+            <td>수원</td>
+        </tr>
+    </table>
+</body>
+
+</html>

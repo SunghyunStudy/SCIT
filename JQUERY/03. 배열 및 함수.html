@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3. 배열 및 함수</title>
+    <script src="./jq_folder/jquery-3.7.1.min.js"></script>
+    <script>
+        function testArray() {
+            console.log('----- 배열 -----');
+
+            let ar = [10, 20];
+            // push() 맨 뒤에 추가
+            ar.push(30);
+
+            // unshift() 맨 앞에 추가
+            ar.unshift(5);
+            console.log(`배열의 첫번째 요소 : ${ar[0]} 
+                    \n배열크기: ${ar.length}\n배열전체 : ${ar}`);
+
+            // pop() 맨 뒤에서 제거
+            let e1 = ar.pop();
+            console.log(`제거된 요소: ${e1}`);
+            // shift() 맨 앞에서 제거
+            ar.shift();
+            console.log(`베열의 첫번째 요소: ${ar[0]}
+                \n배열크기: ${ar.length}\n배열전체: ${ar}`);
+        }
+
+
+
+        function testArray2() {
+            console.log('---- 배열2 -----');
+
+            let ar = [10, 20, 30];
+            console.log('일반 for문');
+            for (let i = 0; i < ar.length; i++) {
+                console.log(`${i}번째: ${ar[i]}`);
+            }
+
+            console.log('for of 문');
+            for (let v of ar) {
+                console.log(`요소 : ${v}`);
+            }
+
+            // each() 함수는 배열이나 객체의 각 요소를 반복하는데 사용.
+            // $.each(반복할 대상, function(index, value) {
+            // })
+            // index : 현재 요소의 인덱스 또는 키(객체일 경우).
+            // value : 현재 요소의 값.
+            console.log('each 함수 사용');
+
+            $.each(ar, function (i, num) {
+                console.log(`${i}번째: ${num}`);
+            });
+            $(ar).each(function (i, n) {
+                console.log(`${i}번째 : ${n}`);
+            });
+        }
+
+        function testEach() {
+            console.log('----- each() 함수 -----');
+            let score = [20, 50, 20, 90];
+
+            // score 배열의 모든 요소의 합계 구하기 (each 함수 사용)
+            let sum = 0;
+            $(score).each(function (i, n) {
+                sum += n;
+            });
+            console.log(`score 합계 : ${sum}`);
+        }
+
+        function testEach2() {
+            console.log('----- each() 함수2 -----');
+
+            let arObject = [
+                { num: 10, name: 'aaa', title: '제목1' },
+                { num: 20, name: 'bbb', title: '제목2' },
+                { num: 30, name: 'ccc', title: '제목3' }
+            ];
+
+            $(arObject).each(function (i, ob) {
+                console.log(`i: ${i}, 이름: ${ob.name}, 제목 : ${ob.title}`);
+            });
+
+            const obj = {
+                id: 10,
+                name: "홍길동",
+                role: "admin"
+            }
+            // 굳이 배열(jQuery객체)로 감싸서 반복문을 돌림 -> 1번 실행됨
+            // 그냥 바로 console.log(obj); 쓰면 됨.
+            console.log(obj);
+            $(obj).each(function (key, value) {
+                // key는 인덱스 값(숫자), value는 id: 10 이런거를 나타냄
+                console.log(`키 : ${key}, 값 : ${value.id}`);
+            });
+            $.each(obj, function (key, value) {
+                console.log(`키 : ${key}, 값: ${value}`);
+            });
+
+
+        }
+
+        function testMap() {
+            console.log('----- map() 함수 -----');
+            // $.map() 함수는 배열이나 객체의 각 요소를 변형하는데 사용
+            // 함수의 결과값은 새로운 배열을 반환,
+            // $.map(collection, function(value, index) { })
+            let objlist = [
+                { area: "서울", name: "무대리" },
+                { area: "부산", name: "홍과장" },
+                { area: "대전", name: "박사장" },
+                { area: "서울", name: "이사원" }
+            ];
+
+            // each는 return값을 받지 못함 전체가 들어감. 걍 외워. 이해하려고 하지마.
+            let arr = $.each(objlist, function (i, v) {
+                if (v.area == "서울") {
+                    return v;
+                }
+            });
+            console.log('each: ', arr);
+
+            let arr2 = $.map(objlist, function (v, i) {
+                if (v.area == '서울') {
+                    return v;
+                }
+            });
+            console.log('map: ', arr2);
+
+
+
+            //.join("") (중요!): map의 결과는 원래 배열(['<tr>..</tr>', '<tr>..</tr>'])입니다. 
+            // 이걸 테이블 태그 안에 쏙 넣으려면 하나의 긴 문자열로 딱 붙여야 합니다. 
+            // join("")이 배열의 칸막이를 없애고 딱풀로 붙여주는 역할을 합니다.
+            let rows = $.map(objlist, function (v, i) {
+                if (v.area == "서울") {
+                    return `
+                    < tr >
+                            <td>${i}</td>
+                            <td>${v.name}</td>
+                            <td>${v.area}</td>    
+                        </tr >
+                    `;
+                }
+            }).join("");
+
+            let str = `
+                    < table >
+                    <tr>
+                        <th>NO</th><th>이름</th><th>지역</th>
+                    </tr>
+                    ${rows}
+                </ >
+            `;
+
+            // innerHTML과 비슷한거.
+            $('#result').html(str);
+        }
+    </script>
+    <style>
+        table,
+        th,
+        td {
+            border: 1px dotted black;
+            border-collapse: collapse;
+        }
+
+        th {
+            width: 100px;
+            background-color: aqua;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>[ 배열과 배열관련 메서드 ]</h1>
+    <button type="button" onclick="testArray()">배열</button>
+    <button type="button" onclick="testArray2()">배열2</button>
+    <button type="button" onclick="testEach()">each 함수</button>
+    <button type="button" onclick="testEach2()">each 함수2</button>
+    <button type="button" onclick="testMap()">map 함수</button>
+    <div id="result">
+
+
+
+    </div>
+</body>
+
+</html>

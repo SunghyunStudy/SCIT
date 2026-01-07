@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html xmlns:th="thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security" lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>infoForm.html</title>
+    <link rel="stylesheet" th:href="@{/css/main.css}">
+    <script>
+        window.onload = function () {
+            const updateForm = document.querySelector("#updateForm");
+            const openButton = document.querySelector("#openButton");
+            const memberId = document.querySelector("#memberId");
+
+            // 유효성 검사
+            updateForm.addEventListener('submit', validation);
+
+        }
+
+        // 유효성 검사 함수
+        function validation(e) {
+            let valPw = document.querySelector("#memberPassword").value;
+            let valPw2 = document.querySelector("#memberPassword2").value;
+            let valName = document.querySelector("#memberName").value;
+            let msgBox = document.querySelector("#msgBox");
+
+            msgBox.textContent = ""; // 이전 메시지 초기화
+
+            if (valPw.trim().length < 3 || valPw.trim().length > 10) {
+                msgBox.textContent = "비민번호 3~10자 사이로 입력해주세요.";
+                event.preventDefault();
+                return;
+            }
+            if (valPw !== valPw2) {
+                msgBox.textContent = "비밀번호가 일치하지 않습니다.";
+                event.preventDefault();
+                return;
+            }
+            if (valName.trim().length < 3) {
+                msgBox.textContent = "이름을 입력하시오.";
+                event.preventDefault();
+                return;
+            }
+        }
+    </script>
+</head>
+
+<body>
+
+    <header>
+        <h1>[ 개인정보 수정 ]</h1>
+    </header>
+
+    <section>
+        <div id="msgBox" style="color: red;"></div>
+        <form id="updateForm" th:action="@{/member/info}" method="post">
+            <table>
+                <tr>
+                    <th>아이디</th>
+                    <td>
+                        <input type="hidden" name="memberId" th:value="${member.memberId}"></input>
+                        <p th:text="${member.memberId}"></p>
+                    </td>
+                </tr>
+
+                <tr>
+                    <th>비밀번호</th>
+                    <td>
+                        <input type="password" name="memberPassword" id="memberPassword" placeholder="비밀번호 변경 시 입력"><br>
+                        <input type="password" id="memberPassword2" placeholder="비밀번호 다시 입력">
+                    </td>
+                </tr>
+
+                <tr>
+                    <th>이름</th>
+                    <td>
+                        <input type="text" name="memberName" th:value="${member.memberName}" id="memberName"
+                            placeholder="입력 입력">
+                    </td>
+                </tr>
+
+                <tr>
+                    <th>이메일</th>
+                    <td>
+                        <input type="text" name="email" th:value="${member.email}" id="email" placeholder="이메일 입력">
+                    </td>
+                </tr>
+
+                <tr>
+                    <th>전화번호</th>
+                    <td>
+                        <input type="text" name="phone" th:value="${member.phone}" placeholder="전화번호 입력">
+                    </td>
+                </tr>
+
+                <tr>
+                    <th>주소</th>
+                    <td>
+                        <input type="text" name="address" th:value="${member.address}" placeholder="주소 입력"
+                            style="width: 300px;">
+                    </td>
+                </tr>
+            </table>
+            <br>
+            <button type="submit" class="submit">수정</button>
+            <button type="reset">다시 쓰기</button>
+
+        </form>
+    </section>
+</body>
+
+</html>

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>web4</title>
+
+    <link rel="stylesheet" th:href="@{/css/writeForm.css}">
+    <script th:src="@{/js/jquery-3.7.1.min.js}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        window.onload = function() {
+            let h2 = document.querySelector('h2');
+            h2.addEventListener('click', function() {
+                location.href = '/';
+            });
+
+            const msg = document.querySelector('#message');
+            const cnt = document.querySelector('#cnt');
+            msg.addEventListener("input", () => {
+                // 글자 수 표시(maxlength 사용)
+                cnt.textContent = `(${msg.value.length} / 200)`;
+            });
+
+            const form = document.querySelector('form');
+            form.addEventListener("submit", function (event) {
+                let name     = document.querySelector('#name');
+                let password = document.querySelector('#password');
+
+                if(name.value.length < 3 || name.value.length > 8 || name.value.trim() == "") {
+                    Swal.fire({
+                        toast: true,
+                        position: 'top',
+                        icon: 'info',
+                        title: '이름은 3~8자로 입력해주세요.',  // title에 메시지 넣기
+                        showConfirmButton: false,
+                        timer: 1500,
+                        timerProgressBar: true,
+                    });
+                    name.focus();
+                    name.select();
+                    event.preventDefault();
+                    return;
+                }
+
+                if(password.value.length < 5) {
+                    Swal.fire({
+                        toast: true,
+                        position: 'top',
+                        icon: 'info',
+                        title: '비밀번호는 5자 이상 입력해주세요.',
+                        showConfirmButton: false,
+                        timer: 1500,
+                        timerProgressBar: true,
+                    });
+                    password.focus();
+                    password.select();
+                    event.preventDefault();
+                    return;
+                }
+            });
+        }
+    </script>
+</head>
+<body>
+    <div class="form-container">
+        <h2>글쓰기</h2>
+        <form th:action="@{write}" method="post">
+            <div class="form-group">
+                <label for="name">이름</label>
+                <input type="text" id="name" name="name" placeholder="이름을 입력하세요">
+            </div>
+            <div class="form-group">
+                <label for="password">비밀번호</label>
+                <input type="password" id="password" name="password" placeholder="비밀번호를 입력하세요">
+            </div>
+            <div class="form-group">
+                <label for="message">내용<span id="cnt">(0 / 200)</span></label>
+                <textarea id="message" name="message" maxlength="200"
+                          placeholder="내용을 입력하세요"></textarea>
+            </div>
+            <button type="submit">저장</button>
+        </form>
+    </div>
+</body>
+</html>

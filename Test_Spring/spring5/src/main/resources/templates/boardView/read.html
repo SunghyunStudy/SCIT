@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html xmlns:th="thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security" lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>read.html</title>
+    <link rel="stylesheet" th:href="@{/css/main.css}">
+    <script>
+        window.onload = function () {
+            // 글 추천
+            const likeBtn = document.querySelector("#likeButton");
+
+            if (likeBtn) {
+                likeBtn.addEventListener("click", () => {
+                    const boardNum = likeBtn.dataset.num;
+                    location.href = `like?boardNum=${boardNum}`;
+                });
+            }
+
+
+            // 글 삭제
+            // 2. 글 삭제 (버튼이 있을 때만 동작하도록 if문 추가!)
+            const delBtn = document.querySelector("#deleteButton");
+            if (delBtn) { // [중요] delBtn이 존재할 때만 이벤트를 건다
+                delBtn.addEventListener("click", (e) => {
+                    const boardNum = delBtn.dataset.num;
+                    if (confirm('삭제 하시겠습니까')) {
+                        location.href = `delete?boardNum=${boardNum}`;
+                    }
+                });
+            }
+            // 글 수정
+            const updateBtn = document.querySelector("#updateButton");
+            if (updateBtn) { // [중요] updateBtn이 존재할 때만 이벤트를 건다
+                updateBtn.addEventListener("click", (e) => {
+                    const boardNum = updateBtn.dataset.num;
+                    location.href = `update?boardNum=${boardNum}`;
+                });
+            }
+
+            // 리플 작성(유효성 검사)
+            const replyForm = document.querySelector("#replyForm");
+            const replyContents = document.querySelector("#replyContents");
+
+            if (replyForm && replyContents) {
+                replyForm.addEventListener("submit", (e) => {
+                    if (replyContents.value.trim().length < 5) {
+                        e.preventDefault();
+                        alert("리플 내용을 5자 이상으로 입력하세요.");
+                        replyContents.focus();
+                        replyContents.select();
+                    }
+                });
+            }
+
+            // 댓글 삭제 (내 방식 : querySelectorAll로 전부 불러와서 for문 씀 )
+            // const replyDelBtn = document.querySelectorAll(".replyDelBtn");
+            // if (replyDelBtn) {
+            //     for (let i = 0; i < replyDelBtn.length; i++) {
+
+            //         replyDelBtn[i].addEventListener("click", function (e) {
+            //             if (!confirm('삭제 하시겠습니까')) {
+            //                 return;
+            //             }
+            //             const boardNum = this.dataset.boardNum;
+            //             const replyNum = this.dataset.replyNum;
+            //             location.href = `replyDelete?boardNum=${boardNum}&replyNum=${replyNum}`;
+
+            //         });
+            //     }
+            // }
+
+            // 댓글 삭제(이벤트 위임 방식)
+            document.addEventListener("click", (e) => {
+                const replyDelBtnBtn = e.target.closest(".replyDelBtn");
+                if (replyDelBtnBtn) {
+                    e.preventDefault();
+
+                    const boardNum = replyDelBtnBtn.dataset.boardNum;
+                    const replyNum = replyDelBtnBtn.dataset.replyNum;
+                    if (confirm('삭제 하시겠습니까')) {
+                        location.href = `replyDelete?boardNum=${boardNum}&replyNum=${replyNum}`;
+                    }
+                    return;
+                }
+            });
+
+
+
+            document.addEventListener("click", (e) => {
+                const replyUpdateBtn = e.target.closest(".replyUpdateBtn");
+                if (replyUpdateBtn) {
+                    e.preventDefault();
+
+                    const boardNum = replyUpdateBtn.dataset.boardNum;
+                    const replyNum = replyUpdateBtn.dataset.replyNum;
+                    const oldContents = replyUpdateBtn.dataset.contents;
+                    const updatedContents = prompt('수정하기', oldContents);
+                    if (!updatedContents || updatedContents.trim().length < 5) return;
+
+                    // 보이지 않는 form태그를 생성
+                    const form = document.createElement("form");
+                    form.method = "post"
+                    form.action = "replyUpdate";
+
+                    form.innerHTML = `
+                        <input type="hidden" name="replyNum" value="${replyNum}">
+                        <input type="hidden" name="boardNum" value="${boardNum}">
+                        <input type="hidden" name="updatedContents" value="${updatedContents}">
+                    `;
+                    document.body.appendChild(form);
+                    form.submit();
+
+                }
+            });
+
+
+        }
+    </script>
+</head>
+
+<body>
+    <header>
+        <h1>[ 게시글 읽기 ]</h1>
+    </header>
+
+    <section>
+        <table>
+            <tr>
+                <th style="width: 100px;">작성자</th>
+                <td th:text="|${member.memberName} (${member.memberId})|" style="width: 600px;"></td>
+            </tr>
+            <tr>
+                <th>작성일</th>
+                <td th:text="${#temporals.format(board.createDate, 'yyyy년 MM월 dd일 HH시 mm분')}"></td>
+            </tr>
+            <tr>
+                <th>조회수</th>
+                <td th:text="${board.viewCount}"></td>
+            </tr>
+            <tr>
+                <th>추천수</th>
+                <td th:text="${board.likeCount}"></td>
+            </tr>
+            <tr>
+                <th>제목</th>
+                <td th:text="${board.title}"></td>
+            </tr>
+            <tr>
+                <th>내용</th>
+                <td th:text="${board.contents}"></td>
+            </tr>
+            <tr>
+                <th>파일첨부</th>
+                <td>
+                    <a th:href="@{/board/download(boardNum=${board.boardNum})}" th:text="${board.originalName}"></a>
+
+                    <!-- 이미지면 미리보기 -->
+                    <!-- fn이라는 변수를 만든거임 -->
+                    <th:block th:if="${board.originalName != null}" th:with="fn=${#strings.toLowerCase(board.originalName)}
+                        , isImg=${fn.matches('.*[.](png|jpg|jpeg|gif|webp)$')}
+                        ">
+
+                        <th:block th:if="${isImg}">
+                            <div style="margin-top: 10px;">
+                                <img th:src="@{/board/preview(boardNum=${board.boardNum})}" alt="첨부 이미지 미리보기"
+                                    style="max-width: 420px; width: 100%; border: 1px solid #ddd; border-radius: 8px;">
+                            </div>
+                        </th:block>
+
+                        <th:block th:unless="${isImg}">
+                            <div style="margin-top: 8px; color: #666;">
+                                (이미지 파일이 아니라 미리보기를 지원하지 않습니다.)
+                            </div>
+                        </th:block>
+
+                    </th:block>
+                </td>
+            </tr>
+        </table>
+        <br>
+        <div>
+            <button id="likeButton" th:data-num="${board.boardNum}">추천</button>
+
+            <th:block th:if="${member.memberId == #authentication.name}">
+                <button id="deleteButton" th:data-num="${board.boardNum}">삭제</button>
+                <button id="updateButton" th:data-num="${board.boardNum}">수정</button>
+            </th:block>
+        </div>
+
+        <br>
+
+
+        <div sec:authorize="isAuthenticated()">
+            <form th:action="@{/board/replyWrite}" method="post" id="replyForm">
+                <input type="hidden" th:value="${#authentication.name}" name="memberId">
+                <input type="hidden" th:value="${board.boardNum}" name="boardNum">
+                <input type="text" name="contents" id="replyContents" style="width: 500px;">
+                <button id="replyButton">댓글 달기</button>
+            </form>
+        </div>
+
+        <!-- 이거 내 방식임. 낫배드-->
+        <!-- <form th:action="@{reply}" method="post">
+            <input type="hidden" th:value="${#authentication.name}" name="memberId">
+            <input type="hidden" th:value="${board.boardNum}" name="boardNum">
+            <input type="text" name="contents" id="contents" style="width: 500px;">
+            <button id="replyButton">댓글 달기</button>
+        </form> -->
+
+
+        <br>
+
+
+        <table class="reply">
+            <tr>
+                <th style="width: 100px;">작성자</th>
+                <td style="width: 500px;">댓글</td>
+                <td style="width: 100px">날짜</td>
+                <!-- <td th:text=" |${member.memberName} (${member.memberId})|" style="width: 600px;"></td> -->
+            </tr>
+
+            <tr th:each="reply : ${board.replyList}">
+                <!-- 작성자 -->
+                <td class="replyid" style="width: 100px;">
+                    <a th:href="|replyList?memberId=${reply.memberId}&boardNum=${reply.boardNum}|"
+                        th:text="${reply.memberId}"></a>
+                </td>
+
+
+                <td class=" replytext" th:text=" ${reply.contents}" style="width: 500px;">
+                </td>
+
+                <td class="replydate" th:text="${#temporals.format(reply.createDate, 'yyyy-MM-dd HH:mm')}"
+                    style="width: 100px"></td>
+
+                <td class="white">
+                    <th:block th:if="${reply.memberId == #authentication.name}">
+                        <a th:href="@{#}" class="replyDelBtn"
+                            th:attr="data-reply-num=${reply.replyNum}, data-board-num=${reply.boardNum}">
+                            <img th:src="@{/images/icon_delete.png}" alt="삭제">
+                        </a>
+                        <!-- <button class="replyDelBtn"
+                            th:attr="data-reply-num=${reply.replyNum}, data-board-num=${reply.boardNum}">
+                            <img th:src="@{/images/icon_delete.png}" alt="삭제"></button> -->
+
+                        <a th:href="@{#}" class="replyUpdateBtn"
+                            th:attr="data-reply-num=${reply.replyNum}, data-board-num=${reply.boardNum}, data-contents=${reply.contents}">
+                            <img th:src="@{/images/icon_edit.png}" alt="수정">
+                        </a>
+
+                        <!-- <button class="replyUpdateBtn"
+                                                    th:attr="data-reply-num=${reply.replyNum}, data-board-num=${reply.boardNum}, data-contents=${reply.contents}">
+                                                    <img th:src="@{/images/icon_edit.png}" alt="수정"></button> -->
+                    </th:block>
+                </td>
+            </tr>
+
+        </table>
+    </section>
+</body>
+
+
+</html>

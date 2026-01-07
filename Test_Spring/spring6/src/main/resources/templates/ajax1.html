@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta charset="UTF-8">
+    <title>ajax1.html</title>
+    <script th:src="@{/js/jquery-3.7.1.min.js}"></script>
+    <script>
+        $(function () {
+            $('#btn1').click(test1);
+            $('#btn2').click(test2);
+            $('#btn3').click(test3); <!-- btn3을 클릭하면 test3를 호출-->
+            $('#btn4').click(test4);
+            $('#btn5').click(test5);
+            $('#btn6').click(test6);
+        });
+        function test1() {
+            alert('test1() 함수 실행');
+            $.ajax({
+                url: 'ajaxTest1',               // 서버의 요청 경로
+                type: 'get',                    // 전송 방식
+                success: function () {           // 요청이 성공적으로 완료되었을 떄.
+                    alert('실행 성공');
+                },
+                error: function () {             // 요청 중 오류가 발생되었을 때.
+                    alert('실행 실패');
+                    alert(e.statusText)
+                }
+            });
+        };
+        function test2() {
+            $.ajax({
+                url: 'ajaxTest2',
+                type: 'post',
+                data: { str: '클라이언트에서 보냄' },      // 서버에 전송할 데이터
+                contentType: "application/x-www-form-urlencoded",
+                /*
+                    MIMETYPE                                     의미
+                    application/x-www-form-urlencoded               기본 form 데이터
+                    application/json                                JSON
+                    multipart/form-data                             파일
+                    text/plain                                      일반 문자열
+                */
+                success: function () {
+                    alert('실행 성공');
+                },
+                error: function (e) {
+                    alert('실행 실패');
+                    alert(e.statusText);
+                    alert(e.responseText);
+                    alert(e.statusText);
+                }
+            });
+        };
+        function test3() {
+            $.ajax({
+                url: 'ajaxTest3',
+                type: 'get',
+                dataType: 'text',           // 서버에서 받을 데이터 타입
+                success: function (msg) {
+                    alert(msg);
+                },
+                error: function () {
+                    alert('실행 실패');
+                }
+            });
+        }
+
+        function test4() {
+            let data = {
+                num1: $('#num1').val(),
+                num2: $('#num2').val()
+            };
+            $.ajax({
+                url: 'ajaxTest4',
+                type: 'post',
+                data: data,
+                dataType: 'text',
+                success: function (sum) {
+                    $('#num3').val(sum);
+                },
+                error: function (e) {
+                    alert("계산 실패");
+                }
+            });
+
+
+        }
+
+        function test5() {
+            let data = {
+                num4: $('#num4').val(),
+                num5: $('#num5').val()
+            };
+
+            $.ajax({
+                url: 'ajaxTest5',
+                type: 'post',
+                data: data,
+                dataType: 'text',
+                success: function (result) {
+                    $('#num6').val(result);
+                },
+                error: function (e) {
+                    alert(e.status);
+                    alert(e.responseText);
+                }
+            })
+        }
+        /*
+                * Ajax 문법
+                $.ajax({
+                    url: 'http://localhost:9996/경로',    // 요청 URL
+                    type: 'POST',                         // 전송 방식(GET, POST, PUT, DElETE 등)
+                    data: {key: value}                    // 전송할 데이터
+                          or JSON.stringify({id:1}),      // json객체로 만드는거.
+                    contentType: 'application/json',      // 서버로 전송할 데이터 형식
+                        기본값: application/x-www-form-urlencoded                  // 위에거를 작성안할 경우.
+                    dataType: 'json',                     // 서버로부터 받는 응답 데이터 형식
+                    headers: {'헤더명': '값'},            // 추가 헤더
+                    success: function(data) {             // 요청이 성공적으로 응답되었을 떄
+                            console.log(data);            // 서버에서 응답한 본문 데이터
+                    },
+                    error: function(e){                   // 요청 중 오류가 있을 경우
+                            console.log(e);               // 서버에서 응답한 응답 객체
+                    },
+                    complete: function() {                // 요청이 완료되었을때(실패건 성공이건)
+                            console.log('요청 성공 실패 여부와 상관없이 출력');
+                    }
+                });
+        */
+
+        function test6() {
+            let data = {
+                num7: $('#num7').val(),
+                num8: $('#num8').val(),
+                op: $('#op').val()
+            };
+            $.ajax({
+                url: 'ajaxTest6',
+                type: 'post',
+                data: data,
+                success: function (result) {
+                    $('#num9').val(result);
+                },
+                error: function (e) {
+                    alert(e.status);
+                    alert(e.responseText);
+                },
+                complete: function () {
+                    $('#num9').css('background-color', 'skyblue');
+                }
+            })
+        }
+    </script>
+</head>
+
+<body>
+    <h1> [Ajax TEST] </h1>
+
+    <section>
+        <button id="btn1">서버로 Ajax 요청 보내기</button>
+        <button id="btn2">서버로 문자열 보내기</button>
+        <button id="btn3">서버에서 문자열 받기</button>
+    </section>
+
+    <hr>
+
+    <section>
+        <p><button id="btn4">값 전달하여 계산하기1</button></p>
+        <p>
+            <input type="text" id="num1"> +
+            <input type="text" id="num2"> =
+            <input type="text" id="num3" readonly>
+        </p>
+    </section>
+    <section>
+        <p><button id="btn5">값 전달하여 계산하기2</button></p>
+        <p>
+            <input type="text" id="num4">/
+            <input type="text" id="num5">=
+            <input type="text" id="num6" readonly>
+        </p>
+    </section>
+
+    <hr>
+
+    <section>
+        <p>값 전달하여 계산하기 3</p>
+        <p>
+            <input type="text" id="num7">
+            <select id="op">
+                <option value="">연산자 선택</option>
+                <option value="+">+</option>
+                <option value="-">-</option>
+                <option value="/">/</option>
+                <option value="*">*</option>
+            </select>
+
+            <input type="text" id="num8">
+            <button id="btn6">=</button>
+            <input type="text" id="num9" readonly>
+        </p>
+    </section>
+</body>
+
+</html>

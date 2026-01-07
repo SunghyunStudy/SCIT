@@ -1,30 +1,31 @@
 <!DOCTYPE html>
 <html xmlns:th="thymeleaf.org" lang="en">
+
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>writeForm.html</title>
     <link rel="stylesheet" th:href="@{/css/list.css}">
-<!--    <script th:src="@{/js/writeForm.js}"></script>-->
+    <!--    <script th:src="@{/js/writeForm.js}"></script>-->
 </head>
 <script>
-    window.onload = function(){
+    window.onload = function () {
         let h1 = document.querySelector("#h1");
-        h1.addEventListener("click", function(){
+        h1.addEventListener("click", function () {
             location.href = '/';
         });
 
         const msg = document.querySelector('#message');
         const cnt = document.querySelector('#cnt');
-        msg.addEventListener('input', function(){
+        msg.addEventListener('input', function () {
             cnt.textContent = `(${msg.value.length} / 200)`;
         });
 
         const form = document.querySelector('form');
-        form.addEventListener('submit', function(){
+        form.addEventListener('submit', function () {
             let name = document.querySelector('#name');
             let password = document.querySelector('#password');
 
-            if (name.value.length < 3){
+            if (name.value.length < 3) {
                 alert('이름은 3자 이상 입력해주세요.');
                 name.focus();
                 name.select();
@@ -32,7 +33,7 @@
                 return;
             }
 
-            if (password.value.length < 5){
+            if (password.value.length < 5) {
                 alert('비밀번호는 5자 이상 입력해주세요.');
                 name.focus();
                 name.select();
@@ -43,16 +44,19 @@
         });
     }
 </script>
+
 <body>
     <h1 id="h1">[ 글쓰기 ]</h1>
 
     <form id="form" th:action="@{write}" method="post">
         이름 <input type="text" name="name" id="name"><br>
         비밀번호 <input type="password" name="password" id="password"><br>
-        내용 <span id="cnt">(0 / 200)</span> <textarea type="text" name="message" maxlength="200" id="message"></textarea><br>
+        내용 <span id="cnt">(0 / 200)</span> <textarea type="text" name="message" maxlength="200"
+            id="message"></textarea><br>
         <input type="submit" value="저장">
     </form>
 
 
 </body>
+
 </html>

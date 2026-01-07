@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org" lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <title>list.html</title>
+    <script th:if="${msg != null}">
+        alert("[[${msg}]]");
+    </script>
+</head>
+
+<body>
+
+    <h1>[ Java 시험 응시 결과 ]</h1>
+
+    <div class="links">
+        <a th:href="@{/list(sort='date')}">응시일순</a> |
+        <a th:href="@{/list(sort='name')}">이름순</a> |
+        <a th:href="@{/list(sort='score')}">성적순</a>
+    </div>
+
+    <table>
+        <thead>
+            <tr>
+                <th>이름</th>
+                <th>이메일</th>
+                <th>1번</th>
+                <th>2번</th>
+                <th>3번</th>
+                <th>4번</th>
+                <th>5번</th>
+                <th>점수</th>
+                <th>응시일</th>
+                <th>결과</th>
+                <th>삭제</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:if="${studentList == null or studentList.isEmpty()}">
+                <td colspan="11">응시 내역이 없습니다.</td>
+            </tr>
+
+            <tr th:each="student : ${studentList}">
+                <td th:text="${student.name}">홍길동</td>
+                <td th:text="${student.email}">email@test.com</td>
+                <td th:text="${student.answer1}">1</td>
+                <td th:text="${student.answer2}">2</td>
+                <td th:text="${student.answer3}">3</td>
+                <td th:text="${student.answer4}">extends</td>
+                <td th:text="${student.answer5}">try</td>
+                <td th:text="${student.score}">100</td>
+                <td th:text="${#temporals.format(student.examDate, 'yy.MM.dd HH:mm:ss')}">25.12.26</td>
+                <td>
+                    <span th:if="${student.score >= 60}" class="pass">Pass</span>
+                    <span th:unless="${student.score >= 60}" class="fail">Fail</span>
+                </td>
+                <td>
+                    <a th:href="@{/deleteForm(seq=${student.seq})}">X</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <p><a th:href="@{/}">[메인으로]</a></p>
+
+</body>
+
+</html>

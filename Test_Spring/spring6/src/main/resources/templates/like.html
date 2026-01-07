@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta charset="UTF-8">
+    <title>like.html</title>
+    <script th:src="@{/js/jquery-3.7.1.min.js}"></script>
+    <style>
+        #view {
+            font-size: 30pt;
+            color: #a74e6b;
+            vertical-align: middle;
+            margin: 10px;
+        }
+
+        img {
+            vertical-align: middle;
+        }
+    </style>
+    <script>
+        // $(function () {
+        //     $('img').click(like);
+        // });
+
+        // function like() {
+        //     $.ajax({
+        //         url: 'pressLike',
+        //         type: 'post',
+        //         dataType: 'text',
+        //         success: function (cnt) {
+        //             $('#likeCount').text(cnt);
+        //         },
+        //         error: function (e) {
+        //             alert("실패");
+        //         }
+        //     });
+        // }
+
+        $(function () {
+            list();
+            $('#icon_like').click(function () {
+                const num = 1;
+
+                $.ajax({
+                    url: `/posts/${num}/like`,
+                    type: 'post',       // 1번 게시글의 추천수 상태 변경(증가)
+                    dataType: 'text',
+                    success: function (cnt) {
+                        $('#view').text(cnt);
+                    }
+                });
+            });
+        });
+
+        function list() {
+            const num = 1;
+            $.ajax({
+                url: `/posts/${num}/like`, // 1번 게시글의 추천수 상태 조회
+                type: 'get',
+                success: function (cnt) {
+                    $('#view').text(cnt);
+                }
+            })
+        }
+
+
+
+    </script>
+</head>
+
+<body>
+    <h1> [ 추천 ] </h1>
+    <div>
+        <span id="view">0</span>
+        <img th:src="@{/images/icon_like.png}" id="icon_like">
+    </div>
+
+    <!-- <section>
+        <p id="likeCount" th:text="${cnt}"></p><img th:src="@{/images/icon_like.png}" alt="좋아요">
+    </section> -->
+
+</body>
+
+</html>

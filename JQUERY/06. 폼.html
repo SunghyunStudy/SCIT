@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>6. 폼</title>
+    <script src="./jq_folder/jquery-3.7.1.min.js"></script>
+    <style>
+        body {
+            font-family: Arial;
+            padding: 20px;
+        }
+
+        label {
+            display: inline-block;
+            width: 120px;
+            margin-bottom: 6px;
+        }
+
+        input,
+        select {
+            width: 260px;
+            padding: 6px;
+            margin-bottom: 10px;
+        }
+
+        button {
+            padding: 6px 12px;
+        }
+
+        #errorBox {
+            margin: 10px 0;
+            color: crimson;
+            font-size: 13px;
+        }
+
+        #errorBox.ok {
+            color: green;
+        }
+
+        pre {
+            margin-top: 12px;
+        }
+
+        input[type="checkbox"] {
+            width: auto;
+            padding: 0;
+            margin-right: 6px;
+            vertical-align: middle;
+        }
+    </style>
+    <script>
+        $(function () {
+            // 유효성 검사 객체
+            const rules = {
+                // "룩업 테이블(Lookup Table)" 방식임
+                // switch랑 매우 유사함. 코드가 훨씬 더 간결하고 효율적인 방식임.
+                memberId: function (v) {
+                    if (!v) return "아이디를 입력하시오.";
+                    if (!/^[a-zA-Z0-9]{4,12}$/.test(v)) return "아이디는 영문/숫자 4~12자 입니다."
+                    return "";
+                },
+                pw(v) {
+                    if (!v) return "비밀번호를 입력하세요.";
+                    if (!/^(?=.*[A-Za-z])(?=.*\d).{8,}$/.test(v)) return "비밀번호는 8자 이상, 문자와 숫자 포함입니다.";
+                    return "";
+                },
+                pw2(v) {
+                    if (!v) return "비밀번호 확인을 입력하세요.";
+                    if (v != $("#pw").val()) return "비밀번호가 일치하지 않습니다.";
+                    return "";
+                },
+                email(v) {
+                    if (!v) return "이메일을 입력하세요.";
+                    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v)) return "이메일 형식이 올바르지 않습니다."
+                    return "";
+                },
+                area(v) {
+                    return v ? "" : "지역을 선택하세요.";
+                },
+                agree(v) {
+                    if (!$("#agree").prop("checked")) return "개인정보 수집에 동의해야 합니다.";
+                    return "";
+                }
+            };
+
+
+
+
+            // 필드 1개 검증
+            function validation(e1) {       // e1 : 이벤트를 발생시키는 객체
+                const id = e1.id;           // e1.id : e1 객체로부터의 id 속성값
+                if (!rules[id]) return true;
+
+                // rules[id] : rules-Object에서 변수 id에 일치하는 속성
+                const msg = rules[id]($(e1).val());
+                if (msg) {
+                    $("#errorBox").text(msg).removeClass("ok");
+                    return false;
+                }
+                return true;
+            }
+
+
+
+
+            // 입력 중 : 해당 필드만
+            // input, change 이벤트에 대해서 input 태그와 select 태그가 대상일 경우
+            $('#joinForm').on("input change", "input, select", function () {
+                $("#errorBox").text("").removeClass("ok");
+                validation(this);
+            });
+
+            // submit : 전체 검증
+            $("#joinForm").on("submit", function (e) {
+                e.preventDefault();
+
+                $("#errorBox").text("").removeClass("ok");
+
+                let ok = true;
+
+                $("#joinForm input, #joinForm select").each(function () {
+                    if (!validation(this)) {
+                        ok = false;
+                        this.focus();
+                        return false;
+                    }
+                });
+                if (!ok) return;
+
+                $("#errorBox").text("모든 입력이 정상입니다.").addClass("ok");
+                $("#result").text(
+                    `
+                        아이디 : ${$("#memberId").val()}
+                        비밀번호 : ${$("#pw").val()}
+                        비밀번호 확인 : ${$("#pw2").val()}
+                        이메일 : ${$("#email").val()}
+                        지역 : ${$("#area option:selected").text()}
+                        [ 체크박스 상태 비교 ]
+                        
+                        attr('checked') : ${$("#agree").attr("checked")}
+                        prop('checked') : ${$("#agree").prop("checked")}
+                    `
+                );
+            })
+        });
+    </script>
+</head>
+
+<body>
+    <h2>[ 회원 가입 ]</h2>
+
+    <form id="joinForm">
+        <label>아이디</label>
+        <input type="text" id="memberId"><br>
+        <label>비밀번호</label>
+        <input type="password" id="pw"><br>
+        <label>비밀번호 확인</label>
+        <input type="password" id="pw2"><br>
+        <label>이메일</label>
+        <input type="email" id="email"><br>
+        <label>지역</label>
+        <select name="area" id="area">
+            <option value="">-- 선택 --</option>
+            <option value="seoul">서울</option>
+            <option value="gg">경기</option>
+        </select><br>
+
+        <input type="checkbox" id="agree"> 개인정보 수집 및 이용에 동의합니다. <br>
+
+        <div id="errorBox"></div>
+        <button type="submit" id="submitBtn">가입</button>
+    </form>
+    <pre id="result"></pre>
+
+</body>
+
+</html>

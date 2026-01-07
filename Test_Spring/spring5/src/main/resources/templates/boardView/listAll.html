@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security" lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>listAll.html</title>
+    <link rel="stylesheet" th:href="@{/css/main.css}">
+</head>
+
+<body>
+    <header>
+        <h1>[ 게시판 - 전체 목록 ]</h1>
+    </header>
+
+
+    <table>
+        <tr>
+            <td class="white" colspan="4"></td>
+            <td class="head">
+                <a sec:authorize="isAuthenticated()" th:href="@{/board/write}">글쓰기</a>
+                <a th:href="@{/}">HOME</a>
+            </td>
+        </tr>
+
+        <tr>
+            <th>번호</th>
+            <th style="width: 300px;">제목</th>
+            <th>작성자</th>
+            <th>조회수</th>
+            <th style="width: 150px;">작성일</th>
+        </tr>
+
+        <tr th:each="list : ${listAll}">
+            <td th:text="${list.boardNum}" class="center"></td>
+            <td><a th:text="${list.title}" th:href="@{/board/read(boardNum=${list.boardNum})}"></a></td>
+            <td th:text="${list.memberId}" class="center"></td>
+            <td th:text="${list.viewCount}" class="center"></td>
+            <td th:text="${#temporals.format(list.createDate, 'yy.MM.dd HH:mm')}" class="center"></td>
+        </tr>
+    </table>
+
+
+</body>
+
+</html>

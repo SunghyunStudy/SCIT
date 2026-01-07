@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>4. 문서 조작 메서드</title>
+    <script src="./jq_folder/jquery-3.7.1.min.js"></script>
+    <style>
+        .boxstyle {
+            columns: darkgoldenrod;
+            width: 200px;
+            background-color: gainsboro;
+            font-size: 30px;
+            border: 2px solid saddlebrown;
+        }
+    </style>
+    <script>
+        // js > window.onload = function() { }
+        // jq > $(docment).ready(function() {})
+        $(function () {
+            $('#bt1').on('click', function () {
+
+                let s = $('h3').html();
+                console.log(s);
+
+                $('h3').each(function (i, ob) {
+                    // i : index / ob : object
+                    console.log(i, $(ob).html());
+                });
+            });
+            $('#bt2').on('click', function () {
+                // 반복문을 쓰지 않아도 h3태그를 전부 가져와서 출력.
+                let s = $('h3').text(); // .text()  :  해당 element의 내용을 text화 시킨 후 가져옴.
+                console.log(s);
+            });
+
+            $('#bt3').on('click', function () {
+                let s = $('#text1').val();
+                alert(s);
+            });
+
+            $('#bt4').on('click', function () {
+                $('#div1').html('<p style="color: red;">변경할 내용</p>');
+                $('#div2').text('<p style="color: red;">변경할 내용</p>');
+                $('#text2').val('변경한 내용');
+                $('#text3').text('변경한 내용');
+            });
+
+            $('#bt5').on('click', function () {
+                // 가져올때 = $('선택자').attr('속성명')
+                console.log($('#img1').attr('src'));
+
+                // 변경할때 = $('선택자').attr('속성명', '변경할 속성값');
+                if ($('#img1').attr('src') != './images/희재.jpg') {
+                    $('#img1').attr('src', './images/희재.jpg');
+                }
+                else { $('#img1').attr('src', './images/안녕나의사랑.jpg'); }
+            });
+
+            $('#bt6').on('click', function () {
+                $('#img1').css('border', '2px solid red').css('background', 'red');
+
+                $('#img1').css({
+                    width: '500px',
+                    heigth: '500px'
+                });
+            });
+
+            $('#addBtn').on('click', function () {
+                $('p:last').addClass('boxstyle');
+            })
+
+            $('#removeBtn').on(
+                {
+                    'click': function () {
+                        $('p:last').removeClass('boxstyle');
+                    },
+
+
+                    'mouseover': function () {
+                        alert('aa');
+                    }
+                }
+            );
+
+
+        });
+
+    </script>
+</head>
+
+<body>
+    <h1>[ 문서 조작 메서드 ]</h1>
+    <pre>
+        html(), text(), val(), attr(), addClass(), removeClass()
+    </pre>
+    <p><input type="button" id="bt1" value="html() 함수"></p>
+    <p><input type="button" id="bt2" value="text() 함수"></p>
+
+    <h3><b>h3</b>태그를 사용한 문자열1</h3>
+    <h3><i>h3</i>태그를 사용한 문자열2</h3>
+    <p><input type="button" id="bt3" value="val() 함수"></p>
+    <p><input type="text" id="text1"></p>
+    <hr>
+
+    <p><input type="button" id="bt4" value="값 변경"></p>
+    <div id="div1">aaaa</div>
+    <div id="div2">bbbb</div>
+    <p><input type="text" id="text2" value="input의 기본값"></p>
+    <p><textarea id="text3"></textarea></p>
+    <hr>
+
+    <p><input type="button" id="bt5" value="attr() 함수"></p>
+    <p><input type="button" id="bt6" value="css() 함수"></p>
+    <p><img src="./images/안녕나의사랑.jpg" id="img1"></p>
+    <hr>
+
+    <p>마지막 p태그</p>
+    <input type="button" value="addClass" id="addBtn">
+    <input type="button" value="removeClass" id="removeBtn">
+</body>
+
+</html>

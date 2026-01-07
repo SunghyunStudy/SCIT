@@ -1,15 +1,19 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="thymeleaf.org" lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
+
 <body>
     <h2>Model 출력</h2>
-    <p>[[${str}]]</p>
+    <p>[[${aaaa}]]</p>
+    <p th:text="${aaaa}"></p>
     <p>[[${num}]]</p>
     <p>[[${person}]]</p>
     <p>[[${person.id}]]</p>
     <p>[[${person.name}]]</p>
 </body>
+
 </html>

@@ -1,0 +1,41 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Spring6Application",
+            "request": "launch",
+            "mainClass": "net.datasa.spring6.Spring6Application",
+            "projectName": "demo-spring6"
+        },
+        {
+            "type": "java",
+            "name": "Spring Boot-Spring5Application<spring5>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "net.datasa.spring5.Spring5Application",
+            "projectName": "spring5",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        },
+        {
+            "type": "java",
+            "name": "Spring Boot-ExamApplication<exam>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "net.datasa.exam.ExamApplication",
+            "projectName": "exam",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        },
+        {
+            "type": "java",
+            "name": "Spring Boot-PracApplication<prac>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "net.dima.prac.PracApplication",
+            "projectName": "prac",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        }
+    ]
+}

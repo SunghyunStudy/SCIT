@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>5. 이벤트</title>
+    <script src="./jq_folder/jquery-3.7.1.min.js"></script>
+    <style>
+        .inputCss1 {
+            border: 1px solid black;
+            background: white;
+        }
+
+        .inputCss2 {
+            border: 1px solid beige;
+            background: skyblue;
+        }
+    </style>
+    <script>
+        function testbutton() { alert('button1 클릭함'); }
+        function testbuttonOff() { $('#button1').off('click'); }
+        function testbuttonOn() { $('#button1').on('click', testbutton); }
+
+        $(function () {
+            $('#button1').on('click', testbutton);
+            $('#button2').on('click', testbuttonOff);
+            $('#button3').on('click', testbuttonOn);
+
+            $('#text1').on('click', function () {
+                alert('#text1의 click 이벤트 발생');
+            });
+            $('#text2').on('click', function () {
+                $('#text1').trigger('click');
+            });
+            $('#text3').on('click', function () {
+                setTimeout(function () {
+                    $('#text1').trigger('click');
+                }, 3000);
+            });
+
+            $('#img1, #img2').on('mouseenter', function () {
+                let w = $(this).width();
+                let h = $(this).height();
+
+                $(this).css('width', w * 2);
+                $(this).css('height', h * 2);
+            });
+
+            $('#img1, #img2').on('mouseleave', function () {
+                let w = $(this).width();
+                let h = $(this).height();
+
+                $(this).css('width', w / 2);
+                $(this).css('height', h / 2);
+            });
+
+            $('.bt').on('click', function () {
+                let msg = $(this).data('msg');
+                alert(msg + '번 버튼 클릭');
+            });
+
+            // focus가 들어갔을 때의 실행
+            $('#input1, #input2').on('focus', function () {
+                $(this).removeClass('inputCss1').addClass('inputCss2');
+            });
+
+            // focus가 빠졌을 때(blur) 이벤트
+            $('#input1, #input2').on('blur', function () {
+                $(this).removeClass('inputCss2').addClass('inputCss1');
+            });
+
+            $('#input3').on('keyup', function () {
+                let n = $('#input3').val().length;
+                $('#cnt').html(n);
+            });
+        });
+    </script>
+</head>
+
+<body>
+    <h1>[ J-Query 이벤트 ]</h1>
+
+    <ol>
+        <li>이벤트 관련 함수
+            <ul>
+                <li>on() 함수 - 이벤트 연결 <br>
+                    $(셀럭터).on(이벤트명, 함수)
+                </li>
+                <li>off() 함수 - 이벤트 연결 제거 <br>
+                    $(셀렉터).off()
+                    $(셀렉터).off(제거할 이벤트명)
+                </li>
+                <li>trigger() 함수 - 이벤트 강제 발생 <br>
+                    $(셀렉터).trigger(이벤트명)
+                </li>
+            </ul>
+        </li>
+        <li>이벤트종류
+            <table class="eventTable">
+                <tr>
+                    <th style="width: 200px;">Mouse Events</th>
+                    <th style="width: 200px;">Keyboard Events</th>
+                    <th style="width: 200px;">Form Events</th>
+                    <th style="width: 250px;">Document Events</th>
+                </tr>
+                <tr>
+                    <td>click</td>
+                    <td>keypress</td>
+                    <td>submit</td>
+                    <td>load</td>
+                </tr>
+                <tr>
+                    <td>dbclick</td>
+                    <td>keydown</td>
+                    <td>change</td>
+                    <td>resize</td>
+                </tr>
+                <tr>
+                    <td>mouseenter</td>
+                    <td>keyup</td>
+                    <td>focus</td>
+                    <td>scroll</td>
+                </tr>
+                <tr>
+                    <td>mouseleave</td>
+                    <td>&nbsp;</td>
+                    <td>blur</td>
+                    <td>unload</td>
+                </tr>
+            </table>
+        </li>
+        <li>이벤트 처리 연결과 해제
+            <p><input type="button" value="button1" id="button1"></p>
+            <p><input type="button" value="button1의 이벤트 연결 해제" id="button2"></p>
+            <p><input type="button" value="button1의 이벤트 다시 연결" id="button3"></p>
+        </li>
+
+        <li>이벤트 강제 발생과 시간 지연 함수
+            <p id="text1">일반 텍스트에 이벤트 연결</p>
+            <p id="text2">이벤트 강제 발생</p>
+            <p id="text3">3초 뒤에 이벤트 강제 발생</p>
+        </li>
+
+        <li>mouseenter, mouseleave 이벤트
+            <p><img src="./images/illit.jpg" id="img1"></p>
+            <p><img src="./images/잘지내나요.jpg" id="img2"></p>
+        </li>
+
+        <li>사용자 정의 속성 읽기
+            <p><input type="button" value="버튼1" class="bt" data-msg="1"></p>
+            <p><input type="button" value="버튼2" class="bt" data-msg="2"></p>
+            <p><input type="button" value="버튼3" class="bt" data-msg="3"></p>
+        </li>
+        <li>focus, blur 이벤트
+            <p><input type="text" id="input1" class="inputCss1"></p>
+            <p><input type="text" id="input2" class="inputCss2"></p>
+        </li>
+
+        <li>keyup 이벤트
+            <input type="text" id="input3">
+            <span id="cnt">0</span> 글자
+        </li>
+
+    </ol>
+
+</body>
+
+</html>

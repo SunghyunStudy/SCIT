@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta charset="UTF-8">
+    <title>ajax1.html</title>
+    <script th:src="@{/js/jquery-3.7.1.min.js}"></script>
+    <script>
+        $(function () {
+            $('#formButton1').on('click', formSubmit1);
+            $('#formButton2').on('click', formSubmit2);
+            $('#formButton3').on('click', formSubmit3);
+            $('#bt1').on('click', getObjectAsString);
+            $('#bt2').on('click', getObjectAsJson);
+            $('#bt3').on('click', getList);
+            $('#bt4').on('click', getJson);
+        });
+
+
+        function formSubmit1() {
+            let n = $('#name1').val();
+            let a = $('#age1').val();
+            let p = $('#phone1').val();
+
+            if (n == '') {
+                alert('이름을 입력하세요');
+                return;
+            }
+            if (a == '' || isNaN(a)) {
+                alert('나이를 숫자로 입력하세요.');
+                return;
+            }
+            $.ajax({
+                url: 'insert1',
+                type: 'post',
+                data: { name: n, age: a, phone: p },
+                success: function () {
+                    alert('저장되었습니다.');
+                    $('#name1').val('');
+                    $('#age1').val('0');
+                    $('#phone1').val('');
+                },
+                error: function () {
+                    alert('저장실패');
+                }
+            });
+        }
+
+
+        function formSubmit2() {
+            const formData = {
+                name: $('#name2').val(),
+                age: $('#age2').val(),
+                phone: $('#phone2').val(),
+            };
+
+            $.ajax({
+                url: 'insert2',
+                type: 'post',
+                data: formData,
+                success: function () {
+                    alert('저장되었습니다');
+                    $('#name2').val('');
+                    $('#age2').val('0');
+                    $('#phone2').val('');
+                },
+                error: function () {
+                    alert('저장 실패');
+                }
+            });
+        }
+
+        function formSubmit3() {
+            $.ajax({
+                url: 'insert3',
+                type: 'post',
+                // 폼 데이터를 URL 인코딩된 문자열로 직렬화
+                // input 태그에 name 속성이 있어야됨
+                // name = John&age=30&phone=1111 형식으로 전송
+                data: $('#writeForm3').serialize(),
+                success: function () {
+                    alert('저장되었습니다');
+                    $('#name3').val('');
+                    $('#age3').val('0');
+                    $('#phone3').val('');
+                },
+                error: function () {
+                    alert('저장 실패');
+                }
+
+            });
+        }
+
+        function getObjectAsString() {
+            $.ajax({
+                url: 'getObject',
+                type: 'get',
+                dataType: 'text',
+                success: function (ob) {
+                    alert(typeof ob);   // String
+
+                    let parsed = JSON.parse(ob);
+                    alert(typeof parsed);   // Object
+
+                    $('#outputDiv1').html(ob);
+                },
+                error: function (e) {
+                    alert(JSON.stringify(e));
+                }
+            });
+        }
+
+        function getObjectAsJson() {
+            $.ajax({
+                url: 'getObject',
+                type: 'get',
+                dataType: 'json',
+                success: function (ob) {
+                    let str = `
+                    받은 객체: ${ob}<br>
+                    이름: ${ob.name}<br>
+                    나이: ${ob.age}<br>
+                    전화: ${ob.phone}<br>
+                    `;
+                    $('#outputDiv2').html(str);
+                },
+                error: function (e) {
+                    alert(JSON.stringify(e));
+                }
+            });
+        }
+
+        function getList() {
+            $.ajax({
+                url: 'getList',
+                type: 'get',
+                dataType: 'json',
+                success: function (list) {
+                    let str = `<table>`;
+                    $(list).each(function (idx, ob) {
+                        str += `
+                            <tr>
+                                <td>${idx}</td>
+                                <td>${ob.name}</td>
+                                <td>${ob.age}</td>
+                                <td>${ob.phone}</td>
+                            </tr>
+                        `;
+                    });
+                    str += `</table>`;
+                    $('#outputDiv3').html(str);
+                },
+                error: function (e) {
+                    alert(JSON.stringify(e));
+                }
+            });
+        }
+
+        function getJson() {
+            let ar = [
+                { name: 'aaa', age: 11, phone: '1111' },
+                { name: 'bbb', age: 22, phone: '2222' }
+            ];
+            let arJson = JSON.stringify(ar);
+
+            $.ajax({
+                url: 'getJson',
+                type: 'post',
+                data: arJson, // 문자열이지만 json구조를 갖고 있다는 의미임.
+                // contentType: "text/plain",   // string으로 보내도 되지만 아래처럼 json으로 보낼 수도 있음.
+                contentType: "application/json",
+                dataType: "text",
+                success: function (str) {
+                    let person = JSON.parse(str);
+                    let result = `<table>`;
+                    $(person).each(function (idx, ob) {
+                        result += `
+                            <tr>
+                                <td>${idx}</td>
+                                <td>${ob.name}</td>
+                                <td>${ob.age}</td>
+                                <td>${ob.phone}</td>
+                            </tr>
+                        `;
+                    });
+                    result += `</table>`;
+                    $('#outputDiv4').html(result);
+                }
+
+            });
+        }
+    </script>
+</head>
+
+<body>
+    <h1> [Ajax2 TEST] </h1>
+    <p>1. 서버에 각각의 Parameter 전달</p>
+    <form action="writeForm1">
+        이름 <input type="text" id="name1"><br>
+        나이 <input type="number" id="age1"><br>
+        전화 <input type="text" id="phone1"><br>
+        <input type="button" id="formButton1" value="저장"><br>
+    </form>
+
+
+    <p>2. 서버에 Object로 전달</p>
+    <form action="writeForm2">
+        이름 <input type="text" id="name2"><br>
+        나이 <input type="number" id="age2"><br>
+        전화 <input type="text" id="phone2"><br>
+        <input type="button" id="formButton2" value="저장"><br>
+    </form>
+
+    <p>3. 서버에 Object로 전달2</p>
+    <form action="writeForm3">
+        이름 <input type="text" id="name3" name="name"><br>
+        나이 <input type="number" id="age3" name="age"><br>
+        전화 <input type="text" id="phone3" name="phone"><br>
+        <input type="button" id="formButton3" value="저장"><br>
+    </form>
+
+
+    <p>4. 서버로부터 객체의 값을 String으로 받기</p>
+    <p><input type="button" id="bt1" value="서버에서 객체 받기"></p>
+    <div id="outputDiv1"></div>
+
+    <p>5. 서버로부터 객체의 값을 Json으로 받기</p>
+    <p><input type="button" id="bt2" value="서버에서 객체 받기"></p>
+    <div id="outputDiv2"></div>
+
+    <p>6. 서버로부터 리스트 받기</p>
+    <p><input type="button" id="bt3" value="서버에서 리스트 받기"></p>
+    <div id="outputDiv3"></div>
+
+
+    <p>7. 서버로 Json 보내고 받기</p>
+    <p><input type="button" id="bt4" value="서버로 Json 보내고 받기"></p>
+    <div id="outputDiv4"></div>
+</body>
+
+</html>

@@ -1,29 +1,31 @@
 <!DOCTYPE html>
 <html xmlns:th="thymeleaf.org" lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>타이토루</title>
 </head>
+
 <body>
 
-<ol>
-    <li>Lombok & Logger 사용
-        <ul>
-            <li><a href="lom/logger">Logger 사용</a> </li>
-            <li><a href="lom/lombok">Lombok 사용</a> </li>
-        </ul>
-    </li>
-    <li> 서버와 값 주고 받기
-        <ul>
-            <li><a href="param/view1">GET method로 parameter 전달</a></li>
-            <li><a href="param/view2">POST method로 parameter 전달</a></li>
-            <li><a href="param/view3">POST method로 parameter 전달 - 객체</a></li>
-            <li><a href="param/input4?name=abc&age=11">GET method로 parameter 전달 - Form없이</a></li>
-            <li><a href="param/input4">GET method로 parameter전달 - 파라미터가 없는 경우</a></li>
-            <li><a href="param/model">Model 사용하기</a> </li>
-        </ul>
-    </li>
-    <!--
+    <ol>
+        <li>Lombok & Logger 사용
+            <ul>
+                <li><a href="lom/logger">Logger 사용</a> </li>
+                <li><a href="lom/lombok">Lombok 사용</a> </li>
+            </ul>
+        </li>
+        <li> 서버와 값 주고 받기
+            <ul>
+                <li><a href="param/view1">GET method로 parameter 전달</a></li>
+                <li><a href="param/view2">POST method로 parameter 전달</a></li>
+                <li><a href="param/view3">POST method로 parameter 전달 - 객체</a></li>
+                <li><a href="param/input4?name=abc&age=11">GET method로 parameter 전달 - Form없이</a></li>
+                <li><a href="param/input4">GET method로 parameter전달 - 파라미터가 없는 경우</a></li>
+                <li><a href="param/model">Model 사용하기</a> </li>
+            </ul>
+        </li>
+        <!--
         Session vs Cookie
             - 웹에서 사용자 상태를 유지하고 위해 사용하는 대표적인 기술
         1. Session
@@ -44,28 +46,30 @@
              - 최근 본 상품목록, 아이디 저장, 테마 설정 등...
     -->
 
-    <li>세션
-        <ul>
-            <li><a href="ss/session1">Session에 저장</a> </li>
-            <li><a href="ss/session2">Session에서 읽기</a> </li>
-            <li><a href="ss/session3">Session에서 삭제</a> </li>
-            <li>session.name: [[${session.name}]]님이 접속중</li>
+        <li>세션
+            <ul>
+                <li><a href="ss/session1">Session에 저장</a> </li>
+                <li><a href="ss/session2">Session에서 읽기</a> </li>
+                <li><a href="ss/session3">Session에서 삭제</a> </li>
+                <li>session.name: [[${session.name}]]님이 접속중</li>
+                <li th:text="|session.name: ${session.name}|"></li>
 
-            <li>session.loginId: [[${session.loginId}]]님이 접속중</li>
-            <li><a href="ss/login">로그인하기</a></li>
-            <li><a href="ss/logout">로그아웃하기</a></li>
-            <li><a href="ss/loginTest">로그인해야 접속 가능한 페이지</a></li>
 
-        </ul>
-    </li>
-    <li>
-        <ul>
-            <li><a href="ck/cookie1">쿠키 저장</a></li>
-            <li><a href="ck/cookie2">쿠키 삭제</a></li>
-            <li><a href="ck/cookie3">쿠키 읽기</a></li>
-        </ul>
-    </li>
-    <!--
+                <li>session.loginId: [[${session.loginId}]]님이 접속중</li>
+                <li><a href="ss/login">로그인하기</a></li>
+                <li><a href="ss/logout">로그아웃하기</a></li>
+                <li><a href="ss/loginTest">로그인해야 접속 가능한 페이지</a></li>
+
+            </ul>
+        </li>
+        <li>
+            <ul>
+                <li><a href="ck/cookie1">쿠키 저장</a></li>
+                <li><a href="ck/cookie2">쿠키 삭제</a></li>
+                <li><a href="ck/cookie3">쿠키 읽기</a></li>
+            </ul>
+        </li>
+        <!--
         웹 스토리지(Web Storage)
         HTML5에서 정의된 Web API이며, 브라우저가 제공하는 기능
         서버와의 통신 없이 클라이언트 쪽에서 데이터를 저장
@@ -86,33 +90,34 @@
             용량: 일반적으로 5MB 정도의 용량
             ex. 사용자 UI, form 데이터
     -->
-    <li>localStorage & sessionStorage
-        <ul>
-            <li><a href="local/save">값 저장</a> </li>
-            <li><a href="local/output">저장한 값 확인</a> </li>
-            <li><a href="local/delete">저장한 값 삭제</a> </li>
-        </ul>
-    </li>
+        <li>localStorage & sessionStorage
+            <ul>
+                <li><a href="local/save">값 저장</a> </li>
+                <li><a href="local/output">저장한 값 확인</a> </li>
+                <li><a href="local/delete">저장한 값 삭제</a> </li>
+            </ul>
+        </li>
 
 
-    <li> Thymeleaf
-        <ul>
-            <li><a href="th/thymeleaf1">타임리프 문법1</a> </li>
-            <li><a href="th/thymeleaf2">타임리프 문법2</a> </li>
+        <li> Thymeleaf
+            <ul>
+                <li><a href="th/thymeleaf1">타임리프 문법1</a> </li>
+                <li><a href="th/thymeleaf2">타임리프 문법2</a> </li>
 
-        </ul>
-    </li>
+            </ul>
+        </li>
 
-    <li>예제
-        <ul>
-            <li><a href="ex/calc1">계산기</a></li>
-            <li><a href="ex/info">개인정보입력</a></li>
-            <li><a th:href="@{ex/count}">방문횟수 카운트</a></li>
-            <li><a th:href="@{ex/darkmode}">다크모드</a></li>
-            <li><a th:href="@{ex/temp}">임시저장</a></li>
+        <li>예제
+            <ul>
+                <li><a href="ex/calc1">계산기</a></li>
+                <li><a href="ex/info">개인정보입력</a></li>
+                <li><a th:href="@{ex/count}">방문횟수 카운트</a></li>
+                <li><a th:href="@{ex/darkmode}">다크모드</a></li>
+                <li><a th:href="@{ex/temp}">임시저장</a></li>
 
-        </ul>
-    </li>
-</ol>
+            </ul>
+        </li>
+    </ol>
 </body>
+
 </html>

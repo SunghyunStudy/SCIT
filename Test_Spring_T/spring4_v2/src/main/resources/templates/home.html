@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>web4</title>
+    <link rel="stylesheet" th:href="@{/css/home.css}">
+</head>
+<body>
+
+    <div class="container">
+        <h2>HOME</h2>
+        <div>
+            <ul>
+                <li><a th:href="@{/list}" th:text="방명록">방명록</a></li>
+                <li><a th:href="@{/write}" th:text="글쓰기">글쓰기</a></li>
+                <!--<li><a th:href="@{/test}" th:text="저장테스트">저장 테스트</a></li>-->
+            </ul>
+        </div>
+    </div>
+</body>
+</html>

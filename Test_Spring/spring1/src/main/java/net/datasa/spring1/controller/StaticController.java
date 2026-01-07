@@ -11,7 +11,7 @@ public class StaticController {
 		System.out.println("이미지 경로 처리");
 		return "image";   // html 파일 이름
 	}
-	
+	 
 	// 애는 image.html에서 상대경로로 경로를 지정한 링크에 접속하려고하면 안됨
 	// sub라는 경로를 기준으로 바뀌었기 때문임
 	// image.html과 경로가 아예 다른거임.

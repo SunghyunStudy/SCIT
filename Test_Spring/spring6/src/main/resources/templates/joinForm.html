@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta charset="UTF-8">
+    <title>joinForm.html</title>
+    <script th:src="@{/js/jquery-3.7.1.min.js}"></script>
+    <style>
+        span {
+            color: red;
+        }
+
+        .ok {
+            color: blue;
+        }
+    </style>
+    <script>
+        $(function () {
+            let isIdChecked = false;
+            let isNameChecked = false;
+
+            function updateButtonState() {
+                if (isIdChecked && isNameChecked) {
+                    $('#btn').prop('disabled', false); // 둘 다 OK면 활성화
+                } else {
+                    $('#btn').prop('disabled', true);  // 하나라도 아니면 비활성화
+                }
+            }
+
+            $('#btn').prop('disabled', true);
+
+            $('#name').on("input", function () {
+                let name = $(this).val();
+
+                if (name.length >= 2) {
+                    isNameChecked = true;
+                } else {
+                    isNameChecked = false;
+                }
+                updateButtonState();
+            });
+
+
+            $('#id').on("input", function () {
+                isIdChecked = false;
+                updateButtonState();
+                let id = $(this).val();
+                let msgVal = idVal(id);
+
+                if (msgVal) {
+                    $('#idVal').removeClass('ok');
+                    $('#idVal').text(msgVal);
+                    return;
+                }
+                $('#idVal').text("");
+
+                console.log(id);
+                $.ajax({
+                    url: '/member/idCheck',
+                    type: 'get',
+                    data: { "id": id },
+                    dataType: 'text',
+                    success: function (msg) {
+                        if (msg) {
+                            $('#idVal').removeClass('ok');
+                            $('#idVal').text("존재하는 아이디입니다.");
+                            isIdChecked = false;
+                        } else {
+                            $('#idVal').addClass('ok');
+                            $('#idVal').text("사용가능합니다.");
+                            isIdChecked = true;
+                        }
+                        updateButtonState();
+                    }
+                });
+            });
+
+
+        });
+
+
+
+        function idVal(id) {
+            if (!id) return "아이디를 입력하시오.";
+            if (id.length < 3 || id.length > 12) {
+                return "아이디는 3~12자여야 합니다.";
+            }
+            return null;
+        }
+
+
+
+
+    </script>
+</head>
+
+<body>
+    <h1> [ ID 중복 확인 ] </h1>
+    <form th:action="login" id="joinForm">
+        ID <input type="text" id="id"><span id="idVal"></span><br><br>
+        이름 <input type="text" id="name"><br><br>
+        <input type="button" id="btn" value="가입" style="width: 100px;">
+    </form>
+
+</body>
+
+</html>

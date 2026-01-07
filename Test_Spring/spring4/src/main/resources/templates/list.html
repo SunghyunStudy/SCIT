@@ -1,13 +1,14 @@
 <!DOCTYPE html>
 <html xmlns:th="http://thymeleaf.org" lang="en">
+
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>list.html</title>
     <link rel="stylesheet" th:href="@{/css/list.css}">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
-        window.onload = function() {
-            if('[[${msg}]]'){
+        window.onload = function () {
+            if ('[[${msg}]]') {
                 Swal.fire({
                     toast: true,
                     position: 'top',
@@ -21,6 +22,7 @@
         }
     </script>
 </head>
+
 <body>
     <h1>방명록</h1>
 
@@ -52,7 +54,7 @@
         </tr>
         <tr>
             <td colspan="2">
-                <textarea rows="4" cols="30" th:text ="${gb.message}" readonly></textarea>
+                <textarea rows="4" cols="30" th:text="${gb.message}" readonly></textarea>
             </td>
         </tr>
         <tr>
@@ -69,7 +71,11 @@
         </tr>
     </table>
     <!-- 여기까지 센세 -->
-<hr><hr><hr><hr><hr>
+    <hr>
+    <hr>
+    <hr>
+    <hr>
+    <hr>
 
     <table>
         <tr>
@@ -90,4 +96,5 @@
 
     </table>
 </body>
+
 </html>
