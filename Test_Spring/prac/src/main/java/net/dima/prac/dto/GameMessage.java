@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class GameMessage {
     public enum MessageType {
-        ENTER, TALK, START, PROGRESS, FINISH, COUNTDOWN, END
+        ENTER, TALK, START, PROGRESS, FINISH, COUNTDOWN, END, ERROR
     }
 
     private MessageType type;

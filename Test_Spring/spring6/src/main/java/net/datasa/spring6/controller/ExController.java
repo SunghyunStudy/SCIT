@@ -1,5 +1,7 @@
 package net.datasa.spring6.controller;
 
+import java.util.List;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -7,6 +9,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import net.datasa.spring6.domain.dto.CommentDTO;
+import net.datasa.spring6.domain.dto.PersonDTO;
 import net.datasa.spring6.service.ExService;
 
 import org.springframework.web.bind.annotation.GetMapping;
@@ -57,20 +61,27 @@ public class ExController {
     }
 
     @GetMapping("member/join")
-    public String join() {
+    public String joinForm() {
         return "joinForm";
     }
 
+    // @ResponseBody
+    // @GetMapping("member/idCheck")
+    // public String idCheck(@RequestParam("id") String id) {
+
+    // boolean s = es.idCheck(id);
+
+    // if (!s) {
+    // return "";
+    // } else
+    // return "존재하는 아이디입니다.";
+    // }
+
     @ResponseBody
-    @GetMapping("member/idCheck")
-    public String idCheck(@RequestParam("id") String id) {
-
-        boolean s = es.idCheck(id);
-
-        if (!s) {
-            return "";
-        } else
-            return "존재하는 아이디입니다.";
+    @GetMapping("member/checkId")
+    public Boolean checkId(@RequestParam("id") String id) {
+        boolean result = es.checkId(id);
+        return result;
     }
 
 }

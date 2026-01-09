@@ -19,9 +19,7 @@
             /* 배경 회색 */
             --text-dark: #334155;
             --placeholder-bg: #cbd5e1;
-            /* 사진 자리 회색 */
             --placeholder-text: #64748b;
-            /* 사진 자리 텍스트 색 */
         }
 
         * {
@@ -55,7 +53,7 @@
             z-index: 2;
         }
 
-        /* [Typography] */
+        /* [Typography - Ultra Simple] */
         h1 {
             font-size: 4rem;
             font-weight: 800;
@@ -66,15 +64,15 @@
         }
 
         h2 {
-            font-size: 2.8rem;
-            font-weight: 700;
-            margin-bottom: 15px;
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 30px;
             color: var(--navy);
             word-break: keep-all;
         }
 
         h3 {
-            font-size: 1.2rem;
+            font-size: 1.5rem;
             font-weight: 700;
             color: var(--orange);
             margin-bottom: 20px;
@@ -82,18 +80,38 @@
             text-transform: uppercase;
         }
 
-        p {
-            font-size: 1.2rem;
-            line-height: 1.7;
+        /* [Keyword List - 더 크게, 더 심플하게] */
+        ul.keyword-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        ul.keyword-list li {
+            font-size: 2rem;
+            /* 글자 대폭 키움 */
             color: var(--text-dark);
-            word-break: keep-all;
+            margin-bottom: 20px;
+            /* 간격 넓힘 */
+            padding-left: 0;
+            font-weight: 600;
+            line-height: 1.4;
+        }
+
+        /* 체크 표시 대신 심플한 강조색 단어 사용 */
+        ul.keyword-list li strong {
+            color: var(--navy);
+            font-weight: 800;
+            display: block;
+            /* 줄바꿈 효과 */
+            font-size: 2.4rem;
+            margin-bottom: 5px;
         }
 
         .highlight {
             color: var(--orange);
         }
 
-        /* [Photo Placeholder Style] - 사진 대신 들어가는 도형 */
+        /* [Photo Placeholder] */
         .photo-box {
             background-color: var(--placeholder-bg);
             display: flex;
@@ -104,7 +122,6 @@
             font-size: 1.2rem;
             text-align: center;
             border: 2px dashed #94a3b8;
-            /* 점선 테두리 */
         }
 
         .photo-label {
@@ -113,7 +130,7 @@
             border-radius: 50px;
         }
 
-        /* [NEW] 챕터 브레이크 슬라이드 스타일 */
+        /* [Chapter Break] */
         .slide-chapter {
             text-align: center;
             flex-direction: column;
@@ -150,20 +167,16 @@
             color: var(--white);
         }
 
-        /* [레이아웃 변주 스타일] */
-
-        /* 1. Overlap Style */
+        /* [Layout Styles] */
         .layout-overlap .img-bg {
             position: absolute;
             right: 0;
             top: 0;
             bottom: 0;
-            width: 65%;
+            width: 60%;
             z-index: 1;
             border: none;
-            /* 배경용이라 테두리 제거 */
             background-color: #94a3b8;
-            /* 조금 더 진한 회색 */
         }
 
         .layout-overlap .content-box {
@@ -176,23 +189,8 @@
             border-radius: 0 20px 20px 0;
         }
 
-        /* 2. Full Background Style */
         .layout-full-bg {
-            /* 사진 대신 진한 회색 배경 */
             background-color: #475569;
-        }
-
-        /* 배경 대신 텍스트로 표시 */
-        .layout-full-bg::after {
-            content: "Background Image Area (꽉 찬 배경)";
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            color: rgba(255, 255, 255, 0.2);
-            font-size: 3rem;
-            font-weight: bold;
-            z-index: 0;
         }
 
         .layout-full-bg .container {
@@ -204,19 +202,25 @@
         }
 
         .layout-full-bg .text-card {
-            background: rgba(15, 23, 42, 0.9);
-            padding: 50px;
-            border-radius: 12px;
+            background: rgba(15, 23, 42, 0.95);
+            padding: 60px;
+            border-radius: 16px;
             width: 45%;
-            border-left: 5px solid var(--orange);
+            border-left: 10px solid var(--orange);
         }
 
-        .layout-full-bg h2,
-        .layout-full-bg p {
+        .layout-full-bg h2 {
             color: var(--white);
         }
 
-        /* 3. Cinema Style */
+        .layout-full-bg ul.keyword-list li {
+            color: #cbd5e1;
+        }
+
+        .layout-full-bg ul.keyword-list li strong {
+            color: var(--white);
+        }
+
         .layout-cinema {
             flex-direction: column;
             justify-content: flex-start;
@@ -224,22 +228,20 @@
 
         .layout-cinema .img-wide {
             width: 100%;
-            height: 55vh;
+            height: 50vh;
             margin-bottom: 40px;
-            border-left: none;
-            border-right: none;
+            border: none;
         }
 
         .layout-cinema .container {
             text-align: center;
         }
 
-        .layout-cinema p {
-            max-width: 700px;
-            margin: 0 auto;
+        .layout-cinema ul.keyword-list {
+            display: inline-block;
+            text-align: center;
         }
 
-        /* 4. Zen Style */
         .layout-zen .container {
             display: flex;
             align-items: center;
@@ -251,10 +253,9 @@
             width: 400px;
             height: 500px;
             border-radius: 200px 200px 0 0;
-            /* 아치형 */
         }
 
-        /* 기본 Intro/Outro 스타일 */
+        /* Basic Styles */
         .slide-dark {
             background-color: var(--deep-navy);
             color: var(--white);
@@ -265,12 +266,6 @@
             color: var(--white);
         }
 
-        .slide-dark .container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
         .img-profile {
             width: 450px;
             height: 450px;
@@ -279,6 +274,7 @@
 
         .slide-agenda ul {
             list-style: none;
+            padding: 0;
         }
 
         .slide-agenda li {
@@ -286,12 +282,12 @@
             margin: 30px 0;
             color: var(--navy);
             font-weight: bold;
+            text-align: left;
         }
 
         .slide-agenda span {
             color: var(--orange);
             margin-right: 20px;
-            font-size: 1.5rem;
         }
 
         .intro-tags {
@@ -301,7 +297,7 @@
         }
 
         .intro-tags span {
-            font-size: 1rem;
+            font-size: 1.1rem;
             color: var(--white);
             background: rgba(255, 255, 255, 0.15);
             padding: 8px 16px;
@@ -326,7 +322,7 @@
         .slide-outro .keywords {
             display: flex;
             gap: 40px;
-            font-size: 1.5rem;
+            font-size: 1.8rem;
             color: var(--orange);
             font-weight: bold;
             margin-top: 30px;
@@ -338,17 +334,19 @@
 <body>
 
     <section class="slide-dark">
-        <div class="container">
+        <div class="container" style="display: flex; justify-content: space-between; align-items: center;">
             <div style="width: 50%;">
                 <span class="location-tag">📍 SEOUL, KR</span>
                 <div class="intro-tags">
                     <span>#끈기</span><span>#경청</span><span>#꼼꼼함</span>
                 </div>
                 <h1>Connecting Dots:<br><span class="highlight">예비 개발자</span> OOO</h1>
-                <p>과거의 경험과 기술을 연결하여<br>신뢰받는 엔지니어로 성장하겠습니다.</p>
+                <p style="font-size: 1.5rem; font-weight: 300; margin-top: 20px;">
+                    Experience × Tech × Global
+                </p>
             </div>
             <div class="photo-box img-profile">
-                <span class="photo-label">프로필 사진 (450x450)</span>
+                <span class="photo-label">프로필 사진</span>
             </div>
         </div>
     </section>
@@ -356,10 +354,10 @@
     <section class="slide-agenda">
         <div class="container" style="text-align: center;">
             <h2 style="letter-spacing: 5px; color:var(--orange); margin-bottom: 50px;">INDEX</h2>
-            <ul style="display: inline-block; text-align: left;">
-                <li><span>01.</span> 自己PR (자기PR)</li>
-                <li><span>02.</span> なぜITなのか (지원동기)</li>
-                <li><span>03.</span> なぜ日本なのか (일본 취업 이유)</li>
+            <ul style="display: inline-block;">
+                <li><span>01.</span> 自己PR (강점 증명)</li>
+                <li><span>02.</span> なぜITなのか (지원 동기)</li>
+                <li><span>03.</span> なぜ日本なのか (일본 취업)</li>
             </ul>
         </div>
     </section>
@@ -367,47 +365,60 @@
     <section class="slide-chapter chapter-orange">
         <h3>CHAPTER 01</h3>
         <h1>自己PR</h1>
-        <p>Gakuchika & Career</p>
+        <p>Grit, Listening, Detail</p>
     </section>
 
     <section class="layout-zen">
         <div class="container">
             <div class="photo-box img-circle">
-                <span class="photo-label">파이썬/동아리 사진<br>(아치형)</span>
+                <span class="photo-label">파이썬/동아리 사진</span>
             </div>
-            <div style="width: 45%;">
+            <div style="width: 50%;">
                 <h3>01. 自己PR - 粘り強さ</h3>
-                <h2>한계에 도전한 집요함</h2>
-                <p>비전공자로서 처음 마주한 코딩은 벽의 연속이었습니다.<br>
-                    하지만 <span class="highlight">교수님을 끝까지 쫓아다니며 질문</span>하는 끈기로<br>
-                    결국 혼자 힘으로 프로젝트를 완수해냈습니다.</p>
+                <h2>한계 넘는 '집요함'</h2>
+                <ul class="keyword-list">
+                    <li><strong>비전공자의 도전</strong>
+                        한계에 부딪힌 첫 코딩</li>
+                    <li><strong>끈질긴 질문 공세</strong>
+                        교수님 연구실 매일 방문</li>
+                    <li><strong>프로젝트 독자 완수</strong>
+                        결국 해내는 '끈기' 증명</li>
+                </ul>
             </div>
         </div>
     </section>
 
     <section class="layout-overlap">
         <div class="photo-box img-bg">
-            <span class="photo-label">물류 현장 사진<br>(배경으로 깔림)</span>
+            <span class="photo-label">물류 현장 사진</span>
         </div>
         <div class="content-box">
-            <h3>01. 自己PR - 前職の経験</h3>
-            <h2>치열했던 물류 현장</h2>
-            <p>졸업 후, 가장 바쁜 항공 수출 팀에 배치되었습니다.<br>
-                화주, 관세사 등 <b>5개 주체와 동시에 소통</b>해야 했고,<br>
-                작은 실수도 용납되지 않는 <b>'위험물'</b>을 다루는<br>
-                긴장감 넘치는 현장이었습니다.</p>
+            <h3>01. 自己PR - 傾聴力</h3>
+            <h2>놓치지 않는 '경청'</h2>
+            <ul class="keyword-list">
+                <li><strong>5개 주체 동시 조율</strong>
+                    화주, 운송사, 관세사 등</li>
+                <li><strong>숨은 니즈(Needs) 캐치</strong>
+                    사소한 요청도 100% 반영</li>
+                <li><strong>정확한 업무 처리</strong>
+                    복잡한 위험물 완벽 핸들링</li>
+            </ul>
         </div>
     </section>
 
     <section class="layout-full-bg">
         <div class="container">
             <div class="text-card">
-                <h3>01. 自己PR - 前職の経験</h3>
-                <h2>증명된 꼼꼼함</h2>
-                <p>인턴 중 <b>'가장 침착하다'</b>는 평가를 받았습니다.<br>
-                    저만의 <b><span class="highlight">더블 체크 프로세스</span></b>를 만들어<br>
-                    단 한 건의 사고도 없이 물량을 처리했고,<br>
-                    거래처가 <b>"가장 먼저 찾는 담당자"</b>가 되었습니다.</p>
+                <h3>01. 自己PR - 几帳面さ</h3>
+                <h2>사고율 0% '꼼꼼함'</h2>
+                <ul class="keyword-list">
+                    <li><strong>"가장 침착한 인재"</strong>
+                        인턴 동기 중 유일한 평가</li>
+                    <li><strong>더블 체크(Double Check)</strong>
+                        나만의 철저한 검수 프로세스</li>
+                    <li><strong>거래처 지명 1순위</strong>
+                        신뢰로 증명한 업무 능력</li>
+                </ul>
             </div>
         </div>
     </section>
@@ -415,58 +426,66 @@
     <section class="slide-chapter chapter-navy">
         <h3>CHAPTER 02</h3>
         <h1>なぜITなのか</h1>
-        <p>Turning Point & Vision</p>
+        <p>Passion & Vision</p>
     </section>
 
     <section class="layout-zen">
         <div class="container" style="flex-direction: row-reverse;">
             <div class="photo-box img-circle" style="border-radius: 200px 200px 200px 200px;">
-                <span class="photo-label">서류 vs 코드<br>대비 사진</span>
+                <span class="photo-label">서류 vs 코드</span>
             </div>
-            <div style="width: 45%;">
+            <div style="width: 50%;">
                 <h3>02. なぜITなのか</h3>
-                <h2>반복이 아닌<br>창조를 원하다</h2>
-                <p>안정적인 업무였지만 마음엔 갈증이 있었습니다.<br>
-                    매뉴얼의 반복이 아닌,<br>
-                    <b>나의 논리로 무언가를 직접 만들어내는</b><br>
-                    대학 시절의 즐거움을 다시 찾고 싶었습니다.
-                </p>
+                <h2>반복에서 '창조'로</h2>
+                <ul class="keyword-list">
+                    <li><strong>매뉴얼의 반복</strong>
+                        물류 업무에서 느낀 갈증</li>
+                    <li><strong>논리적인 창조</strong>
+                        개발에서 찾은 해결책</li>
+                    <li><strong>안정 대신 도전</strong>
+                        가슴 뛰는 일을 택하다</li>
+                </ul>
             </div>
         </div>
     </section>
 
     <section class="layout-cinema">
         <div class="photo-box img-wide">
-            <span class="photo-label">코딩하는 뒷모습<br>(와이드 사진)</span>
+            <span class="photo-label">코딩하는 뒷모습</span>
         </div>
         <div class="container">
             <h3>02. なぜITなのか</h3>
-            <h2>논리로 구현하는 희열</h2>
-            <p>안정 대신 도전을 택한 현재의 모습입니다.<br>
-                내가 짠 코드가 화면에 구현될 때의 <b>시각적 쾌감</b>.<br>
-                밤을 새워 에러를 잡아도 지치지 않는<br>
-                이 <b><span class="highlight">몰입감</span></b>이 제가 개발자가 된 이유입니다.</p>
+            <h2>논리로 구현하는 '희열'</h2>
+            <ul class="keyword-list">
+                <li><strong>시각적 쾌감</strong><br>코드가 화면이 되는 순간</li>
+                <li><strong>압도적 몰입감(Flow)</strong><br>밤샘도 잊게 하는 열정</li>
+                <li><strong>문제 해결의 희열</strong><br>"이것이 내 길이다"</li>
+            </ul>
         </div>
     </section>
 
     <section class="slide-chapter" style="background-color: #e2e8f0;">
         <h3>CHAPTER 03</h3>
         <h1 style="color: var(--navy);">なぜ日本なのか</h1>
-        <p style="color: var(--text-dark);">Why Japan?</p>
+        <p style="color: var(--text-dark);">Accuracy & Basics</p>
     </section>
 
     <section>
-        <div class="container">
-            <div class="photo-box" style="width: 50%; height: 500px; border-radius: 12px;">
+        <div class="container" style="display:flex; justify-content:center; gap:60px;">
+            <div class="photo-box" style="width: 45%; height: 500px; border-radius: 12px;">
                 <span class="photo-label">일본 풍경 사진</span>
             </div>
             <div style="width: 45%;">
                 <h3>03. なぜ日本なのか</h3>
-                <h2>기본과 정확함의 가치</h2>
-                <p>제가 일본을 선택한 이유는 명확합니다.<br>
-                    물류 현장에서 몸에 밴 <b>철저함과 꼼꼼함</b>.<br>
-                    속도보다 <b><span class="highlight">정확함</span></b>을 인정해주는 일본이라면<br>
-                    저의 장점이 가장 큰 무기가 될 것이라 확신합니다.</p>
+                <h2>기본과 정확함의 '가치'</h2>
+                <ul class="keyword-list">
+                    <li><strong>속도보다는 '정확함'</strong>
+                        실수를 용납하지 않는 문화</li>
+                    <li><strong>기본기(Basics) 중시</strong>
+                        장인 정신과의 Cultural Fit</li>
+                    <li><strong>최적의 무대</strong>
+                        나의 꼼꼼함이 인정받는 곳</li>
+                </ul>
             </div>
         </div>
     </section>

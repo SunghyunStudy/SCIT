@@ -1,13 +1,19 @@
 package net.datasa.spring6.service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import net.datasa.spring6.domain.dto.CommentDTO;
 import net.datasa.spring6.domain.entity.BoardEntity;
+import net.datasa.spring6.domain.entity.CommentEntity;
 import net.datasa.spring6.repository.BoardRepository;
+import net.datasa.spring6.repository.CommentRepository;
 import net.datasa.spring6.repository.MemberRepository;
 
 @Service
@@ -18,6 +24,7 @@ public class ExService {
 
     private final BoardRepository br;
     private final MemberRepository mr;
+    private final CommentRepository cr;
 
     // public int getCount(int i) {
     // BoardEntity entity = br.findById(i)
@@ -49,9 +56,13 @@ public class ExService {
         return n;
     }
 
-    public boolean idCheck(String id) {
-        boolean result = mr.existsById(id);
-        return result;
+    // public boolean idCheck(String id) {
+    // boolean result = mr.existsById(id);
+    // return result;
+    // }
+
+    public boolean checkId(String id) {
+        return mr.existsById(id);
     }
 
 }

@@ -76,11 +76,22 @@ public class GameService {
 
     public void startGame(String roomId) {
         GameRoom room = gameRooms.get(roomId);
-        if (room != null && room.getPlayers().size() == 2) {
-            room.setStatus("PLAYING");
+        if (room == null) {
+            // Room might have been deleted or server restarted
             messagingTemplate.convertAndSend("/topic/game/room/" + roomId, 
-                GameMessage.builder().type(GameMessage.MessageType.START).roomId(roomId).content("START").build());
+                GameMessage.builder().type(GameMessage.MessageType.ERROR).roomId(roomId).content("Room not found. Please create a new room.").build());
+            return;
         }
+        
+        if (room.getPlayers().size() < 1) {
+             messagingTemplate.convertAndSend("/topic/game/room/" + roomId, 
+                GameMessage.builder().type(GameMessage.MessageType.ERROR).roomId(roomId).content("Not enough players to start.").build());
+             return;
+        }
+
+        room.setStatus("PLAYING");
+        messagingTemplate.convertAndSend("/topic/game/room/" + roomId, 
+            GameMessage.builder().type(GameMessage.MessageType.START).roomId(roomId).content("START").build());
     }
 
     public void updateProgress(String roomId, String username, int progress) {

@@ -1,94 +1,126 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.w3.org/1999/xhtml">
+<html xmlns:th="http://www.w3.org/1999/xhtml, thymeleaf.org">
 
 <head>
     <meta charset="UTF-8">
     <title>joinForm.html</title>
     <script th:src="@{/js/jquery-3.7.1.min.js}"></script>
     <style>
-        span {
-            color: red;
+        #msg {
+            width: 20px;
+            display: inline;
         }
 
-        .ok {
-            color: blue;
+        label {
+            width: 50px;
+            display: inline-block;
+        }
+
+        button {
+            width: 100px;
         }
     </style>
     <script>
-        $(function () {
-            let isIdChecked = false;
-            let isNameChecked = false;
+        // $(function () {
+        //     let isIdChecked = false;
+        //     let isNameChecked = false;
 
-            function updateButtonState() {
-                if (isIdChecked && isNameChecked) {
-                    $('#btn').prop('disabled', false); // 둘 다 OK면 활성화
-                } else {
-                    $('#btn').prop('disabled', true);  // 하나라도 아니면 비활성화
-                }
+        //     function updateButtonState() {
+        //         if (isIdChecked && isNameChecked) {
+        //             $('#btn').prop('disabled', false); // 둘 다 OK면 활성화
+        //         } else {
+        //             $('#btn').prop('disabled', true);  // 하나라도 아니면 비활성화
+        //         }
+        //     }
+
+        //     $('#btn').prop('disabled', true);
+
+        //     $('#name').on("input", function () {
+        //         let name = $(this).val();
+
+        //         if (name.length >= 2) {
+        //             isNameChecked = true;
+        //         } else {
+        //             isNameChecked = false;
+        //         }
+        //         updateButtonState();
+        //     });
+
+
+        //     $('#id').on("input", function () {
+        //         isIdChecked = false;
+        //         updateButtonState();
+        //         let id = $(this).val();
+        //         let msgVal = idVal(id);
+
+        //         if (msgVal) {
+        //             $('#idVal').removeClass('ok');
+        //             $('#idVal').text(msgVal);
+        //             return;
+        //         }
+        //         $('#idVal').text("");
+
+        //         console.log(id);
+        //         $.ajax({
+        //             url: '/member/idCheck',
+        //             type: 'get',
+        //             data: { "id": id },
+        //             dataType: 'text',
+        //             success: function (msg) {
+        //                 if (msg) {
+        //                     $('#idVal').removeClass('ok');
+        //                     $('#idVal').text("존재하는 아이디입니다.");
+        //                     isIdChecked = false;
+        //                 } else {
+        //                     $('#idVal').addClass('ok');
+        //                     $('#idVal').text("사용가능합니다.");
+        //                     isIdChecked = true;
+        //                 }
+        //                 updateButtonState();
+        //             }
+        //         });
+        //     });
+        // });
+        // function idVal(id) {
+        //     if (!id) return "아이디를 입력하시오.";
+        //     if (id.length < 3 || id.length > 12) {
+        //         return "아이디는 3~12자여야 합니다.";
+        //     }
+        //     return null;
+        // }
+
+        $(function () {
+            function showMsg(text, color, disabled) {
+                $('#msg').text(text).css('color', color);
+                $('#submitButton').prop('disabled', disabled);
             }
 
-            $('#btn').prop('disabled', true);
-
-            $('#name').on("input", function () {
-                let name = $(this).val();
-
-                if (name.length >= 2) {
-                    isNameChecked = true;
-                } else {
-                    isNameChecked = false;
-                }
-                updateButtonState();
-            });
-
-
-            $('#id').on("input", function () {
-                isIdChecked = false;
-                updateButtonState();
+            $('#memberId').on('input', function () {
                 let id = $(this).val();
-                let msgVal = idVal(id);
-
-                if (msgVal) {
-                    $('#idVal').removeClass('ok');
-                    $('#idVal').text(msgVal);
+                if (id.length < 3 || id.length > 10) {
+                    showMsg('ID는 3~10자로 입력하세요.', 'red', true);
                     return;
                 }
-                $('#idVal').text("");
-
-                console.log(id);
                 $.ajax({
-                    url: '/member/idCheck',
-                    type: 'get',
-                    data: { "id": id },
-                    dataType: 'text',
-                    success: function (msg) {
-                        if (msg) {
-                            $('#idVal').removeClass('ok');
-                            $('#idVal').text("존재하는 아이디입니다.");
-                            isIdChecked = false;
+                    /*
+                        Query String - 조회 조건, 필터, 검색
+                        Path         - 자원 식별
+                    */
+                    url: `/member/checkId?id=${id}`,
+                    method: 'get',
+                    success: function (res) {
+                        if (res) {
+                            showMsg('이미 사용중인 ID입니다.', 'red', true);
                         } else {
-                            $('#idVal').addClass('ok');
-                            $('#idVal').text("사용가능합니다.");
-                            isIdChecked = true;
+                            showMsg('사용가능한 아이디입니다.', 'blue', false);
                         }
-                        updateButtonState();
+                    },
+                    error: function () {
+                        alert('조회 실패');
                     }
                 });
             });
-
-
         });
-
-
-
-        function idVal(id) {
-            if (!id) return "아이디를 입력하시오.";
-            if (id.length < 3 || id.length > 12) {
-                return "아이디는 3~12자여야 합니다.";
-            }
-            return null;
-        }
-
-
 
 
     </script>
@@ -96,12 +128,31 @@
 
 <body>
     <h1> [ ID 중복 확인 ] </h1>
-    <form th:action="login" id="joinForm">
+    <!-- 내가한거 -->
+    <!-- <form th:action="login" id="joinForm">
         ID <input type="text" id="id"><span id="idVal"></span><br><br>
         이름 <input type="text" id="name"><br><br>
         <input type="button" id="btn" value="가입" style="width: 100px;">
-    </form>
+    </form> -->
 
+
+
+    <div>
+        <form action="">
+            <p>
+                <label for="memberId">ID</label>
+                <input type="text" id="memberId">
+                <span id="msg"></span>
+            </p>
+            <p>
+                <label for="name">이름</label>
+                <input type="text" id="name">
+            </p>
+            <p>
+                <button type="button" id="submitButton" disabled="disabled">가입</button>
+            </p>
+        </form>
+    </div>
 </body>
 
 </html>
