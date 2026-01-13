@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Game Room</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/sockjs-client@1/dist/sockjs.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
+    <script src="/js/game.js"></script>
+</head>
+<body>
+    <h1 th:text="'Room: ' + ${roomId}">Room</h1>
+    <input type="hidden" id="roomId" th:value="${roomId}">
+    <input type="hidden" id="username" th:value="${username}">
+
+    <div id="statusArea">Status: WAITING</div>
+    
+    <div id="gameArea" style="display:none;">
+        <h3>Type this code:</h3>
+        <pre id="codeTarget">public class HelloWorld { public static void main(String[] args) { System.out.println("Hello"); } }</pre>
+        
+        <textarea id="codeInput" rows="5" cols="50" disabled></textarea>
+        
+        <div style="margin-top:20px;">
+            <p>My Progress: <span id="myProgress">0</span>%</p>
+            <progress id="myProgressBar" value="0" max="100"></progress>
+        </div>
+        <div>
+            <p>Opponent Progress: <span id="oppProgress">0</span>%</p>
+            <progress id="oppProgressBar" value="0" max="100"></progress>
+        </div>
+    </div>
+
+    <div id="controls">
+        <button id="btnStart" onclick="startGameRequest()">Start Game</button>
+    </div>
+    
+    <div id="messages"></div>
+</body>
+</html>

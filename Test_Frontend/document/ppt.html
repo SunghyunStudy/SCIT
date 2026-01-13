@@ -5,7 +5,35 @@
     <meta charset="UTF-8">
     <title>발표 자료 레이아웃 최종 (Timeline 추가)</title>
     <style>
+<<<<<<< HEAD
         /* 폰트 및 기본 설정 */
+=======
+        /* [Design System] */
+        :root {
+            --navy: #0f172a;
+            /* 기본 네이비 */
+            --deep-navy: #020617;
+            /* 딥 네이비 */
+            --orange: #f97316;
+            /* 포인트 오렌지 */
+            --white: #ffffff;
+            --gray: #f8fafc;
+            /* 배경 회색 */
+            --text-dark: #334155;
+            --placeholder-bg: #cbd5e1;
+            /* 사진 자리 회색 */
+            --placeholder-text: #64748b;
+            /* 사진 자리 텍스트 색 */
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Pretendard', 'Malgun Gothic', 'Meiryo', sans-serif;
+        }
+
+>>>>>>> parent of f417b7e (0109)
         body {
             font-family: 'Noto Sans JP', 'Malgun Gothic', sans-serif;
             background-color: #e9ecef;
@@ -28,6 +56,7 @@
             display: flex;
         }
 
+<<<<<<< HEAD
         .slide-number {
             position: absolute;
             bottom: 15px;
@@ -43,6 +72,252 @@
             --text-navy: #2C3E50;
             --text-gray: #666666;
             --bg-light: #F8F9FA;
+=======
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* [Typography] */
+        h1 {
+            font-size: 4rem;
+            font-weight: 800;
+            line-height: 1.2;
+            margin-bottom: 20px;
+            color: var(--navy);
+            word-break: keep-all;
+        }
+
+        h2 {
+            font-size: 2.8rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+            color: var(--navy);
+            word-break: keep-all;
+        }
+
+        h3 {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--orange);
+            margin-bottom: 20px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        p {
+            font-size: 1.2rem;
+            line-height: 1.7;
+            color: var(--text-dark);
+            word-break: keep-all;
+        }
+
+        .highlight {
+            color: var(--orange);
+        }
+
+        /* [Photo Placeholder Style] - 사진 대신 들어가는 도형 */
+        .photo-box {
+            background-color: var(--placeholder-bg);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: var(--placeholder-text);
+            font-weight: bold;
+            font-size: 1.2rem;
+            text-align: center;
+            border: 2px dashed #94a3b8;
+            /* 점선 테두리 */
+        }
+
+        .photo-label {
+            background: rgba(255, 255, 255, 0.8);
+            padding: 10px 20px;
+            border-radius: 50px;
+        }
+
+        /* [NEW] 챕터 브레이크 슬라이드 스타일 */
+        .slide-chapter {
+            text-align: center;
+            flex-direction: column;
+        }
+
+        .slide-chapter h1 {
+            font-size: 6rem;
+            margin: 0;
+            opacity: 0.9;
+        }
+
+        .slide-chapter p {
+            font-size: 1.5rem;
+            opacity: 0.7;
+            margin-top: 20px;
+            font-weight: 300;
+        }
+
+        .chapter-orange {
+            background-color: var(--orange);
+        }
+
+        .chapter-orange h1,
+        .chapter-orange p {
+            color: var(--white);
+        }
+
+        .chapter-navy {
+            background-color: var(--navy);
+        }
+
+        .chapter-navy h1,
+        .chapter-navy p {
+            color: var(--white);
+        }
+
+        /* [레이아웃 변주 스타일] */
+
+        /* 1. Overlap Style */
+        .layout-overlap .img-bg {
+            position: absolute;
+            right: 0;
+            top: 0;
+            bottom: 0;
+            width: 65%;
+            z-index: 1;
+            border: none;
+            /* 배경용이라 테두리 제거 */
+            background-color: #94a3b8;
+            /* 조금 더 진한 회색 */
+        }
+
+        .layout-overlap .content-box {
+            position: relative;
+            z-index: 2;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 60px;
+            width: 50%;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.1);
+            border-radius: 0 20px 20px 0;
+        }
+
+        /* 2. Full Background Style */
+        .layout-full-bg {
+            /* 사진 대신 진한 회색 배경 */
+            background-color: #475569;
+        }
+
+        /* 배경 대신 텍스트로 표시 */
+        .layout-full-bg::after {
+            content: "Background Image Area (꽉 찬 배경)";
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: rgba(255, 255, 255, 0.2);
+            font-size: 3rem;
+            font-weight: bold;
+            z-index: 0;
+        }
+
+        .layout-full-bg .container {
+            z-index: 2;
+            color: var(--white);
+            text-align: left;
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        .layout-full-bg .text-card {
+            background: rgba(15, 23, 42, 0.9);
+            padding: 50px;
+            border-radius: 12px;
+            width: 45%;
+            border-left: 5px solid var(--orange);
+        }
+
+        .layout-full-bg h2,
+        .layout-full-bg p {
+            color: var(--white);
+        }
+
+        /* 3. Cinema Style */
+        .layout-cinema {
+            flex-direction: column;
+            justify-content: flex-start;
+        }
+
+        .layout-cinema .img-wide {
+            width: 100%;
+            height: 55vh;
+            margin-bottom: 40px;
+            border-left: none;
+            border-right: none;
+        }
+
+        .layout-cinema .container {
+            text-align: center;
+        }
+
+        .layout-cinema p {
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        /* 4. Zen Style */
+        .layout-zen .container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 80px;
+        }
+
+        .layout-zen .img-circle {
+            width: 400px;
+            height: 500px;
+            border-radius: 200px 200px 0 0;
+            /* 아치형 */
+        }
+
+        /* 기본 Intro/Outro 스타일 */
+        .slide-dark {
+            background-color: var(--deep-navy);
+            color: var(--white);
+        }
+
+        .slide-dark h1,
+        .slide-dark p {
+            color: var(--white);
+        }
+
+        .slide-dark .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .img-profile {
+            width: 450px;
+            height: 450px;
+            border-radius: 20px;
+        }
+
+        .slide-agenda ul {
+            list-style: none;
+        }
+
+        .slide-agenda li {
+            font-size: 2rem;
+            margin: 30px 0;
+            color: var(--navy);
+            font-weight: bold;
+        }
+
+        .slide-agenda span {
+            color: var(--orange);
+            margin-right: 20px;
+            font-size: 1.5rem;
+>>>>>>> parent of f417b7e (0109)
         }
 
         /* 공통 텍스트 스타일 */
@@ -158,12 +433,22 @@
             margin-bottom: 30px;
         }
 
+<<<<<<< HEAD
         .agenda-box {
             border-top: 2px solid var(--point-orange);
             padding-top: 20px;
             margin-top: 20px;
             color: var(--text-navy);
             font-size: 15px;
+=======
+        .intro-tags span {
+            font-size: 1rem;
+            color: var(--white);
+            background: rgba(255, 255, 255, 0.15);
+            padding: 8px 16px;
+            border-radius: 4px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+>>>>>>> parent of f417b7e (0109)
         }
 
         /* Slide 2: 대학 */
@@ -276,6 +561,14 @@
             color: white;
             border-radius: 50%;
             display: flex;
+<<<<<<< HEAD
+=======
+            gap: 40px;
+            font-size: 1.5rem;
+            color: var(--orange);
+            font-weight: bold;
+            margin-top: 30px;
+>>>>>>> parent of f417b7e (0109)
             justify-content: center;
             align-items: center;
             font-size: 24px;
@@ -384,6 +677,7 @@
 
 <body>
 
+<<<<<<< HEAD
     <div class="guide-text">※ 왼쪽 상단에 시기를 구분하는 라벨이 추가되었습니다.</div>
 
     <div class="slide-container slide-1">
@@ -453,11 +747,26 @@
             <div class="step">
                 <p style="font-size: 14px; color: var(--point-orange);">評価・信頼</p>
                 <strong class="text-orange" style="font-size: 22px;">正社員 登用</strong>
+=======
+    <section class="slide-dark">
+        <div class="container">
+            <div style="width: 50%;">
+                <span class="location-tag">📍 SEOUL, KR</span>
+                <div class="intro-tags">
+                    <span>#끈기</span><span>#경청</span><span>#꼼꼼함</span>
+                </div>
+                <h1>Connecting Dots:<br><span class="highlight">예비 개발자</span> OOO</h1>
+                <p>과거의 경험과 기술을 연결하여<br>신뢰받는 엔지니어로 성장하겠습니다.</p>
+            </div>
+            <div class="photo-box img-profile">
+                <span class="photo-label">프로필 사진 (450x450)</span>
+>>>>>>> parent of f417b7e (0109)
             </div>
         </div>
         <span class="slide-number">3 / 9</span>
     </div>
 
+<<<<<<< HEAD
     <div class="slide-container slide-4">
         <div class="timeline-label"><span>STEP 3</span> 正社員時代 (前職)</div>
 
@@ -475,11 +784,42 @@
             <div class="overlay-card">
                 <h3 class="text-orange">ダブルチェックの徹底</h3>
                 <p style="margin-top: 10px;">꼼꼼함(几帳面)으로<br>거래처 신뢰 유지</p>
+=======
+    <section class="slide-agenda">
+        <div class="container" style="text-align: center;">
+            <h2 style="letter-spacing: 5px; color:var(--orange); margin-bottom: 50px;">INDEX</h2>
+            <ul style="display: inline-block; text-align: left;">
+                <li><span>01.</span> 自己PR (자기PR)</li>
+                <li><span>02.</span> なぜITなのか (지원동기)</li>
+                <li><span>03.</span> なぜ日本なのか (일본 취업 이유)</li>
+            </ul>
+        </div>
+    </section>
+
+    <section class="slide-chapter chapter-orange">
+        <h3>CHAPTER 01</h3>
+        <h1>自己PR</h1>
+        <p>Gakuchika & Career</p>
+    </section>
+
+    <section class="layout-zen">
+        <div class="container">
+            <div class="photo-box img-circle">
+                <span class="photo-label">파이썬/동아리 사진<br>(아치형)</span>
+            </div>
+            <div style="width: 45%;">
+                <h3>01. 自己PR - 粘り強さ</h3>
+                <h2>한계에 도전한 집요함</h2>
+                <p>비전공자로서 처음 마주한 코딩은 벽의 연속이었습니다.<br>
+                    하지만 <span class="highlight">교수님을 끝까지 쫓아다니며 질문</span>하는 끈기로<br>
+                    결국 혼자 힘으로 프로젝트를 완수해냈습니다.</p>
+>>>>>>> parent of f417b7e (0109)
             </div>
         </div>
         <span class="slide-number">4 / 9</span>
     </div>
 
+<<<<<<< HEAD
     <div class="slide-container slide-5">
         <div class="split left">
             <div class="img-box" style="width: 80%; height: 60%;">[PDF 16p]<br>무역 사무실 (흑백)</div>
@@ -490,10 +830,24 @@
             <div class="img-box" style="width: 80%; height: 60%; border-color: var(--point-orange);">[PDF 17p]<br>코딩/학습
                 (컬러)</div>
             <h3 class="text-orange" style="margin-top: 20px;">創造 (창조)</h3>
+=======
+    <section class="layout-overlap">
+        <div class="photo-box img-bg">
+            <span class="photo-label">물류 현장 사진<br>(배경으로 깔림)</span>
+        </div>
+        <div class="content-box">
+            <h3>01. 自己PR - 前職の経験</h3>
+            <h2>치열했던 물류 현장</h2>
+            <p>졸업 후, 가장 바쁜 항공 수출 팀에 배치되었습니다.<br>
+                화주, 관세사 등 <b>5개 주체와 동시에 소통</b>해야 했고,<br>
+                작은 실수도 용납되지 않는 <b>'위험물'</b>을 다루는<br>
+                긴장감 넘치는 현장이었습니다.</p>
+>>>>>>> parent of f417b7e (0109)
         </div>
         <span class="slide-number">5 / 9</span>
     </div>
 
+<<<<<<< HEAD
     <div class="slide-container slide-6">
         <div class="title">エンジニアになる準備</div>
         <div class="cert-box">
@@ -515,16 +869,49 @@
             <div style="margin-top: 40px; border-left: 4px solid var(--point-orange); padding-left: 20px;">
                 <p>동기의 취업 ➡ 관심</p>
                 <p>일본 여행 ➡ 매료됨</p>
+=======
+    <section class="layout-full-bg">
+        <div class="container">
+            <div class="text-card">
+                <h3>01. 自己PR - 前職の経験</h3>
+                <h2>증명된 꼼꼼함</h2>
+                <p>인턴 중 <b>'가장 침착하다'</b>는 평가를 받았습니다.<br>
+                    저만의 <b><span class="highlight">더블 체크 프로세스</span></b>를 만들어<br>
+                    단 한 건의 사고도 없이 물량을 처리했고,<br>
+                    거래처가 <b>"가장 먼저 찾는 담당자"</b>가 되었습니다.</p>
+>>>>>>> parent of f417b7e (0109)
             </div>
         </div>
         <span class="slide-number">7 / 9</span>
     </div>
 
+<<<<<<< HEAD
     <div class="slide-container slide-8">
         <div class="text-side">
             <h2 style="font-size: 40px; margin-bottom: 20px;">職人精神</h2>
             <div class="value-box">
                 スピード <span style="color: #ccc; font-size: 20px;">&lt;</span> <span class="text-orange">正確さ</span>
+=======
+    <section class="slide-chapter chapter-navy">
+        <h3>CHAPTER 02</h3>
+        <h1>なぜITなのか</h1>
+        <p>Turning Point & Vision</p>
+    </section>
+
+    <section class="layout-zen">
+        <div class="container" style="flex-direction: row-reverse;">
+            <div class="photo-box img-circle" style="border-radius: 200px 200px 200px 200px;">
+                <span class="photo-label">서류 vs 코드<br>대비 사진</span>
+            </div>
+            <div style="width: 45%;">
+                <h3>02. なぜITなのか</h3>
+                <h2>반복이 아닌<br>창조를 원하다</h2>
+                <p>안정적인 업무였지만 마음엔 갈증이 있었습니다.<br>
+                    매뉴얼의 반복이 아닌,<br>
+                    <b>나의 논리로 무언가를 직접 만들어내는</b><br>
+                    대학 시절의 즐거움을 다시 찾고 싶었습니다.
+                </p>
+>>>>>>> parent of f417b7e (0109)
             </div>
             <p style="margin-top: 20px; line-height: 1.6;">물류 경험에서 배운 '정확성'이<br>일본의 문화와 일치합니다.</p>
         </div>
@@ -532,6 +919,7 @@
         <span class="slide-number">8 / 9</span>
     </div>
 
+<<<<<<< HEAD
     <div class="slide-container slide-9">
         <div class="final-msg">ご清聴ありがとうございました。</div>
         <div style="display: flex; gap: 15px;">
@@ -545,6 +933,53 @@
         <div class="contact-info">Email: [이메일 주소] &nbsp;|&nbsp; GitHub: [깃허브 주소]</div>
         <span class="slide-number">9 / 9</span>
     </div>
+=======
+    <section class="layout-cinema">
+        <div class="photo-box img-wide">
+            <span class="photo-label">코딩하는 뒷모습<br>(와이드 사진)</span>
+        </div>
+        <div class="container">
+            <h3>02. なぜITなのか</h3>
+            <h2>논리로 구현하는 희열</h2>
+            <p>안정 대신 도전을 택한 현재의 모습입니다.<br>
+                내가 짠 코드가 화면에 구현될 때의 <b>시각적 쾌감</b>.<br>
+                밤을 새워 에러를 잡아도 지치지 않는<br>
+                이 <b><span class="highlight">몰입감</span></b>이 제가 개발자가 된 이유입니다.</p>
+        </div>
+    </section>
+
+    <section class="slide-chapter" style="background-color: #e2e8f0;">
+        <h3>CHAPTER 03</h3>
+        <h1 style="color: var(--navy);">なぜ日本なのか</h1>
+        <p style="color: var(--text-dark);">Why Japan?</p>
+    </section>
+
+    <section>
+        <div class="container">
+            <div class="photo-box" style="width: 50%; height: 500px; border-radius: 12px;">
+                <span class="photo-label">일본 풍경 사진</span>
+            </div>
+            <div style="width: 45%;">
+                <h3>03. なぜ日本なのか</h3>
+                <h2>기본과 정확함의 가치</h2>
+                <p>제가 일본을 선택한 이유는 명확합니다.<br>
+                    물류 현장에서 몸에 밴 <b>철저함과 꼼꼼함</b>.<br>
+                    속도보다 <b><span class="highlight">정확함</span></b>을 인정해주는 일본이라면<br>
+                    저의 장점이 가장 큰 무기가 될 것이라 확신합니다.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="slide-dark slide-outro">
+        <div class="container" style="flex-direction: column; text-align: center;">
+            <span class="location-tag">📍 TOKYO, JP</span>
+            <h1>믿음직한 동료가 되겠습니다</h1>
+            <div class="keywords">
+                <span># 끈기</span><span># 경청</span><span># 꼼꼼함</span>
+            </div>
+        </div>
+    </section>
+>>>>>>> parent of f417b7e (0109)
 
 </body>
 

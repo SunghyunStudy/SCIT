@@ -1,0 +1,221 @@
+/* Retro Game Theme - Type Battle */
+
+:root {
+    --bg-color: #0d0e15;
+    --text-color: #e0e0e0;
+    --primary-color: #ff0055; /* Neon Red/Pink */
+    --secondary-color: #00e5ff; /* Cyan */
+    --accent-color: #ffee00; /* Yellow */
+    --success-color: #00ff00; /* Green */
+    --border-color: #ffffff;
+    --pixel-font: 'Courier New', Courier, monospace;
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    font-family: var(--pixel-font);
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    background-image: 
+        linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%),
+        linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+    background-size: 100% 2px, 3px 100%;
+}
+
+/* Container for centering content */
+body > div, body > form {
+    max-width: 800px;
+    margin: 40px auto;
+    padding: 20px;
+    border: 4px solid var(--border-color);
+    box-shadow: 10px 10px 0px 0px rgba(0,0,0,0.5);
+    background-color: #1a1b26;
+    position: relative;
+}
+
+h1, h2, h3 {
+    text-transform: uppercase;
+    text-shadow: 2px 2px 0px var(--primary-color);
+    color: var(--secondary-color);
+    margin-bottom: 20px;
+    letter-spacing: 2px;
+}
+
+a {
+    color: var(--accent-color);
+    text-decoration: none;
+    border-bottom: 2px dashed var(--accent-color);
+}
+
+a:hover {
+    color: var(--primary-color);
+    border-color: var(--primary-color);
+}
+
+/* Forms and Inputs */
+input[type="text"], 
+input[type="password"],
+textarea {
+    background-color: #000;
+    border: 2px solid var(--secondary-color);
+    color: var(--success-color);
+    padding: 10px;
+    font-family: var(--pixel-font);
+    font-size: 1.1em;
+    margin: 5px 0;
+    outline: none;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+input:focus, textarea:focus {
+    box-shadow: 0 0 10px var(--secondary-color);
+}
+
+button {
+    background-color: var(--primary-color);
+    color: #fff;
+    border: 4px solid #fff;
+    padding: 10px 20px;
+    font-family: var(--pixel-font);
+    font-size: 1.2em;
+    text-transform: uppercase;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: transform 0.1s;
+    box-shadow: 4px 4px 0px 0px #000;
+}
+
+button:hover {
+    transform: translate(-2px, -2px);
+    box-shadow: 6px 6px 0px 0px #000;
+}
+
+button:active {
+    transform: translate(2px, 2px);
+    box-shadow: 2px 2px 0px 0px #000;
+}
+
+/* Room List & Cards */
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+li, .room-card {
+    border: 2px solid var(--secondary-color);
+    padding: 15px;
+    margin-bottom: 10px;
+    background-color: #2a2b36;
+    transition: background-color 0.2s;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+li:hover, .room-card:hover {
+    background-color: #3a3b46;
+    border-color: var(--accent-color);
+}
+
+/* Game Area */
+#gameArea {
+    border: 2px dashed var(--success-color);
+    padding: 20px;
+    margin-top: 20px;
+    background-color: #001100;
+}
+
+#codeTarget {
+    background-color: #000;
+    color: #ccc;
+    padding: 15px;
+    border: 1px solid #555;
+    font-family: 'Consolas', 'Courier New', monospace;
+    white-space: pre-wrap;
+    line-height: 1.5;
+}
+
+progress {
+    width: 100%;
+    height: 25px;
+    border: 2px solid #fff;
+    background: #000;
+}
+
+progress::-webkit-progress-bar {
+    background-color: #000;
+}
+
+progress::-webkit-progress-value {
+    background-color: var(--success-color);
+    background-image: linear-gradient(
+        45deg, 
+        rgba(255, 255, 255, .15) 25%, 
+        transparent 25%, 
+        transparent 50%, 
+        rgba(255, 255, 255, .15) 50%, 
+        rgba(255, 255, 255, .15) 75%, 
+        transparent 75%, 
+        transparent
+    );
+    background-size: 1rem 1rem;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+    width: 12px;
+}
+
+::-webkit-scrollbar-track {
+    background: #000; 
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--secondary-color); 
+    border: 2px solid #000;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--primary-color); 
+}
+
+/* Utility */
+.error {
+    color: var(--primary-color);
+    font-weight: bold;
+    animation: blink 1s infinite;
+}
+
+@keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+}
+
+/* Specific Adjustments */
+#roomList {
+    margin-top: 20px;
+}
+
+#userInfo {
+    margin-bottom: 20px;
+    border-bottom: 1px dashed var(--text-color);
+    padding-bottom: 10px;
+}
+
+#createRoomArea {
+    border: 2px solid var(--primary-color);
+    padding: 15px;
+    background-color: rgba(255, 0, 85, 0.05); /* Very slight red tint */
+    margin-bottom: 20px;
+}
+
+hr {
+    border: 0;
+    border-top: 2px dashed var(--text-color);
+    margin: 30px 0;
+}

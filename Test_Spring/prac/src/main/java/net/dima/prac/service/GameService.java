@@ -17,6 +17,7 @@ public class GameService {
 
     private final GameSessionRepository gameSessionRepository;
 
+<<<<<<< HEAD
     public GameSession getOrCreateSession(String userId) {
         return gameSessionRepository.findById(userId)
                 .orElseGet(() -> gameSessionRepository.save(GameSession.builder()
@@ -24,6 +25,97 @@ public class GameService {
                         .stage(1)
                         .mental(100)
                         .build()));
+=======
+    // In-Memory Storage
+    private final Map<String, GameRoom> gameRooms = new ConcurrentHashMap<>();
+    private final ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
+
+    public List<RoomDto> findAllRooms() {
+        return gameRooms.values().stream()
+                .map(room -> RoomDto.builder()
+                        .roomId(room.getRoomId())
+                        .title(room.getTitle())
+                        .hasPassword(room.getPassword() != null && !room.getPassword().isEmpty())
+                        .userCount(room.getPlayers().size())
+                        .status(room.getStatus())
+                        .build())
+                .collect(Collectors.toList());
+    }
+
+    public GameRoom createRoom(String title, String password) {
+        GameRoom room = GameRoom.create(title, password);
+        gameRooms.put(room.getRoomId(), room);
+        return room;
+    }
+
+    public GameRoom findRoomById(String roomId) {
+        return gameRooms.get(roomId);
+    }
+
+    public boolean joinRoom(String roomId, String username, String password) {
+        GameRoom room = gameRooms.get(roomId);
+        if (room == null) return false;
+        
+        // If already joined, just return true
+        if (room.getPlayers().containsKey(username)) {
+            return true;
+        }
+
+        if (room.getPlayers().size() >= 2) return false;
+        if (room.getPassword() != null && !room.getPassword().isEmpty() && !room.getPassword().equals(password)) {
+            return false;
+        }
+
+        room.getPlayers().put(username, username);
+        room.getProgress().put(username, 0);
+        return true;
+    }
+
+    public void startGame(String roomId) {
+        GameRoom room = gameRooms.get(roomId);
+        if (room != null && room.getPlayers().size() == 2) {
+            room.setStatus("PLAYING");
+            messagingTemplate.convertAndSend("/topic/game/room/" + roomId, 
+                GameMessage.builder().type(GameMessage.MessageType.START).roomId(roomId).content("START").build());
+        }
+    }
+
+    public void updateProgress(String roomId, String username, int progress) {
+        GameRoom room = gameRooms.get(roomId);
+        if (room == null || !"PLAYING".equals(room.getStatus())) return;
+
+        room.getProgress().put(username, progress);
+
+        // Broadcast progress
+        messagingTemplate.convertAndSend("/topic/game/room/" + roomId, 
+            GameMessage.builder()
+                .type(GameMessage.MessageType.PROGRESS)
+                .roomId(roomId)
+                .sender(username)
+                .content(progress)
+                .build());
+
+        if (progress >= 100) {
+            triggerFinish(room, username);
+        }
+    }
+
+    private synchronized void triggerFinish(GameRoom room, String winnerName) {
+        if ("FINISHED".equals(room.getStatus())) return;
+        
+        room.setStatus("FINISHED");
+        // Broadcast Countdown
+        messagingTemplate.convertAndSend("/topic/game/room/" + room.getRoomId(), 
+            GameMessage.builder()
+                .type(GameMessage.MessageType.COUNTDOWN)
+                .roomId(room.getRoomId())
+                .sender(winnerName) // This user finished first
+                .content(10) // 10 seconds
+                .build());
+
+        // Schedule finalization
+        scheduler.schedule(() -> finalizeGame(room.getRoomId(), winnerName), 10, TimeUnit.SECONDS);
+>>>>>>> parent of f417b7e (0109)
     }
 
     @Transactional
