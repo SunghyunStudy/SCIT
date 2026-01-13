@@ -2,170 +2,63 @@ package net.dima.prac.service;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import net.dima.prac.dto.GameMessage;
-import net.dima.prac.dto.GameRoom;
-import net.dima.prac.dto.RoomDto;
-import net.dima.prac.entity.GameHistory;
-import net.dima.prac.entity.Member;
-import net.dima.prac.repository.GameHistoryRepository;
-import net.dima.prac.repository.MemberRepository;
-import org.springframework.messaging.simp.SimpMessagingTemplate;
+import net.dima.prac.entity.GameSession;
+import net.dima.prac.repository.GameSessionRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.*;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.TimeUnit;
-import java.util.stream.Collectors;
+import java.util.HashMap;
+import java.util.Map;
 
 @Service
 @RequiredArgsConstructor
 @Slf4j
 public class GameService {
 
-    private final GameHistoryRepository gameHistoryRepository;
-    private final MemberRepository memberRepository;
-    private final SimpMessagingTemplate messagingTemplate;
+    private final GameSessionRepository gameSessionRepository;
 
-    // In-Memory Storage
-    private final Map<String, GameRoom> gameRooms = new ConcurrentHashMap<>();
-    private final ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
-
-    public List<RoomDto> findAllRooms() {
-        return gameRooms.values().stream()
-                .map(room -> RoomDto.builder()
-                        .roomId(room.getRoomId())
-                        .title(room.getTitle())
-                        .hasPassword(room.getPassword() != null && !room.getPassword().isEmpty())
-                        .userCount(room.getPlayers().size())
-                        .status(room.getStatus())
-                        .build())
-                .collect(Collectors.toList());
-    }
-
-    public GameRoom createRoom(String title, String password) {
-        GameRoom room = GameRoom.create(title, password);
-        gameRooms.put(room.getRoomId(), room);
-        return room;
-    }
-
-    public GameRoom findRoomById(String roomId) {
-        return gameRooms.get(roomId);
-    }
-
-    public boolean joinRoom(String roomId, String username, String password) {
-        GameRoom room = gameRooms.get(roomId);
-        if (room == null) return false;
-        
-        // If already joined, just return true
-        if (room.getPlayers().containsKey(username)) {
-            return true;
-        }
-
-        if (room.getPlayers().size() >= 2) return false;
-        if (room.getPassword() != null && !room.getPassword().isEmpty() && !room.getPassword().equals(password)) {
-            return false;
-        }
-
-        room.getPlayers().put(username, username);
-        room.getProgress().put(username, 0);
-        return true;
-    }
-
-    public void startGame(String roomId) {
-        GameRoom room = gameRooms.get(roomId);
-        if (room == null) {
-            // Room might have been deleted or server restarted
-            messagingTemplate.convertAndSend("/topic/game/room/" + roomId, 
-                GameMessage.builder().type(GameMessage.MessageType.ERROR).roomId(roomId).content("Room not found. Please create a new room.").build());
-            return;
-        }
-        
-        if (room.getPlayers().size() < 1) {
-             messagingTemplate.convertAndSend("/topic/game/room/" + roomId, 
-                GameMessage.builder().type(GameMessage.MessageType.ERROR).roomId(roomId).content("Not enough players to start.").build());
-             return;
-        }
-
-        room.setStatus("PLAYING");
-        messagingTemplate.convertAndSend("/topic/game/room/" + roomId, 
-            GameMessage.builder().type(GameMessage.MessageType.START).roomId(roomId).content("START").build());
-    }
-
-    public void updateProgress(String roomId, String username, int progress) {
-        GameRoom room = gameRooms.get(roomId);
-        if (room == null || !"PLAYING".equals(room.getStatus())) return;
-
-        room.getProgress().put(username, progress);
-
-        // Broadcast progress
-        messagingTemplate.convertAndSend("/topic/game/room/" + roomId, 
-            GameMessage.builder()
-                .type(GameMessage.MessageType.PROGRESS)
-                .roomId(roomId)
-                .sender(username)
-                .content(progress)
-                .build());
-
-        if (progress >= 100) {
-            triggerFinish(room, username);
-        }
-    }
-
-    private synchronized void triggerFinish(GameRoom room, String winnerName) {
-        if ("FINISHED".equals(room.getStatus())) return;
-        
-        room.setStatus("FINISHED");
-        // Broadcast Countdown
-        messagingTemplate.convertAndSend("/topic/game/room/" + room.getRoomId(), 
-            GameMessage.builder()
-                .type(GameMessage.MessageType.COUNTDOWN)
-                .roomId(room.getRoomId())
-                .sender(winnerName) // This user finished first
-                .content(10) // 10 seconds
-                .build());
-
-        // Schedule finalization
-        scheduler.schedule(() -> finalizeGame(room.getRoomId(), winnerName), 10, TimeUnit.SECONDS);
+    public GameSession getOrCreateSession(String userId) {
+        return gameSessionRepository.findById(userId)
+                .orElseGet(() -> gameSessionRepository.save(GameSession.builder()
+                        .userId(userId)
+                        .stage(1)
+                        .mental(100)
+                        .build()));
     }
 
     @Transactional
-    public void finalizeGame(String roomId, String firstFinisher) {
-        GameRoom room = gameRooms.get(roomId);
-        if (room == null) return;
+    public Map<String, Object> checkEvent(String userId, int x, int y) {
+        Map<String, Object> response = new HashMap<>();
+        response.put("event", "none");
 
-        // Logic to determine winner (The one who triggered finish is usually the winner, 
-        // unless specific rules apply. Here we assume first to 100 wins).
-        // The loser is the other player.
+        // Example Logic: Check specific coordinates (e.g., Tiled Map pixel coordinates)
+        // Adjust these ranges based on your actual map (scit_map.json)
         
-        String loserName = room.getPlayers().keySet().stream()
-                .filter(p -> !p.equals(firstFinisher))
-                .findFirst()
-                .orElse("Unknown");
-
-        // Save to DB
-        Member winner = memberRepository.findByUsername(firstFinisher).orElse(null);
-        Member loser = memberRepository.findByUsername(loserName).orElse(null);
-
-        if (winner != null && loser != null) {
-            GameHistory history = GameHistory.builder()
-                    .winner(winner)
-                    .loser(loser)
-                    .build();
-            gameHistoryRepository.save(history);
+        // Event 1: Quiz Zone (Visual Box: 200,200 ~ 300,300)
+        // Center at 250, 250 with larger radius
+        if (isWithinRange(x, y, 250, 250, 75)) {
+            response.put("event", "quiz");
+            response.put("message", "Pop Quiz! What is the default scope of a Spring Bean?");
+        }
+        
+        // Event 2: Boss Room (Visual Box: 1000,800 ~ 1200,1000)
+        // Center at 1100, 900
+        else if (isWithinRange(x, y, 1100, 900, 150)) {
+            response.put("event", "boss");
+            response.put("message", "You have encountered the Final Project Boss!");
         }
 
-        // Broadcast END
-        messagingTemplate.convertAndSend("/topic/game/room/" + roomId, 
-            GameMessage.builder()
-                .type(GameMessage.MessageType.END)
-                .roomId(roomId)
-                .content("Winner: " + firstFinisher)
-                .build());
-        
-        // Cleanup room (optional, or keep it for chat)
-        gameRooms.remove(roomId); 
+        // Auto-save position
+        GameSession session = getOrCreateSession(userId);
+        // session.setLastX(x); // Uncomment if fields exist in Entity
+        // session.setLastY(y);
+        gameSessionRepository.save(session);
+
+        return response;
+    }
+
+    private boolean isWithinRange(int playerX, int playerY, int targetX, int targetY, int radius) {
+        double distance = Math.sqrt(Math.pow(playerX - targetX, 2) + Math.pow(playerY - targetY, 2));
+        return distance <= radius;
     }
 }

@@ -1,37 +1,154 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-
+<html lang="ko">
 <head>
     <meta charset="UTF-8">
-    <title>타자 배틀 - 로비</title>
-    <link rel="stylesheet" href="/css/style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Escape from SCIT</title>
+    <script src="https://cdn.jsdelivr.net/npm/phaser@3.60.0/dist/phaser.min.js"></script>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            background-color: #0d0d0d;
+            font-family: 'Courier New', Courier, monospace;
+        }
+
+        /* 1. 게임 컨테이너 (뒷배경) */
+        #game-container {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 1; /* 뒤쪽 */
+            box-shadow: 0 0 50px rgba(0, 255, 0, 0.2);
+        }
+
+        /* 2. 메인 UI 오버레이 (앞쪽) */
+        #ui-layer {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 10; /* 앞쪽 */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background: rgba(0, 0, 0, 0.85); /* 반투명 검정 배경 */
+            backdrop-filter: blur(5px);
+            transition: opacity 0.5s;
+        }
+
+        /* 타이틀 스타일 */
+        h1.glitch-title {
+            font-size: 80px;
+            color: #00ff00;
+            text-shadow: 2px 2px 0px #003300;
+            margin-bottom: 10px;
+            position: relative;
+            animation: glitch 2s infinite;
+        }
+
+        .subtitle {
+            font-size: 24px;
+            color: #ffffff;
+            margin-bottom: 50px;
+            opacity: 0.8;
+        }
+
+        /* 버튼 스타일 */
+        .btn-group {
+            display: flex;
+            gap: 20px;
+        }
+
+        .retro-btn {
+            background: transparent;
+            border: 2px solid #00ff00;
+            color: #00ff00;
+            padding: 15px 40px;
+            font-size: 24px;
+            font-family: inherit;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-transform: uppercase;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .retro-btn:hover {
+            background: #00ff00;
+            color: #000;
+            box-shadow: 0 0 20px #00ff00;
+        }
+
+        /* 하단 저작권 */
+        .footer {
+            position: absolute;
+            bottom: 20px;
+            color: #555;
+            font-size: 14px;
+        }
+
+        /* 글리치 애니메이션 효과 */
+        @keyframes glitch {
+            0% { transform: skew(0deg); }
+            20% { transform: skew(-2deg); }
+            21% { transform: skew(2deg); }
+            22% { transform: skew(0deg); }
+            100% { transform: skew(0deg); }
+        }
+
+        /* 숨김 클래스 */
+        .hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+    </style>
 </head>
-
 <body>
-    <div>
-        <h1>⌨️ 타자 배틀 로비</h1>
 
-        <div id="userInfo">
-            <span th:text="${#authentication.name}">사용자</span>님 안녕하세요!
-            <a href="/logout" style="color: red; margin-left: 10px;">로그아웃</a>
+    <!-- Phaser Game Container -->
+    <div id="game-container"></div>
+
+    <!-- HTML UI Overlay -->
+    <div id="ui-layer">
+        <h1 class="glitch-title">ESCAPE FROM SCIT</h1>
+        <p class="subtitle">- 8개월의 생존 기록 -</p>
+        
+        <div class="btn-group">
+            <button class="retro-btn" onclick="startGame()">System Start</button>
+            <button class="retro-btn" onclick="alert('준비 중입니다.')">Load Data</button>
         </div>
 
-        <div id="createRoomArea">
-            <h3>방 만들기</h3>
-            <input type="text" id="roomTitle" placeholder="방 제목을 입력하세요">
-            <input type="password" id="roomPassword" placeholder="비밀번호(선택)">
-            <button onclick="createRoom()">생성</button>
-        </div>
-
-        <hr>
-
-        <h3>개설된 방 목록</h3>
-        <div id="roomList">
-            <p>방을 불러오는 중...</p>
-        </div>
+        <div class="footer">SCIT MASTER 49th Class Project</div>
     </div>
 
-    <script src="/js/main.js"></script>
-</body>
+    <!-- Game Logic -->
+    <script src="/js/game.js"></script>
 
+    <script>
+        // HTML 버튼에서 호출하는 함수
+        function startGame() {
+            // 1. UI 숨기기
+            const ui = document.getElementById('ui-layer');
+            ui.classList.add('hidden');
+
+            // 2. Phaser 게임 시작 신호 (GameScene 실행)
+            // game 변수는 game.js에 정의되어 있음
+            // 현재 활성화된 씬을 찾아서 start 호출
+            const gameScene = game.scene.getScene('GameScene');
+            if (gameScene) {
+                gameScene.scene.start(); // 재시작
+            } else {
+                // 처음에 Scene이 Sleep 상태일 수 있으므로 깨움
+                game.scene.scenes[0].scene.restart(); 
+            }
+        }
+    </script>
+</body>
 </html>
